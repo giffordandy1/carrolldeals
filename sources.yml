@@ -26,3 +26,14 @@ sites:
   #   urls:
   #     - https://www.example.com/events
   #     - https://www.example.com/specials
+
+  - name: The Local Motive
+    address: 7540 Main Street, Sykesville, MD 21784
+    urls:
+      - https://www.localmotivesykesville.com/faqs
+
+  - name: E W Beck's Restaurant & Pub
+    address: 7565 Main Street, Sykesville, MD 21784
+    urls:
+      - https://ewbecks.com/sykesville-e-w-beck-s-restaurant-and-pub-e-w-beck-s-restaurant-and-pub-happy-hours-specials
+      - https://ewbecks.com/sykesville-e-w-beck-s-restaurant-and-pub-e-w-beck-s-restaurant-and-pub-news-specials-events

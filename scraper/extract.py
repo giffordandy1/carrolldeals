@@ -44,14 +44,15 @@ DAYS_RE = re.compile(
 )
 TIME = r"\d{1,2}(?::\d{2})?\s*(?:am|pm|a\.m\.|p\.m\.)?"
 TIMES_RE = re.compile(
-    rf"\b{TIME}\s*(?:-|–|to|until|til)\s*{TIME}|\b\d{{1,2}}(?::\d{{2}})?\s*(?:am|pm)\b|\buntil close\b",
+    rf"\b{TIME}\s*(?:-|–|to|until|til)\s*{TIME}|\b\d{{1,2}}(?::\d{{2}})?\s*(?:am|pm)\b|\buntil close\b|\ball[\s-]day\b",
     re.I,
 )
 DATE_RE = re.compile(
     r"\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s+\d{1,2}(?:st|nd|rd|th)?(?:,?\s+\d{4})?\b"
-    r"|\b\d{1,2}/\d{1,2}(?:/\d{2,4})?\b",
+    r"|\b\d{1,2}/\d{1,2}(?:/\d{2,4})?\b(?!\s*(?:off|price|lb|oz|pound|of))",
     re.I,
 )
+WEEKDAY_TITLE_RE = re.compile(r"\b(?:mon|tues|wednes|thurs|fri|satur|sun)days?\b", re.I)
 HEADINGS = ["h1", "h2", "h3", "h4", "h5", "h6"]
 
 
@@ -112,10 +113,41 @@ def _parse_date(text, now=None):
 
 
 def _recurring(text):
-    days = DAYS_RE.search(text or "")
-    times = TIMES_RE.search(text or "")
+    """Short schedule phrase like "all day Tuesdays and 4pm-6pm Wednesday through Friday"."""
+    text = text or ""
+    day_matches = list(DAYS_RE.finditer(text))
+    matches = day_matches + list(TIMES_RE.finditer(text))
+    if not matches:
+        return None
+    a, b = min(m.start() for m in matches), max(m.end() for m in matches)
+    span = _clean(text[a:b])
+    stems = re.findall(r"\b(mon|tue|wed|thu|fri|sat|sun)", span, re.I)
+    repeats = len(stems) != len({x.lower() for x in stems})
+    if repeats:
+        t = TIMES_RE.search(text)
+        out = _clean(f"{day_matches[-1].group(0)} {t.group(0) if t else ''}", 60)
+        return out[0].upper() + out[1:]
+    if len(day_matches) <= 2 and len(span) <= 70 and "$" not in span and ":" not in span and not re.search(r"[.!?]\s", span):
+        return span[0].upper() + span[1:]
+    days, times = DAYS_RE.search(text), TIMES_RE.search(text)
     bits = [m.group(0).strip() for m in (days, times) if m]
     return _clean(" ".join(bits), 60) or None
+
+
+QUESTION_RE = re.compile(
+    r"^(?:do|does|can|is|are|will)\s+(?:you|we|i|there|they)\s+(?:have|offer|host|do|get|be|a)?\s*(?:a|an|any|some)?\s*",
+    re.I,
+)
+
+
+def _tidy_title(title):
+    """Turn FAQ-style questions ("Do you have a happy hour?") into labels ("Happy hour")."""
+    t = _clean(title)
+    if t.endswith("?"):
+        t2 = QUESTION_RE.sub("", t[:-1]).strip()
+        if 2 < len(t2) < len(t):
+            t = t2[0].upper() + t2[1:]
+    return t
 
 
 def _kind(text):
@@ -233,7 +265,7 @@ def _section_text(heading):
         if sum(len(p) for p in parts) > 700:
             break
     text = _clean(" ".join(parts))
-    if not text and heading.parent is not None:
+    if not text and heading.parent is not None and len(heading.parent.find_all(HEADINGS)) == 1:
         text = _clean(heading.parent.get_text(" ").replace(heading.get_text(" "), "", 1))
     return text
 
@@ -243,15 +275,27 @@ def heuristics(soup, base_url):
         t.decompose()
     out, seen_text = [], set()
 
-    def add(title, body, anchor):
+    def add(title, body, anchor, weekly=False):
+        title = _tidy_title(title)
         full = f"{title} {body}"
-        start = _parse_date(full)
-        recurring = None if start else _recurring(full)
-        kind = _kind(full)
+        if re.search(r"private (event|part)|\bbook(ing)?\b|\brent(al)?\b|reserv", full, re.I):
+            return
+        if weekly:
+            # "Burger Wednesdays": a standing weekly special, even if the page shows this week's date.
+            start = None
+            day = WEEKDAY_TITLE_RE.search(title).group(0).capitalize()
+            day = day if day.endswith("s") else day + "s"
+            t = TIMES_RE.search(body)
+            recurring = f"{day} {t.group(0)}" if t else day
+            kind = "event" if EVENT_RE.search(title) else "special"
+        else:
+            start = _parse_date(full)
+            recurring = None if start else _recurring(full)
+            kind = _kind(full)
         # Require some signal it's time-bound or a real offer, not just a nav label.
         if kind == "event" and not (start or recurring):
             return
-        if kind == "special" and not (recurring or re.search(r"\$\s?\d|%|half|bogo|free", full, re.I) or len(body) > 20):
+        if kind == "special" and not (recurring or re.search(r"\$\s?\d|%|half|bogo|free|happy\s*hour", full, re.I) or len(body) > 20):
             return
         link = anchor.find("a", href=True) if anchor else None
         out.append({
@@ -279,7 +323,10 @@ def heuristics(soup, base_url):
             lines += [x for x in ([sib] if sib.name in ("p", "li") else sib.find_all(["li", "p"]))]
         if sum(1 for x in lines if SPECIAL_RE.search(x.get_text(" ")) or EVENT_RE.search(x.get_text(" "))) >= 2:
             continue
-        if SPECIAL_RE.search(title) or (EVENT_RE.search(title) and (DATE_RE.search(title + " " + body) or DAYS_RE.search(title + " " + body))):
+        weekly = bool(WEEKDAY_TITLE_RE.search(title)) and not DATE_RE.search(title) and len(title.split()) <= 6
+        if weekly:
+            add(title, body, h.parent, weekly=True)
+        elif SPECIAL_RE.search(title) or (EVENT_RE.search(title) and (DATE_RE.search(title + " " + body) or DAYS_RE.search(title + " " + body))):
             add(title, body, h.parent)
 
     # Stand-alone paragraphs / list items that describe a special with a day or time.
@@ -292,8 +339,11 @@ def heuristics(soup, base_url):
         if SPECIAL_RE.search(text) and (DAYS_RE.search(text) or TIMES_RE.search(text)):
             strong = el.find(["strong", "b"])
             title = _clean(strong.get_text(" ")) if strong and len(strong.get_text(strip=True)) > 3 else re.split(r"(?<=[.!:])\s", text)[0]
+            short = re.split(r"\s+(?:every|on|from|is|are)\s+", title, maxsplit=1, flags=re.I)[0].rstrip("!.:")
+            if len(short.split()) >= 2:
+                title = short
             add(title, text, el)
-        elif EVENT_RE.search(text) and DATE_RE.search(text):
+        elif EVENT_RE.search(text) and (DATE_RE.search(text) or (DAYS_RE.search(text) and not re.search(r"private|book|rent", text, re.I))):
             title = re.split(r"(?<=[.!:])\s|\s[–—-]\s", text)[0]
             add(title, text, el)
 
