@@ -304,6 +304,8 @@ def heuristics(soup, base_url):
         full = f"{title} {body}"
         if re.search(r"private (event|part)|\bbook(ing)?\b|\brent(al)?\b|reserv", full, re.I):
             return
+        if re.search(r"facebook|instagram|follow us|newsletter|subscribe", title, re.I):
+            return
         if weekly:
             # "Burger Wednesdays": a standing weekly special, even if the page shows this week's date.
             start = None

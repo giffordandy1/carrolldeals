@@ -5,7 +5,7 @@ on:
     - cron: "17 */6 * * *"     # every 6 hours (times are UTC)
   push:
     branches: [main]
-    paths: [sources.yml]       # re-check right away when you edit the site list
+    paths: [sources.yml, "scraper/**"]   # re-check right away when the site list or scraper changes
   workflow_dispatch:           # adds a "Run workflow" button on the Actions tab
 
 permissions:

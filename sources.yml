@@ -50,3 +50,8 @@ sites:
       - https://www.oscarsalehouse.net/eldersburg
       - https://www.oscarsalehouse.net/eldersburg-specials
       - https://www.oscarsalehouse.net/eldersburg-bow
+
+  - name: Tony Locos Bar & Restaurant
+    address: 710 Lisbon Center Drive, Woodbine, MD 21797
+    urls:
+      - https://tonylocos.com/
