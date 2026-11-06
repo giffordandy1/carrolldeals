@@ -316,7 +316,7 @@ def heuristics(soup, base_url):
             day = day if day.endswith("s") else day + "s"
             t = TIMES_RE.search(body)
             recurring = f"{day} {t.group(0)}" if t else day
-            kind = "event" if EVENT_RE.search(title) else "special"
+            kind = "event" if EVENT_RE.search(title) or (EVENT_RE.search(body) and not SPECIAL_RE.search(full)) else "special"
         else:
             start = _parse_date(full)
             recurring = None if start else _recurring(full)
