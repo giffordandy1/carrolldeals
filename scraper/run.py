@@ -6,6 +6,7 @@ import asyncio
 import hashlib
 import json
 import os
+import re
 import sys
 from datetime import datetime, timedelta, timezone
 
@@ -28,8 +29,8 @@ def load_sources():
     sources = data.get("sites") or []
     out = []
     for i, s in enumerate(sources):
-        if not isinstance(s, dict) or not s.get("name") or not s.get("urls"):
-            print(f"Skipping entry {i + 1} in sources.yml: it needs a name and at least one URL.", file=sys.stderr)
+        if not isinstance(s, dict) or not s.get("name") or not (s.get("urls") or s.get("manual")):
+            print(f"Skipping entry {i + 1} in sources.yml: it needs a name and at least one URL or manual item.", file=sys.stderr)
             continue
         if s.get("paused"):
             continue
@@ -37,7 +38,8 @@ def load_sources():
         out.append({
             "id": hashlib.sha1(s["name"].encode()).hexdigest()[:10],
             "name": s["name"],
-            "urls": s["urls"] if isinstance(s["urls"], list) else [s["urls"]],
+            "urls": (s.get("urls") if isinstance(s.get("urls"), list) else [s["urls"]]) if s.get("urls") else [],
+            "manual": s.get("manual") or [],
             "address": s.get("address"),
             "lat": s.get("lat"),
             "lng": s.get("lng"),
@@ -69,7 +71,21 @@ async def main():
             if g:
                 src["lat"], src["lng"] = g["lat"], g["lng"]
 
-        items, errors = await fetch_source(src)
+        items, errors = await fetch_source(src) if src["urls"] else ([], [])
+
+        # Items typed in by hand (for sites that block automated checks or only post on social media).
+        for m in src["manual"]:
+            if not isinstance(m, dict) or not m.get("title"):
+                continue
+            when = str(m.get("when") or "")
+            dated = re.match(r"^\d{4}-\d{2}-\d{2}", when)
+            items.append({
+                "kind": "event" if str(m.get("kind", "")).lower().startswith("event") else "special",
+                "title": str(m["title"]), "description": str(m.get("details") or ""),
+                "start": when if dated else None, "end": None, "recurring": None if dated else (when or None),
+                "url": m.get("url") or (src["urls"][0] if src["urls"] else None),
+                "image": None, "price": m.get("price"), "venue": None, "address": None, "lat": None, "lng": None,
+            })
 
         for it in items:
             if it["lat"] is None and it.get("address") and it["address"] != src["address"]:

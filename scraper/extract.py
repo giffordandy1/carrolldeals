@@ -126,7 +126,8 @@ def _recurring(text):
     repeats = len(stems) != len({x.lower() for x in stems})
     if repeats:
         t = TIMES_RE.search(text)
-        out = _clean(f"{day_matches[-1].group(0)} {t.group(0) if t else ''}", 60)
+        best = max(day_matches, key=lambda m: len(m.group(0)))  # "Monday through Friday" over "Fridays"
+        out = _clean(f"{best.group(0)} {t.group(0) if t else ''}", 60)
         return out[0].upper() + out[1:]
     # Keep the whole phrase only if what sits between the days/times is just joining words.
     ordered = sorted(matches, key=lambda m: m.start())

@@ -11,6 +11,12 @@
 # Optional:
 #   lat / lng:   exact map coordinates, if the address lookup puts it in the wrong spot
 #   paused: true    stop checking this site without deleting it
+#   manual:         items you type in yourself, for sites that block the checker
+#                   or only post on Facebook. Each one has:
+#     - title: Thirsty Thursdays
+#       kind: event            (event or special)
+#       when: Thursdays 7pm    (a schedule, or a date like 2026-12-05)
+#       details: Live music    (optional)
 #   selectors:      tell the scraper exactly which parts of the page to read
 #     item:  CSS selector for each event or special block, e.g. ".event-card"
 #     title: selector for the title inside that block, e.g. "h3"
@@ -53,5 +59,16 @@ sites:
 
   - name: Tony Locos Bar & Restaurant
     address: 710 Lisbon Center Drive, Woodbine, MD 21797
-    urls:
-      - https://tonylocos.com/
+    # Their site blocks automated checks, so these come from their homepage by hand.
+    # Daily specials are posted on their Facebook page.
+    manual:
+      - title: Thirsty Thursdays
+        kind: event
+        when: Thursdays
+        details: Live music on Thursdays.
+        url: https://tonylocos.com/
+      - title: Music & Events
+        kind: event
+        when: Every Saturday and Sunday
+        details: Live music and events every weekend.
+        url: https://tonylocos.com/
