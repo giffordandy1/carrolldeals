@@ -9,12 +9,13 @@ Three extraction strategies, in order of reliability:
      deals, trivia, live music, etc., with day/time detection for recurring ones.
 """
 import asyncio
+import html
 import json
 import os
 import re
 from datetime import datetime, timedelta
 from urllib import robotparser
-from urllib.parse import urljoin, urlparse
+from urllib.parse import unquote, urljoin, urlparse
 
 import httpx
 from bs4 import BeautifulSoup
@@ -28,7 +29,7 @@ MAX_ITEMS_PER_PAGE = 40
 SPECIAL_RE = re.compile(
     r"happy\s*hour|specials?\b|deals?\b|discount|\d+\s*%\s*off|half[\s-]*(off|price)|bogo|"
     r"buy one|\$\s?\d|\bbrunch\b|all[\s-]day|wing night|taco tuesday|prix fixe|"
-    r"kids eat free|two for|2 for \$|drink of the|featured (drink|cocktail|beer)",
+    r"kids eat free|two for|2 for \$|drink of the|featured (drink|cocktail|beer)|of the (week|month)",
     re.I,
 )
 EVENT_RE = re.compile(
@@ -148,6 +149,9 @@ QUESTION_RE = re.compile(
 def _tidy_title(title):
     """Turn FAQ-style questions ("Do you have a happy hour?") into labels ("Happy hour")."""
     t = _clean(title)
+    t2 = re.sub(r"^(?:join us|come (?:in|out|by))\s+(?:for|on|every)?\s*(?:our|the)?\s*(?:now\s+)?(?:famous\s+)?", "", t, flags=re.I)
+    if t2 != t and len(t2.split()) >= 2:
+        t = t2[0].upper() + t2[1:]
     if t.endswith("?"):
         t2 = QUESTION_RE.sub("", t[:-1]).strip()
         if 2 < len(t2) < len(t):
@@ -182,7 +186,7 @@ def from_jsonld(soup, base_url):
         for obj in _walk(data):
             if not any(t.endswith("Event") for t in _types(obj)):
                 continue
-            name = _clean(obj.get("name"), 160)
+            name = _clean(html.unescape(str(obj.get("name") or "")), 160)
             if not name:
                 continue
             loc = _first(obj.get("location"))
@@ -206,7 +210,7 @@ def from_jsonld(soup, base_url):
             elif obj.get("isAccessibleForFree") in (True, "true", "True"):
                 price = "Free"
 
-            desc = BeautifulSoup(str(obj.get("description") or ""), "lxml").get_text(" ")
+            desc = html.unescape(BeautifulSoup(str(obj.get("description") or ""), "lxml").get_text(" "))
             out.append({
                 "kind": "event",
                 "title": name,
@@ -260,12 +264,27 @@ def from_selectors(soup, base_url, item_sel, title_sel=None, date_sel=None):
 
 # ---------------------------------------------------------------- strategy 3: heuristics
 
-def _section_text(heading):
-    """Text that follows a heading, up to the next heading of the same or higher level."""
-    parts = []
-    for sib in heading.find_next_siblings():
+def _following(heading):
+    """Blocks that come after a heading, up to the next heading.
+
+    Page builders (Elementor, Wix, etc.) wrap each heading in its own boxes, so
+    climb out of wrappers that hold nothing but the heading before looking.
+    """
+    node = heading
+    for _ in range(4):
+        if node.find_next_sibling() is not None or node.parent is None or node.parent.name in ("body", "html"):
+            break
+        node = node.parent
+    for sib in node.find_next_siblings():
         if sib.name in HEADINGS or sib.name in ("footer", "header", "nav", "aside") or sib.find(HEADINGS):
             break
+        yield sib
+
+
+def _section_text(heading):
+    """Text that follows a heading, up to the next heading."""
+    parts = []
+    for sib in _following(heading):
         parts.append(sib.get_text(" "))
         if sum(len(p) for p in parts) > 700:
             break
@@ -288,6 +307,9 @@ def heuristics(soup, base_url):
         if weekly:
             # "Burger Wednesdays": a standing weekly special, even if the page shows this week's date.
             start = None
+            if DAYS_RE.fullmatch(title.rstrip(":!").strip()) and body:
+                # Heading is just "Tuesday"; the special itself is the text under it.
+                title, body = f"{title.rstrip(':!').strip()}: {re.split(r'(?<=[.!])\s', body)[0][:100]}", body
             day = WEEKDAY_TITLE_RE.search(title).group(0).capitalize()
             day = day if day.endswith("s") else day + "s"
             t = TIMES_RE.search(body)
@@ -322,12 +344,18 @@ def heuristics(soup, base_url):
         # A heading over a list of several specials ("Weekly Specials") is a
         # container: let the line-by-line pass below pick up each one instead.
         lines = []
-        for sib in h.find_next_siblings():
-            if sib.name in HEADINGS or sib.find(HEADINGS):
-                break
+        for sib in _following(h):
             lines += [x for x in ([sib] if sib.name in ("p", "li") else sib.find_all(["li", "p"]))]
         if sum(1 for x in lines if SPECIAL_RE.search(x.get_text(" ")) or EVENT_RE.search(x.get_text(" "))) >= 2:
             continue
+        if not body and SPECIAL_RE.search(title):
+            # "BURGER OF THE WEEK" followed by a heading naming it.
+            nxt = h.find_next(HEADINGS)
+            if nxt is not None:
+                name = _clean(nxt.get_text(" "))
+                if 3 <= len(name) <= 80 and not SPECIAL_RE.search(name):
+                    title = f"{title.title() if title.isupper() else title}: {name}"
+                    body = _section_text(nxt) or name
         weekly = bool(WEEKDAY_TITLE_RE.search(title)) and not DATE_RE.search(title) and len(title.split()) <= 6
         if weekly:
             add(title, body, h.parent, weekly=True)
@@ -356,6 +384,22 @@ def heuristics(soup, base_url):
         elif EVENT_RE.search(text) and (DATE_RE.search(text) or (DAYS_RE.search(text) and not re.search(r"private|book|rent", text, re.I))):
             title = re.split(r"(?<=[.!:])\s|\s[–—-]\s", text)[0]
             add(title, text, el)
+
+    # Weekly specials posted only as pictures, labelled by their alt text or
+    # file name ("Wings Wednesday.jpg", "BurgerMonday_revised2025.jpg").
+    for img in soup.find_all("img"):
+        label = img.get("alt") or ""
+        if not WEEKDAY_TITLE_RE.search(label):
+            label = unquote(urlparse(img.get("src") or "").path.rsplit("/", 1)[-1])
+            label = re.sub(r"\.(jpe?g|png|gif|webp|avif)$", "", label, flags=re.I)
+        label = re.sub(r"(?<=[a-z])(?=[A-Z])", " ", re.sub(r"[_\-+~]+", " ", label))
+        words = [w for w in label.split() if not re.search(r"\d", w)
+                 and w.lower() not in {"revised", "final", "copy", "new", "flyer", "img", "image", "edit", "mv"}]
+        label = " ".join(words)
+        if WEEKDAY_TITLE_RE.search(label) and 2 <= len(words) <= 5 and not DATE_RE.search(label):
+            label = label[0].upper() + label[1:]
+            if label.lower() not in {o["title"].lower() for o in out}:
+                add(label, "", img, weekly=True)
 
     # De-duplicate by title.
     uniq, titles = [], set()
@@ -388,10 +432,10 @@ def extract(html, url, source):
     if source.get("item_selector"):
         items += from_selectors(soup, url, source["item_selector"], source.get("title_selector"), source.get("date_selector"))
     else:
-        found = heuristics(soup, url)
-        if items:  # structured events found; only take specials from the heuristics
-            found = [i for i in found if i["kind"] == "special"]
-        items += found
+        # A page that publishes structured events is an events calendar; reading
+        # its layout as well only adds clutter (calendar cells, repeated listings).
+        if not items:
+            items += heuristics(soup, url)
     return items
 
 

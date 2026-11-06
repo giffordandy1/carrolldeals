@@ -43,3 +43,10 @@ sites:
     urls:
       - https://1623brewing.com/1623-events/
       - https://1623brewing.com/food-menu/
+
+  - name: Oscar's Ale House (Eldersburg)
+    address: 1438 Liberty Road, Eldersburg, MD 21784
+    urls:
+      - https://www.oscarsalehouse.net/eldersburg
+      - https://www.oscarsalehouse.net/eldersburg-specials
+      - https://www.oscarsalehouse.net/eldersburg-bow
