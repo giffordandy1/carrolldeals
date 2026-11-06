@@ -1,0 +1,28 @@
+# The websites to check for events and specials.
+#
+# Edit this file right on GitHub (click the pencil icon), then "Commit changes".
+# The site updates itself within a few minutes.
+#
+# For each site:
+#   name:     what to call it on the map (must be unique)
+#   address:  street address, used to place it on the map
+#   urls:     the page(s) that list events or specials, one per line starting with "-"
+#
+# Optional:
+#   lat / lng:   exact map coordinates, if the address lookup puts it in the wrong spot
+#   paused: true    stop checking this site without deleting it
+#   selectors:      tell the scraper exactly which parts of the page to read
+#     item:  CSS selector for each event or special block, e.g. ".event-card"
+#     title: selector for the title inside that block, e.g. "h3"
+#     date:  selector for the date inside that block, e.g. "time"
+#
+# Tip: point at a business's Events or Specials page, not its homepage.
+# Lines starting with # are notes and are ignored.
+
+sites:
+  # Example (remove the # at the start of each line to use it, then change the details):
+  # - name: Main Street Tavern
+  #   address: 123 Main St, Westminster, MD 21157
+  #   urls:
+  #     - https://www.example.com/events
+  #     - https://www.example.com/specials

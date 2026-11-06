@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What's On Nearby</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<style>
+:root{
+  --ink:#1E2A3A; --muted:#566673; --paper:#EEF2F0; --surface:#FFFFFF; --line:#CDD6D3;
+  --event:#3550C8; --event-soft:#E4E9FB; --special:#F2B705; --special-ink:#4A3600; --special-soft:#FDF3D1;
+  --focus:#3550C8;
+  --display:"Bricolage Grotesque", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --ink:#E6ECEA; --muted:#9AA9A4; --paper:#141B22; --surface:#1C252E; --line:#2E3A44;
+    --event:#8FA3FF; --event-soft:#252F52; --special:#F5C842; --special-ink:#F5C842; --special-soft:#3A3115;
+    --focus:#8FA3FF;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--paper);color:var(--ink);font:16px/1.5 var(--body);}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+button,input,select{font:inherit;color:inherit}
+
+.app{display:grid;grid-template-columns:minmax(340px,440px) 1fr;height:100vh}
+.side{display:flex;flex-direction:column;min-height:0;border-right:1px solid var(--line);background:var(--paper)}
+#mapwrap{height:100vh;min-width:0}
+#map{height:100%;z-index:0}
+
+header{padding:20px 20px 14px}
+h1{font:800 clamp(28px,3.2vw,36px)/1 var(--display);letter-spacing:-.02em;margin:0 0 4px}
+.where{color:var(--muted);margin:0;font-size:15px}
+.where strong{color:var(--ink)}
+
+.controls{padding:0 20px 14px;display:grid;gap:10px;grid-template-columns:minmax(0,1fr)}
+.search{display:flex;gap:8px;flex-wrap:wrap}
+.search input{flex:1 1 160px;min-width:0;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.btn{padding:10px 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);cursor:pointer;white-space:nowrap}
+.btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn:disabled{opacity:.6;cursor:progress}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:none;padding:7px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+select{flex:1 1 auto;min-width:0;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.filter{width:100%;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+
+.count{padding:8px 20px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+.list{flex:1;overflow:auto;padding:4px 16px 24px;display:grid;gap:12px;align-content:start}
+
+/* The cards: events are ticket stubs, specials are price tags. */
+.card{display:grid;grid-template-columns:88px 1fr;background:var(--surface);border-radius:6px;cursor:pointer;position:relative;
+  border:1px solid var(--line);text-align:left;padding:0;width:100%}
+.card.active{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.stub{padding:12px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px;
+  border-right:2px dashed var(--line);font-family:var(--display)}
+.event .stub{background:var(--event-soft);color:var(--event)}
+.special .stub{background:var(--special-soft);color:var(--special-ink);border-right-style:solid}
+.stub .big{font-size:26px;font-weight:800;line-height:1}
+.stub .small{font-size:13px;font-weight:700;line-height:1.2}
+.special .stub::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--paper);border:2px solid var(--special);margin-bottom:6px}
+.event::before,.event::after{content:"";position:absolute;left:80px;width:16px;height:8px;background:var(--paper);border:1px solid var(--line)}
+.event::before{top:-1px;border-top:0;border-radius:0 0 8px 8px}
+.event::after{bottom:-1px;border-bottom:0;border-radius:8px 8px 0 0}
+.body{padding:12px 14px;min-width:0}
+.body h2{font:700 17px/1.25 var(--display);margin:0 0 3px}
+.meta{font-size:14px;color:var(--muted);margin:0 0 6px}
+.desc{font-size:14px;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.links{margin-top:8px;font-size:14px}
+.links a{color:var(--event);font-weight:700}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:1px 7px;border-radius:4px;margin-right:6px}
+.event .tag{background:var(--event-soft);color:var(--event)}
+.special .tag{background:var(--special-soft);color:var(--special-ink)}
+
+.empty{padding:28px 8px;color:var(--muted)}
+.empty h2{font:700 20px/1.2 var(--display);color:var(--ink);margin:0 0 6px}
+.error{color:#B42318}
+@media (prefers-color-scheme: dark){.error{color:#FF8A80}}
+
+.leaflet-popup-content{font-family:var(--body)}
+.leaflet-popup-content strong{font-family:var(--display)}
+
+@media (max-width: 820px){
+  .app{grid-template-columns:1fr;grid-template-rows:auto 38vh auto;height:auto}
+  .side{display:contents}
+  header{grid-row:1}
+  .controls{grid-row:1}
+  .top{grid-row:1;background:var(--paper)}
+  #mapwrap{grid-row:2;height:38vh;position:sticky;top:0;z-index:1;border-block:1px solid var(--line)}
+  .listwrap{grid-row:3}
+  .list{overflow:visible}
+  header,.controls{padding-left:16px;padding-right:16px}
+}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="top">
+      <header>
+        <h1>What's on nearby</h1>
+        <p class="where" id="where">Pick a place to see events and specials around it.</p>
+      </header>
+      <div class="controls">
+        <form class="search" id="placeForm">
+          <label for="place" class="sr" hidden>ZIP code or city</label>
+          <input id="place" placeholder="ZIP code or city" autocomplete="postal-code" aria-label="ZIP code or city">
+          <button class="btn primary" type="submit">Search</button>
+          <button class="btn" type="button" id="locate">Use my location</button>
+        </form>
+        <div class="row">
+          <div class="seg" role="group" aria-label="Show">
+            <button type="button" data-kind="" aria-pressed="true">All</button>
+            <button type="button" data-kind="event" aria-pressed="false">Events</button>
+            <button type="button" data-kind="special" aria-pressed="false">Specials</button>
+          </div>
+          <select id="radius" aria-label="Distance">
+            <option value="2">Within 2 mi</option>
+            <option value="5">Within 5 mi</option>
+            <option value="10" selected>Within 10 mi</option>
+            <option value="25">Within 25 mi</option>
+            <option value="50">Within 50 mi</option>
+          </select>
+          <select id="days" aria-label="Dates">
+            <option value="0">Today</option>
+            <option value="7">Next 7 days</option>
+            <option value="30" selected>Next 30 days</option>
+          </select>
+        </div>
+        <input class="filter" id="q" type="search" placeholder="Filter, e.g. trivia, wings, brunch" aria-label="Filter results">
+      </div>
+    </div>
+    <div class="listwrap" style="display:contents">
+      <div class="count" id="count" aria-live="polite"></div>
+      <div class="list" id="list"></div>
+    </div>
+  </aside>
+  <div id="mapwrap"><div id="map" role="region" aria-label="Map of results"></div></div>
+</div>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const state = { lat: null, lng: null, label: null, radius: 10, kind: "", q: "", days: 30 };
+const store = {
+  get(k){ try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
+  set(k,v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+};
+
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const map = L.map("map", { zoomControl: true }).setView([39.0, -77.0], 9);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+const layer = L.layerGroup().addTo(map);
+let youMarker = null, radiusCircle = null, markers = {};
+
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : null;
+
+function stub(it){
+  if (it.start){
+    const d = new Date(it.start.length <= 10 ? it.start + "T12:00:00" : it.start);
+    if (!isNaN(d)){
+      const hasTime = it.start.length > 10;
+      return `<span class="small">${d.toLocaleDateString(undefined,{weekday:"short"})}</span>
+              <span class="big">${d.getDate()}</span>
+              <span class="small">${d.toLocaleDateString(undefined,{month:"short"})}${hasTime ? "<br>" + d.toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"}).replace(":00","") : ""}</span>`;
+    }
+  }
+  if (it.recurring) return `<span class="small">${esc(it.recurring)}</span>`;
+  return `<span class="small">${it.kind === "special" ? "Ongoing" : "See site"}</span>`;
+}
+
+function card(it){
+  const url = safeUrl(it.url);
+  const where = [it.venue, it.distance != null ? (it.distance < 0.1 ? "under 0.1 mi away" : `${it.distance} mi away`) : null].filter(Boolean).join(", ");
+  return `<article class="card ${it.kind}" tabindex="0" data-id="${it.id}" aria-label="${esc(it.title)}">
+    <div class="stub">${stub(it)}</div>
+    <div class="body">
+      <h2>${esc(it.title)}</h2>
+      <p class="meta"><span class="tag">${it.kind === "special" ? "Special" : "Event"}</span>${esc(where)}${it.price ? ", " + esc(it.price) : ""}</p>
+      ${it.description ? `<p class="desc">${esc(it.description)}</p>` : ""}
+      ${url ? `<div class="links"><a href="${esc(url)}" target="_blank" rel="noopener">Open ${esc(new URL(url).hostname.replace(/^www\./,""))}</a></div>` : ""}
+    </div>
+  </article>`;
+}
+
+function activate(id, fromMap){
+  document.querySelectorAll(".card.active").forEach(c => c.classList.remove("active"));
+  const el = document.querySelector(`.card[data-id="${id}"]`);
+  if (el){ el.classList.add("active"); if (fromMap) el.scrollIntoView({ block: "nearest", behavior: "smooth" }); }
+  const m = markers[id];
+  if (m && !fromMap){ map.setView(m.getLatLng(), Math.max(map.getZoom(), 14)); m.openPopup(); }
+}
+
+let ALL = null, UPDATED = null;
+function milesBetween(a, b, c, d){
+  const r = 3958.8, rad = x => x * Math.PI / 180;
+  const h = Math.sin(rad(c - a) / 2) ** 2 + Math.cos(rad(a)) * Math.cos(rad(c)) * Math.sin(rad(d - b) / 2) ** 2;
+  return 2 * r * Math.asin(Math.sqrt(h));
+}
+const isoDay = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+
+async function load(){
+  if (!ALL){
+    $("#count").textContent = "Loading…";
+    try {
+      const r = await fetch("data/items.json", { cache: "no-cache" });
+      if (!r.ok) throw new Error(r.status);
+      const data = await r.json();
+      ALL = data.items || []; UPDATED = data.updated;
+    } catch (e) {
+      $("#count").textContent = "";
+      $("#list").innerHTML = `<div class="empty"><h2>Couldn't load results</h2><p class="error">The results file didn't load. Refresh the page; if it keeps happening, check that the update workflow has run on GitHub.</p></div>`;
+      return;
+    }
+  }
+  const now = new Date();
+  const today = isoDay(now);
+  const horizon = isoDay(new Date(now.getTime() + state.days * 86400000));
+  const needle = state.q.toLowerCase();
+  const out = [];
+  for (const raw of ALL){
+    const it = { ...raw, distance: null };
+    const start = (it.start || "").slice(0, 10), end = (it.end || "").slice(0, 10);
+    if (start && ((end || start) < today || start > horizon)) continue;
+    if (state.kind && it.kind !== state.kind) continue;
+    if (needle && ![it.title, it.description, it.venue].join(" ").toLowerCase().includes(needle)) continue;
+    if (state.lat != null){
+      if (it.lat == null) continue;
+      it.distance = Math.round(milesBetween(state.lat, state.lng, it.lat, it.lng) * 10) / 10;
+      if (it.distance > state.radius) continue;
+    }
+    out.push(it);
+  }
+  out.sort((a, b) => (a.distance ?? 0) - (b.distance ?? 0) || (a.start || "9999").localeCompare(b.start || "9999") || a.title.localeCompare(b.title));
+  render(out);
+}
+
+function render(items){
+  layer.clearLayers(); markers = {};
+  const n = items.length;
+  const upd = UPDATED ? new Date(UPDATED) : null;
+  const updText = upd && !isNaN(upd) ? `. Updated ${upd.toLocaleString(undefined, { weekday: "short", hour: "numeric", minute: "2-digit" })}` : "";
+  $("#count").textContent = `${n} ${n === 1 ? "result" : "results"}${state.lat != null ? ` within ${state.radius} mi` : ""}${updText}`;
+  if (!n){
+    $("#list").innerHTML = `<div class="empty"><h2>Nothing here yet</h2><p>${state.lat != null ? "Try a wider distance, a longer date range, or clear the filter." : "No events or specials have been collected yet. Add sites to sources.yml in the GitHub repo."}</p></div>`;
+  } else {
+    $("#list").innerHTML = items.map(card).join("");
+  }
+  const bounds = [];
+  for (const it of items){
+    if (it.lat == null) continue;
+    const color = it.kind === "special" ? css("--special") : css("--event");
+    const m = L.circleMarker([it.lat, it.lng], { radius: 8, color: css("--ink"), weight: 1.5, fillColor: color, fillOpacity: .95 })
+      .bindPopup(`<strong>${esc(it.title)}</strong><br>${esc(it.venue || "")}${it.recurring ? "<br>" + esc(it.recurring) : ""}`)
+      .on("click", () => activate(it.id, true))
+      .addTo(layer);
+    markers[it.id] = m; bounds.push([it.lat, it.lng]);
+  }
+  if (state.lat != null){
+    if (bounds.length) map.fitBounds(L.latLngBounds(bounds).extend([state.lat, state.lng]), { padding: [30, 30], maxZoom: 14 });
+    else if (radiusCircle) map.fitBounds(radiusCircle.getBounds());
+  } else if (bounds.length) {
+    map.fitBounds(bounds, { padding: [30, 30], maxZoom: 14 });
+  }
+}
+
+function setPlace(lat, lng, label){
+  Object.assign(state, { lat, lng, label });
+  store.set("place", { lat, lng, label });
+  $("#where").innerHTML = `Showing what's on near <strong>${esc(label)}</strong>`;
+  if (youMarker) youMarker.remove();
+  if (radiusCircle) radiusCircle.remove();
+  youMarker = L.circleMarker([lat, lng], { radius: 6, color: css("--ink"), fillColor: css("--ink"), fillOpacity: 1 }).bindTooltip("You").addTo(map);
+  radiusCircle = L.circle([lat, lng], { radius: state.radius * 1609.34, color: css("--ink"), weight: 1, dashArray: "4 6", fill: false }).addTo(map);
+  load();
+}
+
+$("#placeForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const q = $("#place").value.trim();
+  if (!q) return;
+  const btn = e.submitter; btn.disabled = true;
+  try {
+    const r = await fetch("https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=us&q=" + encodeURIComponent(q));
+    if (!r.ok) throw 0;
+    const res = await r.json();
+    if (!res.length) throw 0;
+    setPlace(parseFloat(res[0].lat), parseFloat(res[0].lon), q);
+  } catch {
+    $("#where").innerHTML = `<span class="error">Couldn't find "${esc(q)}". Try a 5-digit ZIP or "City, State".</span>`;
+  } finally { btn.disabled = false; }
+});
+
+$("#locate").addEventListener("click", () => {
+  if (!navigator.geolocation){ $("#where").innerHTML = `<span class="error">This browser can't share location. Type a ZIP or city instead.</span>`; return; }
+  const btn = $("#locate"); btn.disabled = true; btn.textContent = "Locating…";
+  navigator.geolocation.getCurrentPosition(
+    pos => { btn.disabled = false; btn.textContent = "Use my location"; setPlace(pos.coords.latitude, pos.coords.longitude, "your location"); },
+    () => { btn.disabled = false; btn.textContent = "Use my location"; $("#where").innerHTML = `<span class="error">Location access was blocked. Type a ZIP or city instead.</span>`; },
+    { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
+  );
+});
+
+document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".seg button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  state.kind = b.dataset.kind; load();
+}));
+$("#radius").addEventListener("change", e => {
+  state.radius = +e.target.value; store.set("radius", state.radius);
+  if (radiusCircle) radiusCircle.setRadius(state.radius * 1609.34);
+  load();
+});
+$("#days").addEventListener("change", e => { state.days = +e.target.value; load(); });
+let qTimer; $("#q").addEventListener("input", e => { clearTimeout(qTimer); qTimer = setTimeout(() => { state.q = e.target.value.trim(); load(); }, 250); });
+
+$("#list").addEventListener("click", e => {
+  if (e.target.closest("a")) return;
+  const c = e.target.closest(".card"); if (c) activate(c.dataset.id, false);
+});
+$("#list").addEventListener("keydown", e => {
+  const c = e.target.closest(".card"); if (c && (e.key === "Enter" || e.key === " ")){ e.preventDefault(); activate(c.dataset.id, false); }
+});
+
+const savedRadius = store.get("radius");
+if (savedRadius){ state.radius = savedRadius; $("#radius").value = String(savedRadius); }
+const saved = store.get("place");
+if (saved && typeof saved.lat === "number") setPlace(saved.lat, saved.lng, saved.label || "your saved place");
+else load();
+</script>
+</body>
+</html>
