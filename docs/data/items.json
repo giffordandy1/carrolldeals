@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T23:02:23+00:00",
+ "updated": "2026-11-06T23:03:26+00:00",
  "items": [
   {
    "kind": "special",
@@ -721,7 +721,7 @@
    "description": "Once life is back to normal for all of us we will continue to host Happy Hour Monday through Friday from 3 to 6 throughout the restaurant, and our now famous “Teacher” Happy Hour on Fridays throughout the school year.",
    "start": null,
    "end": null,
-   "recurring": "Fridays 3 to 6",
+   "recurring": "Monday through Friday 3 to 6",
    "url": "https://www.oscarsalehouse.net/eldersburg",
    "image": null,
    "price": null,
@@ -782,6 +782,40 @@
    "lng": -76.9432281,
    "source": "Oscar's Ale House (Eldersburg)",
    "id": "11caf3be1aef"
+  },
+  {
+   "kind": "event",
+   "title": "Thirsty Thursdays",
+   "description": "Live music on Thursdays.",
+   "start": null,
+   "end": null,
+   "recurring": "Thursdays",
+   "url": "https://tonylocos.com/",
+   "image": null,
+   "price": null,
+   "venue": "Tony Locos Bar & Restaurant",
+   "address": "710 Lisbon Center Drive, Woodbine, MD 21797",
+   "lat": 39.3491531,
+   "lng": -77.0670716,
+   "source": "Tony Locos Bar & Restaurant",
+   "id": "78b5433451b1"
+  },
+  {
+   "kind": "event",
+   "title": "Music & Events",
+   "description": "Live music and events every weekend.",
+   "start": null,
+   "end": null,
+   "recurring": "Every Saturday and Sunday",
+   "url": "https://tonylocos.com/",
+   "image": null,
+   "price": null,
+   "venue": "Tony Locos Bar & Restaurant",
+   "address": "710 Lisbon Center Drive, Woodbine, MD 21797",
+   "lat": 39.3491531,
+   "lng": -77.0670716,
+   "source": "Tony Locos Bar & Restaurant",
+   "id": "851b3144e86f"
   }
  ]
 }

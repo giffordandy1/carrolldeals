@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T23:02:23+00:00",
+ "updated": "2026-11-06T23:03:26+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -31,11 +31,9 @@
   },
   {
    "site": "Tony Locos Bar & Restaurant",
-   "status": "error",
-   "found": 0,
-   "errors": [
-    "https://tonylocos.com/: HTTPStatusError 403"
-   ],
+   "status": "ok",
+   "found": 2,
+   "errors": [],
    "mapped": true
   }
  ]
