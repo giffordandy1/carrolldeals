@@ -33,6 +33,7 @@ Indentation matters: use spaces, lined up as shown. If a check fails right after
 - If a site gives junk or nothing, add `selectors` (the comments in `sources.yml` explain them). In your browser, right-click an event on that site and choose *Inspect* to find its class name.
 - Pages that only show content after JavaScript runs (Facebook, Instagram, some Wix/Squarespace widgets) can't be read. Look for the venue's plain events page or its Eventbrite/ticketing page instead.
 - Some sites block requests from cloud servers like GitHub's. Those show an error such as `403` in the log.
+- For a site that blocks the checker or only posts on Facebook, type its standing events and specials in by hand with `manual:` (see Tony Locos in `sources.yml` for an example). You can list `urls` and `manual` items for the same site.
 
 ## How it reads a page
 
