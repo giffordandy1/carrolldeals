@@ -37,3 +37,9 @@ sites:
     urls:
       - https://ewbecks.com/sykesville-e-w-beck-s-restaurant-and-pub-e-w-beck-s-restaurant-and-pub-happy-hours-specials
       - https://ewbecks.com/sykesville-e-w-beck-s-restaurant-and-pub-e-w-beck-s-restaurant-and-pub-news-specials-events
+
+  - name: 1623 Brewing
+    address: 5975 Exchange Drive, Eldersburg, MD 21784
+    urls:
+      - https://1623brewing.com/1623-events/
+      - https://1623brewing.com/food-menu/

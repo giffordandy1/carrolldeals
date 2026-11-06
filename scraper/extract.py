@@ -127,7 +127,12 @@ def _recurring(text):
         t = TIMES_RE.search(text)
         out = _clean(f"{day_matches[-1].group(0)} {t.group(0) if t else ''}", 60)
         return out[0].upper() + out[1:]
-    if len(day_matches) <= 2 and len(span) <= 70 and "$" not in span and ":" not in span and not re.search(r"[.!?]\s", span):
+    # Keep the whole phrase only if what sits between the days/times is just joining words.
+    ordered = sorted(matches, key=lambda m: m.start())
+    gaps = [text[x.end():y.start()] for x, y in zip(ordered, ordered[1:]) if y.start() > x.end()]
+    joiners_only = all(len(re.findall(r"[a-z0-9$%]+", g, re.I)) <= 2 and "$" not in g and not re.search(r"[.!?]\s", g) for g in gaps)
+    if len(span) <= 70 and joiners_only:
+        span = re.sub(r"\s*:\s*", " ", span)
         return span[0].upper() + span[1:]
     days, times = DAYS_RE.search(text), TIMES_RE.search(text)
     bits = [m.group(0).strip() for m in (days, times) if m]
@@ -342,6 +347,11 @@ def heuristics(soup, base_url):
             short = re.split(r"\s+(?:every|on|from|is|are)\s+", title, maxsplit=1, flags=re.I)[0].rstrip("!.:")
             if len(short.split()) >= 2:
                 title = short
+            if DAYS_RE.fullmatch(title.rstrip(":").strip()):
+                # "Tuesday: $4.50 Any Single Taco" -> title "$4.50 Any Single Taco"
+                rest = _clean(text[len(title):].lstrip(" :-–"))
+                if rest:
+                    title = re.split(r"(?<=[.!])\s", rest)[0]
             add(title, text, el)
         elif EVENT_RE.search(text) and (DATE_RE.search(text) or (DAYS_RE.search(text) and not re.search(r"private|book|rent", text, re.I))):
             title = re.split(r"(?<=[.!:])\s|\s[–—-]\s", text)[0]
