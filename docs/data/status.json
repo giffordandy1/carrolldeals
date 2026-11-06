@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T22:46:02+00:00",
+ "updated": "2026-11-06T22:47:28+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -12,6 +12,13 @@
    "site": "E W Beck's Restaurant & Pub",
    "status": "ok",
    "found": 4,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "1623 Brewing",
+   "status": "ok",
+   "found": 56,
    "errors": [],
    "mapped": true
   }
