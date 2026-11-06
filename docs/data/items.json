@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T22:49:39+00:00",
+ "updated": "2026-11-06T23:02:23+00:00",
  "items": [
   {
    "kind": "special",
@@ -71,8 +71,8 @@
   },
   {
    "kind": "special",
-   "title": "Happy Hour Deals: Healing Opportunity",
-   "description": "Healing Opportunity",
+   "title": "Happy Hour Deals",
+   "description": "",
    "start": null,
    "end": null,
    "recurring": null,
@@ -84,7 +84,7 @@
    "lat": 39.3654056,
    "lng": -76.9690372,
    "source": "E W Beck's Restaurant & Pub",
-   "id": "82299a3aa8e2"
+   "id": "03e25a56ec8e"
   },
   {
    "kind": "special",
@@ -102,23 +102,6 @@
    "lng": -76.9690372,
    "source": "E W Beck's Restaurant & Pub",
    "id": "43b987256d57"
-  },
-  {
-   "kind": "special",
-   "title": "Crab Cake Thursdays.",
-   "description": "",
-   "start": null,
-   "end": null,
-   "recurring": "Thursdays",
-   "url": "https://ewbecks.com/sykesville-e-w-beck-s-restaurant-and-pub-e-w-beck-s-restaurant-and-pub-happy-hours-specials",
-   "image": null,
-   "price": null,
-   "venue": "E W Beck's Restaurant & Pub",
-   "address": "7565 Main Street, Sykesville, MD 21784",
-   "lat": 39.3654056,
-   "lng": -76.9690372,
-   "source": "E W Beck's Restaurant & Pub",
-   "id": "8ea555bac1f2"
   },
   {
    "kind": "event",
@@ -667,10 +650,10 @@
   {
    "kind": "special",
    "title": "Happy Hour at Craft Culture!",
-   "description": "",
+   "description": "Join us for $1 off all draft beer pours & $7 house wines! Tues-Fri: 2–6pm | Sunday: 4-8pm",
    "start": null,
    "end": null,
-   "recurring": null,
+   "recurring": "Tues-Fri 2–6pm | Sunday 4-8pm",
    "url": "https://1623brewing.com/food-menu/",
    "image": null,
    "price": null,
@@ -683,42 +666,8 @@
   },
   {
    "kind": "special",
-   "title": "$1 off all draft beer pours & $7 house wines!: Tues-Fri: 2–6pm | Sunday: 4-8pm",
-   "description": "Tues-Fri: 2–6pm | Sunday: 4-8pm",
-   "start": null,
-   "end": null,
-   "recurring": "Sunday 2–6pm",
-   "url": "https://1623brewing.com/food-menu/",
-   "image": null,
-   "price": null,
-   "venue": "1623 Brewing",
-   "address": "5975 Exchange Drive, Eldersburg, MD 21784",
-   "lat": 39.4163621,
-   "lng": -76.977291,
-   "source": "1623 Brewing",
-   "id": "8e4a2ac9458f"
-  },
-  {
-   "kind": "special",
-   "title": "Tues-Fri: 2–6pm | Sunday: 4-8pm",
-   "description": "",
-   "start": null,
-   "end": null,
-   "recurring": "Sundays",
-   "url": "https://1623brewing.com/food-menu/",
-   "image": null,
-   "price": null,
-   "venue": "1623 Brewing",
-   "address": "5975 Exchange Drive, Eldersburg, MD 21784",
-   "lat": 39.4163621,
-   "lng": -76.977291,
-   "source": "1623 Brewing",
-   "id": "d39f8a8343d5"
-  },
-  {
-   "kind": "special",
-   "title": "Weekly Specials: Tuesday",
-   "description": "Tuesday",
+   "title": "Tuesday: $4.50 Any Single Taco",
+   "description": "$4.50 Any Single Taco",
    "start": null,
    "end": null,
    "recurring": "Tuesdays",
@@ -730,29 +679,12 @@
    "lat": 39.4163621,
    "lng": -76.977291,
    "source": "1623 Brewing",
-   "id": "2e67397b5743"
+   "id": "d90bbf241081"
   },
   {
    "kind": "special",
-   "title": "Tuesday",
-   "description": "",
-   "start": null,
-   "end": null,
-   "recurring": "Tuesdays",
-   "url": "https://1623brewing.com/food-menu/",
-   "image": null,
-   "price": null,
-   "venue": "1623 Brewing",
-   "address": "5975 Exchange Drive, Eldersburg, MD 21784",
-   "lat": 39.4163621,
-   "lng": -76.977291,
-   "source": "1623 Brewing",
-   "id": "be5ae96800ad"
-  },
-  {
-   "kind": "special",
-   "title": "$4.50 Any Single Taco: Wednesday",
-   "description": "Wednesday",
+   "title": "Wednesday: $13 Specialty Flatbreads",
+   "description": "$13 Specialty Flatbreads",
    "start": null,
    "end": null,
    "recurring": "Wednesdays",
@@ -764,29 +696,12 @@
    "lat": 39.4163621,
    "lng": -76.977291,
    "source": "1623 Brewing",
-   "id": "12c28fe740df"
+   "id": "df7c85f80be2"
   },
   {
    "kind": "special",
-   "title": "Wednesday",
-   "description": "",
-   "start": null,
-   "end": null,
-   "recurring": "Wednesdays",
-   "url": "https://1623brewing.com/food-menu/",
-   "image": null,
-   "price": null,
-   "venue": "1623 Brewing",
-   "address": "5975 Exchange Drive, Eldersburg, MD 21784",
-   "lat": 39.4163621,
-   "lng": -76.977291,
-   "source": "1623 Brewing",
-   "id": "3edcbe8decca"
-  },
-  {
-   "kind": "special",
-   "title": "$13 Specialty Flatbreads: Thursday",
-   "description": "Thursday",
+   "title": "Thursday: $11 Craft SmashBurger",
+   "description": "$11 Craft SmashBurger",
    "start": null,
    "end": null,
    "recurring": "Thursdays",
@@ -798,62 +713,11 @@
    "lat": 39.4163621,
    "lng": -76.977291,
    "source": "1623 Brewing",
-   "id": "4424d2a56ac9"
+   "id": "e4408fd8d807"
   },
   {
    "kind": "special",
-   "title": "Thursday",
-   "description": "",
-   "start": null,
-   "end": null,
-   "recurring": "Thursdays",
-   "url": "https://1623brewing.com/food-menu/",
-   "image": null,
-   "price": null,
-   "venue": "1623 Brewing",
-   "address": "5975 Exchange Drive, Eldersburg, MD 21784",
-   "lat": 39.4163621,
-   "lng": -76.977291,
-   "source": "1623 Brewing",
-   "id": "16552d1ca699"
-  },
-  {
-   "kind": "special",
-   "title": "$11 Craft SmashBurger: Discover",
-   "description": "Our Beer Drink Menu Food Menu Culture Events Taproom FAQs News/Press Newsletter Signup Contact",
-   "start": null,
-   "end": null,
-   "recurring": null,
-   "url": "https://1623brewing.com/food-menu/",
-   "image": null,
-   "price": null,
-   "venue": "1623 Brewing",
-   "address": "5975 Exchange Drive, Eldersburg, MD 21784",
-   "lat": 39.4163621,
-   "lng": -76.977291,
-   "source": "1623 Brewing",
-   "id": "47c77cbe2b70"
-  },
-  {
-   "kind": "special",
-   "title": "Facebook will be updated daily with specials, as well as other important information happening here at Oscar’s…",
-   "description": "Facebook will be updated daily with specials, as well as other important information happening here at Oscar’s Alehouse of Eldersburg.",
-   "start": null,
-   "end": null,
-   "recurring": "daily",
-   "url": "https://www.oscarsalehouse.net/eldersburg",
-   "image": null,
-   "price": null,
-   "venue": "Oscar's Ale House (Eldersburg)",
-   "address": "1438 Liberty Road, Eldersburg, MD 21784",
-   "lat": 39.402333,
-   "lng": -76.9432281,
-   "source": "Oscar's Ale House (Eldersburg)",
-   "id": "3f216f08525c"
-  },
-  {
-   "kind": "special",
-   "title": "Once life",
+   "title": "Happy hour",
    "description": "Once life is back to normal for all of us we will continue to host Happy Hour Monday through Friday from 3 to 6 throughout the restaurant, and our now famous “Teacher” Happy Hour on Fridays throughout the school year.",
    "start": null,
    "end": null,
@@ -866,24 +730,7 @@
    "lat": 39.402333,
    "lng": -76.9432281,
    "source": "Oscar's Ale House (Eldersburg)",
-   "id": "81fdbf66b0bd"
-  },
-  {
-   "kind": "special",
-   "title": "Specials: WEST",
-   "description": "906 N East Street Frederick, MD 21701 ​ 301-378-2793 ​ oscars@oscarswest.net",
-   "start": null,
-   "end": null,
-   "recurring": null,
-   "url": "https://www.oscarsalehouse.net/eldersburg-specials",
-   "image": null,
-   "price": null,
-   "venue": "Oscar's Ale House (Eldersburg)",
-   "address": "1438 Liberty Road, Eldersburg, MD 21784",
-   "lat": 39.402333,
-   "lng": -76.9432281,
-   "source": "Oscar's Ale House (Eldersburg)",
-   "id": "61bcc73c3080"
+   "id": "ca6f97d015fd"
   },
   {
    "kind": "special",
@@ -921,8 +768,8 @@
   },
   {
    "kind": "special",
-   "title": "Burger Of The Week: Miss Mary's Mac Burger",
-   "description": "Wood grilled half pound burger topped with fried mac and cheese, pickled onions, sriracha queso, and lettuce.",
+   "title": "Burger of the week: The Cuban Burger!!",
+   "description": "8 ounce burger topped with swiss cheese, pickles, sweet mustard sauce, jalapenos, mayonnaise, and a mix of chopped ham, smoked pork, shredded swiss cheese and dices pickles.",
    "start": null,
    "end": null,
    "recurring": null,
@@ -934,7 +781,7 @@
    "lat": 39.402333,
    "lng": -76.9432281,
    "source": "Oscar's Ale House (Eldersburg)",
-   "id": "a8bcac7489ad"
+   "id": "11caf3be1aef"
   }
  ]
 }
