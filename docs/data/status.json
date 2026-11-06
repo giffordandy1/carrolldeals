@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T22:47:28+00:00",
+ "updated": "2026-11-06T22:49:39+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -11,14 +11,21 @@
   {
    "site": "E W Beck's Restaurant & Pub",
    "status": "ok",
-   "found": 4,
+   "found": 5,
    "errors": [],
    "mapped": true
   },
   {
    "site": "1623 Brewing",
    "status": "ok",
-   "found": 56,
+   "found": 42,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Oscar's Ale House (Eldersburg)",
+   "status": "ok",
+   "found": 6,
    "errors": [],
    "mapped": true
   }
