@@ -309,7 +309,7 @@ def heuristics(soup, base_url):
             start = None
             if DAYS_RE.fullmatch(title.rstrip(":!").strip()) and body:
                 # Heading is just "Tuesday"; the special itself is the text under it.
-                title, body = f"{title.rstrip(':!').strip()}: {re.split(r'(?<=[.!])\s', body)[0][:100]}", body
+                title = f"{title.rstrip(':!').strip()}: {re.split(r'(?<=[.!])\s', body)[0][:100]}"
             day = WEEKDAY_TITLE_RE.search(title).group(0).capitalize()
             day = day if day.endswith("s") else day + "s"
             t = TIMES_RE.search(body)
@@ -336,7 +336,11 @@ def heuristics(soup, base_url):
         seen_text.add(_clean(body)[:200])
 
     # Headings that announce a special or event, with the text beneath them.
-    for h in soup.find_all(HEADINGS):
+    heads = soup.find_all(HEADINGS)
+    used = set()
+    for idx, h in enumerate(heads):
+        if id(h) in used:
+            continue
         title = _clean(h.get_text(" "))
         if not (3 <= len(title) <= 120):
             continue
@@ -348,14 +352,36 @@ def heuristics(soup, base_url):
             lines += [x for x in ([sib] if sib.name in ("p", "li") else sib.find_all(["li", "p"]))]
         if sum(1 for x in lines if SPECIAL_RE.search(x.get_text(" ")) or EVENT_RE.search(x.get_text(" "))) >= 2:
             continue
-        if not body and SPECIAL_RE.search(title):
-            # "BURGER OF THE WEEK" followed by a heading naming it.
-            nxt = h.find_next(HEADINGS)
-            if nxt is not None:
-                name = _clean(nxt.get_text(" "))
-                if 3 <= len(name) <= 80 and not SPECIAL_RE.search(name):
-                    title = f"{title.title() if title.isupper() else title}: {name}"
-                    body = _section_text(nxt) or name
+        day_only = bool(DAYS_RE.fullmatch(title.rstrip(":!").strip()))
+        if not body and (SPECIAL_RE.search(title) or day_only):
+            # Some layouts put the details in the next headings instead of text:
+            # "Tuesday" / "$4.50 Any Single Taco", "Happy Hour" / "$1 off drafts" /
+            # "Tues-Fri 2-6pm", or "Burger of the Week" / "Miss Mary's Mac Burger".
+            of_week = bool(re.search(r"of the (week|month)", title, re.I))
+            extra = []
+            for nxt in heads[idx + 1: idx + 4]:
+                t = _clean(nxt.get_text(" "))
+                if not t or len(t) > 120 or DAYS_RE.fullmatch(t.rstrip(":!").strip()):
+                    break
+                if day_only or (of_week and not extra):
+                    extra.append(t)
+                    used.add(id(nxt))
+                    if of_week and _section_text(nxt):
+                        extra.append(_section_text(nxt))
+                    break
+                if re.search(r"\$\s?\d|%|\boff\b", t) or TIMES_RE.search(t):
+                    extra.append(t)
+                    used.add(id(nxt))
+                else:
+                    break
+            if extra:
+                if day_only:
+                    title, body = f"{title.rstrip(':!').strip()}: {extra[0]}", extra[0]
+                elif of_week:
+                    title = f"{title.capitalize() if title.isupper() else title}: {extra[0]}"
+                    body = " ".join(extra[1:]) or extra[0]
+                else:
+                    body = " ".join(extra)
         weekly = bool(WEEKDAY_TITLE_RE.search(title)) and not DATE_RE.search(title) and len(title.split()) <= 6
         if weekly:
             add(title, body, h.parent, weekly=True)
@@ -369,6 +395,8 @@ def heuristics(soup, base_url):
             continue
         if any(text[:200] in s or s in text for s in seen_text if s):
             continue
+        if re.search(r"facebook|instagram|follow us|sign up|newsletter|subscribe", text, re.I):
+            continue
         if SPECIAL_RE.search(text) and (DAYS_RE.search(text) or TIMES_RE.search(text)):
             strong = el.find(["strong", "b"])
             title = _clean(strong.get_text(" ")) if strong and len(strong.get_text(strip=True)) > 3 else re.split(r"(?<=[.!:])\s", text)[0]
@@ -380,6 +408,11 @@ def heuristics(soup, base_url):
                 rest = _clean(text[len(title):].lstrip(" :-–"))
                 if rest:
                     title = re.split(r"(?<=[.!])\s", rest)[0]
+            elif not (SPECIAL_RE.search(title) or EVENT_RE.search(title)):
+                # Title came out as filler ("Once life"); name it by the offer instead.
+                m = re.search(r"happy\s*hour|brunch|wing night|taco tuesday|[a-z]+ specials?", text, re.I)
+                if m:
+                    title = m.group(0).strip().capitalize()
             add(title, text, el)
         elif EVENT_RE.search(text) and (DATE_RE.search(text) or (DAYS_RE.search(text) and not re.search(r"private|book|rent", text, re.I))):
             title = re.split(r"(?<=[.!:])\s|\s[–—-]\s", text)[0]
@@ -398,13 +431,14 @@ def heuristics(soup, base_url):
         label = " ".join(words)
         if WEEKDAY_TITLE_RE.search(label) and 2 <= len(words) <= 5 and not DATE_RE.search(label):
             label = label[0].upper() + label[1:]
-            if label.lower() not in {o["title"].lower() for o in out}:
+            norm = lambda x: re.sub(r"[^a-z0-9]+", " ", x.lower()).strip()
+            if norm(label) not in {norm(o["title"]) for o in out}:
                 add(label, "", img, weekly=True)
 
     # De-duplicate by title.
     uniq, titles = [], set()
     for it in out:
-        key = it["title"].lower()
+        key = re.sub(r"[^a-z0-9]+", " ", it["title"].lower()).strip()
         if key not in titles:
             titles.add(key)
             uniq.append(it)
