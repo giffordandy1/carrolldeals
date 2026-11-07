@@ -78,6 +78,7 @@ select{flex:1 1 auto;min-width:0;padding:7px 10px;border:1px solid var(--line);b
 .links{margin-top:8px;font-size:14px}
 .links a{color:var(--event);font-weight:700}
 .tag{display:inline-block;font-size:12px;font-weight:700;padding:1px 7px;border-radius:4px;margin-right:6px}
+.card .tag.today{background:var(--ink);color:var(--paper)}
 .event .tag{background:var(--event-soft);color:var(--event)}
 .special .tag{background:var(--special-soft);color:var(--special-ink)}
 
@@ -172,7 +173,7 @@ function stub(it){
   if (it.start){
     const d = new Date(it.start.length <= 10 ? it.start + "T12:00:00" : it.start);
     if (!isNaN(d)){
-      const hasTime = it.start.length > 10;
+      const hasTime = it.start.length > 10 && !/T00:00(:00)?(\.0+)?([+-]|Z|$)/.test(it.start); // midnight = all day
       return `<span class="small">${d.toLocaleDateString(undefined,{weekday:"short"})}</span>
               <span class="big">${d.getDate()}</span>
               <span class="small">${d.toLocaleDateString(undefined,{month:"short"})}${hasTime ? "<br>" + d.toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"}).replace(":00","") : ""}</span>`;
@@ -189,7 +190,7 @@ function card(it){
     <div class="stub">${stub(it)}</div>
     <div class="body">
       <h2>${esc(it.title)}</h2>
-      <p class="meta"><span class="tag">${it.kind === "special" ? "Special" : "Event"}</span>${esc(where)}${it.price ? ", " + esc(it.price) : ""}</p>
+      <p class="meta">${it.today ? '<span class="tag today">Today</span>' : ""}<span class="tag">${it.kind === "special" ? "Special" : "Event"}</span>${esc(where)}${it.price ? ", " + esc(it.price) : ""}</p>
       ${it.description ? `<p class="desc">${esc(it.description)}</p>` : ""}
       ${safeUrl(it.image) ? `<a class="pic" href="${esc(it.image)}" target="_blank" rel="noopener" aria-label="See the full picture for ${esc(it.title)}"><img src="${esc(it.image)}" alt="" loading="lazy" onerror="this.parentNode.remove()"></a>` : ""}
       ${url ? `<div class="links"><a href="${esc(url)}" target="_blank" rel="noopener">Open ${esc(new URL(url).hostname.replace(/^www\./,""))}</a></div>` : ""}
@@ -211,6 +212,40 @@ function milesBetween(a, b, c, d){
   const h = Math.sin(rad(c - a) / 2) ** 2 + Math.cos(rad(a)) * Math.cos(rad(c)) * Math.sin(rad(d - b) / 2) ** 2;
   return 2 * r * Math.asin(Math.sqrt(h));
 }
+// Which weekdays (0 = Sunday … 6 = Saturday) a schedule like "Tues-Fri 2–6pm | Sunday 4-8pm",
+// "Monday through Friday", "Every Saturday and Sunday" or "Pizza Monday" covers. Empty set = not stated.
+const DAY_IDX = { sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6 };
+const DAY_WORD = "(sun|mon|tue|wed|thu|fri|sat)(?:day|urday|nesday|sday|rsday|s|r|rs)?s?\\.?(?![a-z])";
+function scheduleDays(text){
+  const days = new Set();
+  const t = (text || "").toLowerCase();
+  if (/\bevery\s?day\b|\bdaily\b|\bnightly\b|\b7 days\b|\ball week\b/.test(t)) [0,1,2,3,4,5,6].forEach(d => days.add(d));
+  if (/\bweekdays\b/.test(t)) [1,2,3,4,5].forEach(d => days.add(d));
+  if (/\bweekends?\b/.test(t)) [0,6].forEach(d => days.add(d));
+  const range = new RegExp(`\\b${DAY_WORD}\\s*(?:-|–|—|to|thru|through|until)\\s*${DAY_WORD}`, "g");
+  let rest = t, m;
+  while ((m = range.exec(t))){
+    let a = DAY_IDX[m[1]], b = DAY_IDX[m[2]];
+    for (let i = 0; i < 7; i++){ const d = (a + i) % 7; days.add(d); if (d === b) break; }
+    rest = rest.replace(m[0], " ");
+  }
+  for (const w of rest.matchAll(new RegExp(`\\b${DAY_WORD}`, "g"))) days.add(DAY_IDX[w[1]]);
+  return days;
+}
+
+// Is this item on today? Dated items: today falls between start and end.
+// Weekly items: today's weekday is in its schedule (or in its name, e.g. "Pizza Monday").
+function isToday(it, today, weekday){
+  const start = (it.start || "").slice(0, 10), end = (it.end || "").slice(0, 10);
+  if (start) return start <= today && today <= (end || start);
+  let days = scheduleDays(it.recurring);
+  if (!days.size) days = scheduleDays(it.title);
+  return days.has(weekday);
+}
+function hasDays(it){
+  return !!it.start || scheduleDays(it.recurring).size > 0 || scheduleDays(it.title).size > 0;
+}
+
 const isoDay = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 
 async function load(){
@@ -237,6 +272,9 @@ async function load(){
     const start = (it.start || "").slice(0, 10), end = (it.end || "").slice(0, 10);
     if (start && ((end || start) < today || start > horizon)) continue;
     if (state.kind && it.kind !== state.kind) continue;
+    it.today = isToday(it, today, now.getDay());
+    // "Today" shows what's on today: skip weekly items set for other days.
+    if (state.days === 0 && !it.today && hasDays(it)) continue;
     if (needle && ![it.title, it.description, it.venue].join(" ").toLowerCase().includes(needle)) continue;
     if (state.lat != null){
       if (it.lat == null) continue;
@@ -245,7 +283,8 @@ async function load(){
     }
     out.push(it);
   }
-  out.sort((a, b) => (a.distance ?? 0) - (b.distance ?? 0) || (a.start || "9999").localeCompare(b.start || "9999") || a.title.localeCompare(b.title));
+  // Today's events and specials first, then everything else; nearest first within each group.
+  out.sort((a, b) => (b.today - a.today) || (a.distance ?? 0) - (b.distance ?? 0) || (a.start || "9999").localeCompare(b.start || "9999") || a.title.localeCompare(b.title));
   render(out);
 }
 
