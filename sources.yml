@@ -77,7 +77,7 @@ sites:
         url: https://tonylocos.com/
 
   - name: Serra Restaurant & Bar (Eldersburg)
-    address: 2021 Liberty Road, Sykesville, MD 21784
+    address: 2021 Liberty Road, Eldersburg, MD 21784
     only: Eldersburg
     urls:
       - https://www.eatdrinkserra.com/specials

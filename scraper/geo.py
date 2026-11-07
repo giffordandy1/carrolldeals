@@ -2,6 +2,7 @@
 import asyncio
 import json
 import os
+import re
 import time
 
 import httpx
@@ -22,6 +23,27 @@ class Geocoder:
             self.cache = {}
 
     async def lookup(self, query):
+        """Find coordinates, falling back to less exact versions of the address.
+
+        OpenStreetMap often lacks house numbers on long roads, so
+        "2021 Liberty Road, Sykesville, MD 21784" falls back to
+        "Liberty Road, Sykesville, MD 21784", then "Sykesville, MD 21784".
+        """
+        q = (query or "").strip()
+        tries = [q]
+        no_number = re.sub(r"^\s*\d+[A-Za-z]?\s+", "", q)
+        if no_number != q:
+            tries.append(no_number)
+        parts = [x.strip() for x in q.split(",")]
+        if len(parts) >= 3:
+            tries.append(", ".join(parts[1:]))
+        for t in tries:
+            hit = await self._lookup_one(t)
+            if hit:
+                return hit
+        return None
+
+    async def _lookup_one(self, query):
         q = (query or "").strip()
         if not q:
             return None

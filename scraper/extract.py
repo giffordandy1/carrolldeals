@@ -454,7 +454,10 @@ def heuristics(soup, base_url):
         body = _section_text(h)
         link_text = " ".join(_clean(a.get_text(" ")) for sib in _following(h) for a in ([sib] if sib.name == "a" else sib.find_all("a")))
         bare = not body or (len(body.split()) <= 4 and _clean(body.replace(link_text, "")) == "") if link_text else not body
-        if bare and specials_page and len(title.split()) <= 8:
+        label = title.rpartition(":")[2] or title
+        offer_like = (DAYS_RE.search(label) or TIMES_RE.search(label) or SPECIAL_RE.search(label)
+                      or re.search(r"\b(lunch|brunch|dinner|breakfast|late night)\b", label, re.I))
+        if bare and specials_page and offer_like and len(title.split()) <= 8:
             pic = _picture_under(h)
             if pic is not None:
                 add_picture(title, pic)
