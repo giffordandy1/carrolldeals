@@ -91,3 +91,9 @@ sites:
       - https://www.eatdrinkserra.com/specials
       - https://www.eatdrinkserra.com/events
       - https://www.eatdrinkserra.com/live
+
+  - name: The Woodstock Inn
+    address: 1415 Woodstock Road, Woodstock, MD 21163
+    urls:
+      - https://www.woodstockinn.net/events
+      - https://www.woodstockinn.net/specials

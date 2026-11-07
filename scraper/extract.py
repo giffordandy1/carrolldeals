@@ -133,6 +133,20 @@ def _parse_date(text, now=None):
     return d.date().isoformat()
 
 
+def _with_time(day, time_text):
+    """"2026-11-24" + "6:30 PM" -> "2026-11-24T18:30" (start time of a range)."""
+    if not (day and time_text):
+        return day
+    m = re.search(r"(\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.m\.|p\.m\.)", time_text, re.I)
+    if not m:
+        return day
+    h, mnt, ap = int(m.group(1)), int(m.group(2) or 0), m.group(3).lower()[0]
+    if h > 12 or mnt > 59:
+        return day
+    h = h % 12 + (12 if ap == "p" else 0)
+    return f"{day}T{h:02d}:{mnt:02d}"
+
+
 def _recurring(text):
     """Short schedule phrase like "all day Tuesdays and 4pm-6pm Wednesday through Friday"."""
     text = text or ""
@@ -170,7 +184,7 @@ QUESTION_RE = re.compile(
 def _tidy_title(title):
     """Turn FAQ-style questions ("Do you have a happy hour?") into labels ("Happy hour")."""
     t = _clean(title)
-    t2 = re.sub(r"^(?:join us|come (?:in|out|by))\s+(?:for|on|every)?\s*(?:our|the)?\s*(?:now\s+)?(?:famous\s+)?", "", t, flags=re.I)
+    t2 = re.sub(r"^(?:join us|enjoy|come (?:in|out|by))\s+(?:one of\s+)?(?:for|on|every)?\s*(?:our|the)?\s*(?:now\s+)?(?:famous\s+)?", "", t, flags=re.I)
     if t2 != t and len(t2.split()) >= 2:
         t = t2[0].upper() + t2[1:]
     if t.endswith("?"):
@@ -452,6 +466,29 @@ def heuristics(soup, base_url):
         if not (3 <= len(title) <= 120):
             continue
         body = _section_text(h)
+        # "Tuesday November 24th" heading, then a heading with the event's name.
+        dm = DATE_RE.search(title)
+        if dm and not body and idx + 1 < len(heads):
+            rest = _clean(DAYS_RE.sub(" ", title.replace(dm.group(0), " ")).strip(" ,-–:"))
+            nxt = heads[idx + 1]
+            name = _clean(nxt.get_text(" "))
+            if len(rest.split()) <= 1 and 3 <= len(name) <= 120 and not DATE_RE.search(name):
+                used.add(id(nxt))
+                details = _section_text(nxt)
+                when = _parse_date(title)
+                if when and not re.search(r"private (event|part)", f"{name} {details}", re.I):
+                    t = TIMES_RE.search(details)
+                    price = re.search(r"\$\s?\d+(?:\.\d\d)?\s*(?:per person|pp\b|/person|per ticket|admission|cover)", details, re.I)
+                    out.append({
+                        "kind": "event", "title": name, "description": _clean(details, 500),
+                        "start": _with_time(when, t.group(0) if t else None), "end": None, "recurring": None,
+                        "url": next((urljoin(base_url, a["href"]) for a in [nxt.find_next("a", href=True)]
+                                     if a is not None and a.find_previous(HEADINGS) is nxt), base_url),
+                        "image": None, "price": price.group(0) if price else None,
+                        "venue": None, "address": None, "lat": None, "lng": None,
+                    })
+                    seen_text.add(_clean(details)[:200])
+                continue
         link_text = " ".join(_clean(a.get_text(" ")) for sib in _following(h) for a in ([sib] if sib.name == "a" else sib.find_all("a")))
         bare = not body or (len(body.split()) <= 4 and _clean(body.replace(link_text, "")) == "") if link_text else not body
         label = title.rpartition(":")[2] or title
@@ -505,6 +542,66 @@ def heuristics(soup, base_url):
         elif SPECIAL_RE.search(title) or (EVENT_RE.search(title) and (DATE_RE.search(title + " " + body) or DAYS_RE.search(title + " " + body))):
             add(title, body, h.parent)
 
+    # Picture blocks: a picture named for a day ("mondays-25.jpg", "steak-night.jpg")
+    # followed by the deal in plain text, up to the next picture.
+    if specials_page:
+        for img in soup.find_all("img"):
+            if id(img) in pictures_used:
+                continue
+            src = img.get("src") or img.get("data-src") or ""
+            fname = unquote(urlparse(src).path.rsplit("/", 1)[-1])
+            label = re.sub(r"[_\-+~.]+", " ", re.sub(r"\.(jpe?g|png|gif|webp|avif)$", "", fname, flags=re.I))
+            lines, size = [], 0
+            for el in img.next_elements:
+                if getattr(el, "name", None) == "img" or getattr(el, "name", None) in HEADINGS:
+                    break
+                if isinstance(el, str):
+                    t = _clean(el)
+                    if t:
+                        lines.append(t)
+                        size += len(t)
+                        if size > 600:
+                            break
+            text = " ".join(lines)
+            if not lines or not re.search(r"\$\s?\d|%|1/2|half|\boff\b|\bfor 1\b|happy\s*hour|bottomless", text, re.I):
+                continue
+            day_m = WEEKDAY_TITLE_RE.search(label)
+            file_name = _name_from_file(src)
+            if not (day_m or file_name or DAYS_RE.search(text)):
+                continue
+            pictures_used.add(id(img))
+            clock = [m.group(0) for m in TIMES_RE.finditer(text) if re.search(r"\d", m.group(0))]
+            head = lines[0]
+            head_is_offer = re.match(r"^[-•*]?\s*\$|^\d+(/\d)?\b", head) is not None
+            head_used = False
+            if file_name:
+                title = file_name                       # "Steak night", "Orange crushes"
+            elif not head_is_offer and len(head) <= 70:
+                title = _tidy_title(head)               # "TWOsdays", "Sunday BRUNCH"
+                head_used = True
+            else:
+                title = re.sub(r"^[-•*]\s*", "", head if head_is_offer else lines[0])[:70]
+            if day_m:
+                day = day_m.group(0).capitalize()
+                day = day if day.endswith("s") else day + "s"
+                if not WEEKDAY_TITLE_RE.search(title):
+                    title = f"{day.rstrip('s')}: {title}" if (head_is_offer or file_name is None and len(title) > 40) else title
+                recurring = _clean(f"{day} {clock[0] if clock else ''}")
+            else:
+                recurring = _recurring(text)
+                if recurring and not DAYS_RE.search(recurring):
+                    m = re.search(r"\b(?:till|til|until)\s+(\d{1,2}(?::\d{2})?\s*(?:am|pm))", text, re.I)
+                    recurring = f"Until {m.group(1)}" if m else recurring
+            details = "; ".join(re.sub(r"^[-•*]\s*", "", l) for l in lines if not (head_used and l == head))
+            out.append({
+                "kind": "special", "title": _clean(title, 120), "description": _clean(details, 500),
+                "start": None, "end": None, "recurring": recurring, "url": base_url,
+                "image": urljoin(base_url, src), "price": None, "venue": None, "address": None, "lat": None, "lng": None,
+            })
+            seen_text.add(_clean(text)[:200])
+            for l in lines:
+                seen_text.add(l[:200])
+
     # Stand-alone paragraphs / list items that describe a special with a day or time.
     for el in soup.find_all(["p", "li", "dd", "td"]):
         text = _clean(el.get_text(" "))
@@ -541,6 +638,8 @@ def heuristics(soup, base_url):
         if id(img) in pictures_used:
             continue
         label = img.get("alt") or ""
+        if DATE_RE.search(label):
+            continue  # a dated banner ("Tuesday November 24th"), not a weekly special
         if not WEEKDAY_TITLE_RE.search(label):
             label = unquote(urlparse(img.get("src") or "").path.rsplit("/", 1)[-1])
             label = re.sub(r"\.(jpe?g|png|gif|webp|avif)$", "", label, flags=re.I)
