@@ -40,7 +40,7 @@ EVENT_RE = re.compile(
 DAY = (r"(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday|"
        r"mon|tues|tue|weds|wed|thurs|thur|thu|fri|sat|sun)(?:s)?\.?")
 DAYS_RE = re.compile(
-    rf"\b(?:every\s+)?{DAY}(?:\s*(?:-|–|to|thru|through|&|and|,)\s*{DAY})*\b|\bdaily\b|\bweekdays\b|\bweekends\b|\bnightly\b",
+    rf"\b(?:every\s+)?{DAY}(?:\s*(?:-|–|to|thru|through|&|and|,)\s*{DAY})*\b|\bdaily\b|\bevery\s?day\b|\bweekdays\b|\bweekends\b|\bnightly\b",
     re.I,
 )
 TIME = r"\d{1,2}(?::\d{2})?\s*(?:am|pm|a\.m\.|p\.m\.)?"
@@ -315,6 +315,48 @@ def _section_text(heading):
     return text
 
 
+FILE_JUNK = {"jpg", "jpeg", "png", "webp", "gif", "avif", "img", "image", "photo", "post", "website", "web",
+             "thumb", "final", "copy", "new", "revised", "edit", "mv", "flyer", "graphic", "insta", "fb", "story"}
+
+
+def _name_from_file(src):
+    """A readable name from an image file name, or None.
+
+    kids-eat-free-website-jpg_001.webp -> "Kids eat free"
+    10-99-lunch-jpg_001.webp            -> "$10.99 lunch"
+    serrarestaurant_2for22tuesdays_post_7-18-25-jpg.webp -> "2 for $22"
+    monday-jpg.webp                     -> None (only a day name)
+    """
+    name = unquote(urlparse(src or "").path.rsplit("/", 1)[-1])
+    name = re.sub(r"\.(jpe?g|png|gif|webp|avif)$", "", name, flags=re.I)
+    name = re.sub(r"(?<=[a-z])(?=[A-Z])|(?<=[A-Za-z])(?=\d)|(?<=\d)(?=[A-Za-z])", " ", name)
+    name = re.sub(r"[_\-+~.]+", " ", name)
+    name = re.sub(r"\b\d{1,2} \d{1,2} \d{2,4}\b", " ", name)          # dates like 7-18-25
+    words = [w for w in name.split() if w.lower() not in FILE_JUNK and len(w) <= 12]
+    text = " ".join(words)
+    text = re.sub(r"\b(\d+) for (\d+)\b", r"\1 for $\2", text)
+    text = re.sub(r"\b(\d{1,2}) (\d{2})\b", r"$\1.\2", text)
+    text = re.sub(r"(?<![$.\w])\d+(?![\w.])(?! for)", " ", text)           # stray numbers
+    text = DAYS_RE.sub(" ", text)
+    text = _clean(text)
+    if len(re.findall(r"[a-z]{2,}|\$[\d.]+", text, re.I)) < 2:
+        return None
+    return text[0].upper() + text[1:]
+
+
+def _picture_under(heading):
+    """The image directly under a heading that has no text of its own, if any."""
+    for sib in _following(heading):
+        text = _clean(sib.get_text(" "))
+        links = " ".join(_clean(a.get_text(" ")) for a in (sib.find_all("a") if sib.name != "a" else [sib]))
+        if text and (len(text.split()) > 4 or _clean(text.replace(links, "")) if links else True):
+            return None
+        img = sib if sib.name == "img" else sib.find("img")
+        if img is not None and (img.get("src") or img.get("data-src")):
+            return img
+    return None
+
+
 def heuristics(soup, base_url):
     for t in soup(["script", "style", "noscript", "svg", "form", "nav", "iframe"]):
         t.decompose()
@@ -327,6 +369,9 @@ def heuristics(soup, base_url):
             return
         if re.search(r"facebook|instagram|follow us|newsletter|subscribe", title, re.I):
             return
+        if re.fullmatch(r"(?:our |weekly |daily |current |today'?s )?(?:specials?|deals|events?|happy hours?|menu)!?", title.strip().lower()) \
+                and not (DAYS_RE.search(body) or TIMES_RE.search(body) or re.search(r"\$\s?\d|%", body)):
+            return  # a section title ("SPECIALS") with only an intro line under it
         if weekly:
             # "Burger Wednesdays": a standing weekly special, even if the page shows this week's date.
             start = None
@@ -358,9 +403,48 @@ def heuristics(soup, base_url):
         })
         seen_text.add(_clean(body)[:200])
 
+    def add_picture(title, img):
+        """A special shown only as a picture under a short heading ("Eldersburg: Monday")."""
+        prefix, _, rest = title.rpartition(":")
+        prefix, rest = prefix.strip(), (rest.strip() or title)
+        if not prefix or DAYS_RE.fullmatch(prefix):
+            prefix, rest = "", title.strip()
+        src = urljoin(base_url, img.get("src") or img.get("data-src"))
+        sched = _recurring(rest) if (DAYS_RE.search(rest) or TIMES_RE.search(rest)) else None
+        leftover = _clean(re.sub(r"\b(?:thru|through|to|and|only)\b|[-–&,!]", " ", TIMES_RE.sub(" ", DAYS_RE.sub(" ", rest)), flags=re.I))
+        if len(leftover.split()) >= 2 or (leftover and WEEKDAY_TITLE_RE.search(rest)):
+            name = rest  # the heading already names it: "Crab Cake Thursdays!", "Happy Hour Deals"
+        else:
+            name = _name_from_file(src) or (f"{rest} special" if len(rest.split()) <= 4 else rest)
+        if sched and re.fullmatch(r"every\s?day", sched, re.I):
+            sched = "Every day"
+        if re.search(r"private (event|part)|facebook|instagram|follow us|gift card", f"{title} {name}", re.I):
+            return
+        pictures_used.add(id(img))
+        if sched and re.fullmatch(r"(?!every)[A-Za-z]+day", sched, re.I):
+            sched += "s"
+        link = None
+        box = img.parent
+        while box is not None and box.find(HEADINGS) is None and box.parent is not None:
+            box = box.parent  # the block holding this heading + picture
+        for a in (box.find_all("a", href=True) if box is not None else []):
+            if a.find_previous("img") is img and re.search(r"\.pdf($|\?)", a["href"], re.I):
+                link = a
+                break
+        out.append({
+            "kind": "event" if EVENT_RE.search(f"{rest} {name}") and not SPECIAL_RE.search(name) else "special",
+            "title": _clean(f"{prefix}: {name}" if prefix else name, 120),
+            "description": "" if sched else _clean(rest, 200) if rest.lower() not in name.lower() else "",
+            "start": None, "end": None, "recurring": sched,
+            "url": urljoin(base_url, link["href"]) if link else base_url,
+            "image": src, "price": None, "venue": None, "address": None, "lat": None, "lng": None,
+        })
+
     # Headings that announce a special or event, with the text beneath them.
     heads = soup.find_all(HEADINGS)
-    used = set()
+    used, pictures_used = set(), set()
+    specials_page = bool(re.search(r"special|deal|happy", base_url, re.I)) or any(
+        SPECIAL_RE.search(_clean(x.get_text(" "))) for x in heads)
     for idx, h in enumerate(heads):
         if id(h) in used:
             continue
@@ -368,6 +452,13 @@ def heuristics(soup, base_url):
         if not (3 <= len(title) <= 120):
             continue
         body = _section_text(h)
+        link_text = " ".join(_clean(a.get_text(" ")) for sib in _following(h) for a in ([sib] if sib.name == "a" else sib.find_all("a")))
+        bare = not body or (len(body.split()) <= 4 and _clean(body.replace(link_text, "")) == "") if link_text else not body
+        if bare and specials_page and len(title.split()) <= 8:
+            pic = _picture_under(h)
+            if pic is not None:
+                add_picture(title, pic)
+                continue
         # A heading over a list of several specials ("Weekly Specials") is a
         # container: let the line-by-line pass below pick up each one instead.
         lines = []
@@ -444,6 +535,8 @@ def heuristics(soup, base_url):
     # Weekly specials posted only as pictures, labelled by their alt text or
     # file name ("Wings Wednesday.jpg", "BurgerMonday_revised2025.jpg").
     for img in soup.find_all("img"):
+        if id(img) in pictures_used:
+            continue
         label = img.get("alt") or ""
         if not WEEKDAY_TITLE_RE.search(label):
             label = unquote(urlparse(img.get("src") or "").path.rsplit("/", 1)[-1])

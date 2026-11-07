@@ -11,6 +11,9 @@
 # Optional:
 #   lat / lng:   exact map coordinates, if the address lookup puts it in the wrong spot
 #   paused: true    stop checking this site without deleting it
+#   only: Eldersburg   for a page that lists several locations' specials
+#                      ("Eldersburg: Monday", "Westminster: Tuesday"), keep just this
+#                      location's items plus "Both Locations" ones
 #   manual:         items you type in yourself, for sites that block the checker
 #                   or only post on Facebook. Each one has:
 #     - title: Thirsty Thursdays
@@ -72,3 +75,19 @@ sites:
         when: Every Saturday and Sunday
         details: Live music and events every weekend.
         url: https://tonylocos.com/
+
+  - name: Serra Restaurant & Bar (Eldersburg)
+    address: 2021 Liberty Road, Sykesville, MD 21784
+    only: Eldersburg
+    urls:
+      - https://www.eatdrinkserra.com/specials
+      - https://www.eatdrinkserra.com/events
+      - https://www.eatdrinkserra.com/live
+
+  - name: Serra Restaurant & Bar (Westminster)
+    address: 32 W Main St, Westminster, MD 21157
+    only: Westminster
+    urls:
+      - https://www.eatdrinkserra.com/specials
+      - https://www.eatdrinkserra.com/events
+      - https://www.eatdrinkserra.com/live

@@ -40,6 +40,7 @@ def load_sources():
             "name": s["name"],
             "urls": (s.get("urls") if isinstance(s.get("urls"), list) else [s["urls"]]) if s.get("urls") else [],
             "manual": s.get("manual") or [],
+            "only": [str(x).lower() for x in (s.get("only") if isinstance(s.get("only"), list) else [s["only"]] if s.get("only") else [])],
             "address": s.get("address"),
             "lat": s.get("lat"),
             "lng": s.get("lng"),
@@ -113,6 +114,16 @@ async def main():
                     it[k] = _clean(it[k], limit) or None
             if not it.get("title"):
                 continue
+            # One page shared by several locations ("Eldersburg: Monday", "Westminster: Tuesday"):
+            # keep this location's items and the ones for all locations, and drop the label.
+            if src["only"]:
+                m = re.match(r"^\s*([^:]{2,40}):\s*(.+)$", it["title"])
+                if m and not re.search(r"\d|\$", m.group(1)):
+                    label = m.group(1).lower()
+                    if any(o in label for o in src["only"]) or re.search(r"\b(both|all) locations?\b", label):
+                        it["title"] = m.group(2)
+                    else:
+                        continue
             start, end = (it.get("start") or "")[:10], (it.get("end") or "")[:10]
             if start and (end or start) < today:
                 continue  # already over

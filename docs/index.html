@@ -72,6 +72,8 @@ select{flex:1 1 auto;min-width:0;padding:7px 10px;border:1px solid var(--line);b
 .body{padding:12px 14px;min-width:0}
 .body h2{font:700 17px/1.25 var(--display);margin:0 0 3px}
 .meta{font-size:14px;color:var(--muted);margin:0 0 6px}
+.pic{display:block;margin-top:8px;border-radius:4px;overflow:hidden;border:1px solid var(--line);max-width:200px}
+.pic img{display:block;width:100%;max-height:110px;object-fit:cover;background:var(--paper)}
 .desc{font-size:14px;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .links{margin-top:8px;font-size:14px}
 .links a{color:var(--event);font-weight:700}
@@ -189,6 +191,7 @@ function card(it){
       <h2>${esc(it.title)}</h2>
       <p class="meta"><span class="tag">${it.kind === "special" ? "Special" : "Event"}</span>${esc(where)}${it.price ? ", " + esc(it.price) : ""}</p>
       ${it.description ? `<p class="desc">${esc(it.description)}</p>` : ""}
+      ${safeUrl(it.image) ? `<a class="pic" href="${esc(it.image)}" target="_blank" rel="noopener" aria-label="See the full picture for ${esc(it.title)}"><img src="${esc(it.image)}" alt="" loading="lazy" onerror="this.parentNode.remove()"></a>` : ""}
       ${url ? `<div class="links"><a href="${esc(url)}" target="_blank" rel="noopener">Open ${esc(new URL(url).hostname.replace(/^www\./,""))}</a></div>` : ""}
     </div>
   </article>`;
