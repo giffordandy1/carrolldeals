@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-07T18:50:22+00:00",
+ "updated": "2026-11-07T19:21:24+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -61,6 +61,13 @@
    "site": "Amante Pizza & Pasta",
    "status": "ok",
    "found": 10,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Downtown Sykesville Connection",
+   "status": "ok",
+   "found": 6,
    "errors": [],
    "mapped": true
   }
