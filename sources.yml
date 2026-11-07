@@ -100,11 +100,47 @@ sites:
 
   - name: Amante Pizza & Pasta
     address: 21 Liberty Road, Sykesville, MD 21784
-    # Their site blocks automated checks, so this comes from their homepage by hand.
+    # Their site blocks automated checks, so these are entered by hand from their
+    # homepage and specials page (as posted Nov 2026). Update here when they change.
     manual:
-      - title: Wine-tasting dinner
+      - title: Wine tasting paired with a 3-course meal
         kind: event
         when: First Monday of every month 6:30 PM
         price: $59 per person
-        details: Wine-tasting dinner on the first Monday of every month. Call ahead to reserve, as these fill up quickly.
+        details: Wine tastings paired with a 3-course meal on the first Monday of every month. Call ahead to reserve, as these fill up quickly.
         url: https://amantepizzasykesville.com/
+      - title: Happy hour
+        when: Monday-Friday 2pm-6pm, Sunday all day
+        url: https://amantepizzasykesville.com/specials
+      - title: Lunch special, 12" sub with chips $11.99
+        when: Monday-Friday 11am-4pm
+        details: 12" sub of your choice with chips, $11.99.
+        url: https://amantepizzasykesville.com/specials
+      - title: Medium 2-topping pizza + 6 wings $22.99
+        when: Mon & Wed
+        details: One medium 2-topping pizza plus 6 wings or boneless wings, $22.99. Carryout or delivery only.
+        url: https://amantepizzasykesville.com/specials
+      - title: Monday specials
+        when: Mondays
+        details: Philly or chicken cheesesteak with fries $11.99; large 16" cheese pizza $13.99; grilled salmon with veggies $2 off. $15 minimum on delivery.
+        url: https://amantepizzasykesville.com/specials
+      - title: Tuesday specials
+        when: Tuesdays
+        details: Large 16" 3-topping pizza $18.99 (excludes seafood); Cuban panini with fries $13.99; buy one, get one 50% off pasta; top-shelf tequila $3 off. $15 minimum on delivery.
+        url: https://amantepizzasykesville.com/specials
+      - title: Wednesday specials, Top Shelf Bourbon Night
+        when: Wednesdays
+        details: Burger or pulled pork sandwich with fries $11.99; top-shelf bourbon $3 off. $15 minimum on delivery.
+        url: https://amantepizzasykesville.com/specials
+      - title: Thursday specials
+        when: Thursdays
+        details: Italian cold cut $11.99; Greek gyro with fries $11.99; any panini or calzone $2 off; any martini $7. $15 minimum on delivery.
+        url: https://amantepizzasykesville.com/specials
+      - title: Saturday pizza deal
+        when: Saturdays
+        details: 3 or more large 16" cheese pizzas, $12.99 each. $15 minimum on delivery.
+        url: https://amantepizzasykesville.com/specials
+      - title: Sunday specials, all-day happy hour
+        when: Sundays
+        details: Large 16" cheese pizza $13.99; happy hour all day. $15 minimum on delivery.
+        url: https://amantepizzasykesville.com/specials
