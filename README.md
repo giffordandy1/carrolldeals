@@ -51,6 +51,12 @@ Each item is placed at its own address if the page lists one, otherwise at the s
 - `docs/qr-code.png` is a printable QR code that opens the site.
 - If you move to your own domain, update the two `og:` addresses near the top of `docs/index.html` and make a new QR code.
 
+## Logo
+
+The Carroll Deals logo is a price tag with a map pin punched into it: deals, near you. Files are in `brand/`:
+`carroll-deals-logo.png` (logo with name, transparent background), `carroll-deals-mark.svg` (symbol only, any size)
+and `carroll-deals-app-icon.svg` (symbol on a dark square). Colors: navy `#1E2A3A`, yellow `#F2B705`.
+
 ## Good to know
 
 - It costs nothing as long as the repo is **public**. That also means the repo, including your site list, is visible to anyone.

@@ -55,7 +55,8 @@ header .where{grid-column:1/-1}
 .share svg{width:16px;height:16px}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:8px;font-size:15px;z-index:1000;box-shadow:0 4px 16px rgba(0,0,0,.25)}
 .toast[hidden]{display:none}
-h1{font:800 clamp(28px,3.2vw,36px)/1 var(--display);letter-spacing:-.02em;margin:0 0 4px}
+h1{font:800 clamp(28px,3.2vw,36px)/1 var(--display);letter-spacing:-.03em;margin:0 0 6px;display:flex;align-items:center;gap:10px}
+h1 .mark{width:1.25em;height:1.25em;flex:none;margin-left:-.12em}
 .where{color:var(--muted);margin:0;font-size:15px}
 .where strong{color:var(--ink)}
 
@@ -133,7 +134,7 @@ select{flex:1 1 auto;min-width:0;padding:7px 10px;border:1px solid var(--line);b
   <aside class="side">
     <div class="top">
       <header>
-        <h1>Carroll Deals</h1>
+        <h1><img class="mark" src="logo.svg" alt="" width="44" height="44">Carroll Deals</h1>
         <button type="button" class="share" id="shareSite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg><span>Share</span></button>
         <p class="where" id="where">Events and specials around Carroll County. Pick a place to see what's on near you.</p>
       </header>
