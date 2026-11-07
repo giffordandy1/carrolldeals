@@ -1,4 +1,4 @@
-# What's on nearby
+# Carroll Deals
 
 A free map of local events and specials. GitHub checks the websites you list every 6 hours and publishes the results as a web page. There's no server to pay for or keep running.
 
