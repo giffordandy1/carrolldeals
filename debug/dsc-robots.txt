@@ -1,0 +1,8 @@
+  User-Agent: *
+  Allow: /
+  Disallow: /carts/
+  Disallow: /password/
+  Disallow: /confirmation/
+  Disallow: /unlock/
+  Disallow: /preview/
+  Sitemap: https://s3.amazonaws.com/impact-production/sitemaps/14966/sitemap.xml.gz
