@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-07T16:08:52+00:00",
+ "updated": "2026-11-07T16:10:07+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -11,7 +11,7 @@
   {
    "site": "E W Beck's Restaurant & Pub",
    "status": "ok",
-   "found": 11,
+   "found": 4,
    "errors": [],
    "mapped": true
   },
@@ -25,7 +25,7 @@
   {
    "site": "Oscar's Ale House (Eldersburg)",
    "status": "ok",
-   "found": 7,
+   "found": 4,
    "errors": [],
    "mapped": true
   },
@@ -41,7 +41,7 @@
    "status": "ok",
    "found": 6,
    "errors": [],
-   "mapped": false
+   "mapped": true
   },
   {
    "site": "Serra Restaurant & Bar (Westminster)",
