@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-07T01:03:40+00:00",
+ "updated": "2026-11-07T07:02:17+00:00",
  "items": [
   {
    "kind": "special",
@@ -734,8 +734,8 @@
   },
   {
    "kind": "special",
-   "title": "Burger of the week: The Cuban Burger!!",
-   "description": "8 ounce burger topped with swiss cheese, pickles, sweet mustard sauce, jalapenos, mayonnaise, and a mix of chopped ham, smoked pork, shredded swiss cheese and dices pickles.",
+   "title": "Burger of the week: Miss Mary's Mac Burger",
+   "description": "Wood grilled half pound burger topped with fried mac and cheese, pickled onions, sriracha queso, and lettuce.",
    "start": null,
    "end": null,
    "recurring": null,
@@ -747,7 +747,7 @@
    "lat": 39.402333,
    "lng": -76.9432281,
    "source": "Oscar's Ale House (Eldersburg)",
-   "id": "11caf3be1aef"
+   "id": "a8bcac7489ad"
   },
   {
    "kind": "event",
