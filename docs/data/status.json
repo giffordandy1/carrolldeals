@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T23:03:26+00:00",
+ "updated": "2026-11-07T01:03:40+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -18,7 +18,7 @@
   {
    "site": "1623 Brewing",
    "status": "ok",
-   "found": 36,
+   "found": 34,
    "errors": [],
    "mapped": true
   },

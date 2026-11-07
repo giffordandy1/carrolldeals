@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T23:03:26+00:00",
+ "updated": "2026-11-07T01:03:40+00:00",
  "items": [
   {
    "kind": "special",
@@ -102,40 +102,6 @@
    "lng": -76.9690372,
    "source": "E W Beck's Restaurant & Pub",
    "id": "43b987256d57"
-  },
-  {
-   "kind": "event",
-   "title": "Burger Night Thursdays",
-   "description": "<p>Join us every Thursday for $11 Craft Smashburgers and brews that pair just right🍔✨ Start your weekend early with Thirsty Thursdays, cheers! </p>\\n",
-   "start": "2026-11-05T14:00:00-05:00",
-   "end": "2026-11-05T21:00:00-05:00",
-   "recurring": null,
-   "url": "https://1623brewing.com/event/burger-night-thursdays-2/2026-11-05/",
-   "image": null,
-   "price": null,
-   "venue": "1623 Brewing Co. Taproom",
-   "address": "5975 Exchange Drive, Suite L, Eldersburg, MD, 21784",
-   "lat": 39.4163621,
-   "lng": -76.977291,
-   "source": "1623 Brewing",
-   "id": "3baef927b500"
-  },
-  {
-   "kind": "event",
-   "title": "Music Bingo Thursdays!",
-   "description": "<p>Join us in the Taproom every Wednesday for Music Bingo with King Trivia at 6:30pm!</p>\\n",
-   "start": "2026-11-05T18:30:00-05:00",
-   "end": "2026-11-05T20:30:00-05:00",
-   "recurring": null,
-   "url": "https://1623brewing.com/event/music-bingo-thursdays/2026-11-05/",
-   "image": "https://1623brewing.com/wp-content/uploads/2026/03/1623-Brewing-Starting-Post-3-2025-1-1.jpg",
-   "price": null,
-   "venue": "1623 Brewing Co. Taproom",
-   "address": "5975 Exchange Drive, Suite L, Eldersburg, MD, 21784",
-   "lat": 39.4163621,
-   "lng": -76.977291,
-   "source": "1623 Brewing",
-   "id": "df566ba9b381"
   },
   {
    "kind": "event",
