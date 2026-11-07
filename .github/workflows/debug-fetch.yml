@@ -1,0 +1,21 @@
+name: Temporary page download
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/debug-fetch.yml]
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p debug
+          UA="LocalHappenings/1.0 (+https://github.com/${{ github.repository }})"
+          curl -sSL -A "$UA" -w "%{http_code} calendar\n" https://www.downtownsykesville.com/calendar/ -o debug/dsc-calendar.html
+          curl -sSL -A "$UA" -w "%{http_code} event\n" https://www.downtownsykesville.com/2026/11/14/357534/sykesville-craft-beer-festival/ -o debug/dsc-event.html
+          curl -sSL -A "$UA" -w "%{http_code} robots\n" https://www.downtownsykesville.com/robots.txt -o debug/dsc-robots.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add debug && git commit -m "Temporary page download" && git pull --rebase && git push
