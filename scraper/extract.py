@@ -59,8 +59,28 @@ HEADINGS = ["h1", "h2", "h3", "h4", "h5", "h6"]
 
 # ---------------------------------------------------------------- helpers
 
+def _plain(text):
+    """Turn any HTML-ish text into plain text.
+
+    Handles tags, entity codes (&amp; &#8217; &nbsp;), text that was encoded
+    twice (&lt;p&gt; -> <p> -> nothing), literal "\\n" sequences, and the
+    "[…]" / "[&hellip;]" marks WordPress adds to cut-off excerpts.
+    """
+    text = str(text or "")
+    for _ in range(3):  # some sites encode more than once
+        if not re.search(r"&[#a-zA-Z0-9]+;|<[a-zA-Z/!][^>]*>", text):
+            break
+        text = html.unescape(text)
+        if re.search(r"<[a-zA-Z/!][^>]*>", text):
+            text = BeautifulSoup(text, "lxml").get_text(" ")
+    text = text.replace("\\n", " ").replace("\\t", " ").replace("\xa0", " ")
+    text = re.sub(r"\s*\[(?:…|\.\.\.)\]\s*$", "…", text.strip())
+    text = re.sub(r"\s+([,.!?;:])", r"\1", text)
+    return text
+
+
 def _clean(text, limit=None):
-    text = re.sub(r"\s+", " ", (text or "")).strip()
+    text = re.sub(r"\s+", " ", _plain(text)).strip()
     if limit and len(text) > limit:
         text = text[: limit - 1].rsplit(" ", 1)[0] + "…"
     return text
@@ -187,7 +207,7 @@ def from_jsonld(soup, base_url):
         for obj in _walk(data):
             if not any(t.endswith("Event") for t in _types(obj)):
                 continue
-            name = _clean(html.unescape(str(obj.get("name") or "")), 160)
+            name = _clean(obj.get("name"), 160)
             if not name:
                 continue
             loc = _first(obj.get("location"))
@@ -211,7 +231,7 @@ def from_jsonld(soup, base_url):
             elif obj.get("isAccessibleForFree") in (True, "true", "True"):
                 price = "Free"
 
-            desc = html.unescape(BeautifulSoup(str(obj.get("description") or ""), "lxml").get_text(" "))
+            desc = obj.get("description")
             out.append({
                 "kind": "event",
                 "title": name,

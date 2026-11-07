@@ -12,7 +12,7 @@ from datetime import datetime, timedelta, timezone
 
 import yaml
 
-from .extract import fetch_source
+from .extract import _clean, fetch_source
 from .geo import Geocoder
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -107,6 +107,12 @@ async def main():
 
         kept, seen = [], set()
         for it in items:
+            # Plain text only, whatever the source (including results kept from a previous run).
+            for k, limit in (("title", 160), ("description", 500), ("venue", 120), ("address", 200), ("price", 40), ("recurring", 80)):
+                if it.get(k):
+                    it[k] = _clean(it[k], limit) or None
+            if not it.get("title"):
+                continue
             start, end = (it.get("start") or "")[:10], (it.get("end") or "")[:10]
             if start and (end or start) < today:
                 continue  # already over
