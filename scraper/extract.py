@@ -147,6 +147,46 @@ def _with_time(day, time_text):
     return f"{day}T{h:02d}:{mnt:02d}"
 
 
+ORDINALS = {"first": 1, "1st": 1, "second": 2, "2nd": 2, "third": 3, "3rd": 3, "fourth": 4, "4th": 4, "last": -1}
+WEEKDAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+MONTHLY_RE = re.compile(
+    r"\b(first|1st|second|2nd|third|3rd|fourth|4th|last)\s+"
+    r"(mon|tue|wed|thu|fri|sat|sun)[a-z]*\.?\s+(?:of\s+)?(?:every|each|the|a)?\s*month",
+    re.I,
+)
+LOCAL_TZ = os.environ.get("TIMEZONE", "America/New_York")
+
+
+def _monthly(text):
+    """"first Monday of every month" -> (1, 0, "First Monday of every month"), or None."""
+    m = MONTHLY_RE.search(text or "")
+    if not m:
+        return None
+    nth = ORDINALS[m.group(1).lower()]
+    wd = next(i for i, d in enumerate(WEEKDAYS) if d.startswith(m.group(2).lower()))
+    return nth, wd, f"{m.group(1).capitalize()} {WEEKDAYS[wd].capitalize()} of every month"
+
+
+def _next_monthly(nth, wd, today=None):
+    """Next date (today or later) that is the nth weekday of its month (nth=-1: last)."""
+    if today is None:
+        try:
+            from zoneinfo import ZoneInfo
+            today = datetime.now(ZoneInfo(LOCAL_TZ)).date()
+        except Exception:
+            today = datetime.now().date()
+    y, mo = today.year, today.month
+    for _ in range(14):
+        first = datetime(y, mo, 1).date()
+        days = [first + timedelta(days=i) for i in range(31) if (first + timedelta(days=i)).month == mo]
+        hits = [d for d in days if d.weekday() == wd]
+        d = hits[nth - 1] if nth > 0 and len(hits) >= nth else (hits[-1] if nth == -1 else None)
+        if d and d >= today:
+            return d.isoformat()
+        y, mo = (y + 1, 1) if mo == 12 else (y, mo + 1)
+    return None
+
+
 def _recurring(text):
     """Short schedule phrase like "all day Tuesdays and 4pm-6pm Wednesday through Friday"."""
     text = text or ""
@@ -181,12 +221,23 @@ QUESTION_RE = re.compile(
 )
 
 
+# Listings about renting the place out, not things the public can come to.
+PRIVATE_RE = re.compile(
+    r"private (?:event|part|dining|room)|party rooms?|banquet|\brental\b|\brent (?:our|the|a)\b|"
+    r"book (?:your|a|an) (?:party|event|private)|host (?:your|a) (?:party|event)",
+    re.I,
+)
+
+
 def _tidy_title(title):
     """Turn FAQ-style questions ("Do you have a happy hour?") into labels ("Happy hour")."""
     t = _clean(title)
-    t2 = re.sub(r"^(?:join us|enjoy|come (?:in|out|by))\s+(?:one of\s+)?(?:for|on|every)?\s*(?:our|the)?\s*(?:now\s+)?(?:famous\s+)?", "", t, flags=re.I)
+    t2 = re.sub(r"^(?:join us|enjoy|sign up|come (?:in|out|by))\s+(?:for\s+)?(?:one of\s+)?(?:for|on|every)?\s*(?:our|the)?\s*(?:now\s+)?(?:famous\s+)?", "", t, flags=re.I)
     if t2 != t and len(t2.split()) >= 2:
         t = t2[0].upper() + t2[1:]
+    t3 = re.sub(r"\s+(?:at|from|starting at)\s+\d{1,2}(?::\d{2})?\s*(?:am|pm)\b.*$", "", t, flags=re.I)
+    if len(t3.split()) >= 2:
+        t = t3                                          # "Wine-tasting dinners at 6:30 PM" -> "Wine-tasting dinners"
     if t.endswith("?"):
         t2 = QUESTION_RE.sub("", t[:-1]).strip()
         if 2 < len(t2) < len(t):
@@ -379,7 +430,7 @@ def heuristics(soup, base_url):
     def add(title, body, anchor, weekly=False):
         title = _tidy_title(title)
         full = f"{title} {body}"
-        if re.search(r"private (event|part)|\bbook(ing)?\b|\brent(al)?\b|reserv", full, re.I):
+        if PRIVATE_RE.search(full):
             return
         if re.search(r"facebook|instagram|follow us|newsletter|subscribe", title, re.I):
             return
@@ -400,7 +451,16 @@ def heuristics(soup, base_url):
         else:
             start = _parse_date(full)
             recurring = None if start else _recurring(full)
+            monthly = None if start else _monthly(full)
+            if monthly:
+                # "first Monday of every month at 6:30 PM": show the next actual date.
+                nth, wd, phrase = monthly
+                t = TIMES_RE.search(full)
+                start = _with_time(_next_monthly(nth, wd), t.group(0) if t else None)
+                recurring = phrase
             kind = _kind(full)
+            if monthly and EVENT_RE.search(full) and re.search(r"dinner|tasting|class|night|club|party", full, re.I):
+                kind = "event"
         # Require some signal it's time-bound or a real offer, not just a nav label.
         if kind == "event" and not (start or recurring):
             return
@@ -615,7 +675,7 @@ def heuristics(soup, base_url):
             continue
         if any(text[:200] in s or s in text for s in seen_text if s):
             continue
-        if re.search(r"facebook|instagram|follow us|sign up|newsletter|subscribe", text, re.I):
+        if re.search(r"facebook|instagram|follow us|newsletter|subscribe|sign up for (?:our |the )?(?:email|mailing|text|newsletter)", text, re.I):
             continue
         if SPECIAL_RE.search(text) and (DAYS_RE.search(text) or TIMES_RE.search(text)):
             strong = el.find(["strong", "b"])

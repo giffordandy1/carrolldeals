@@ -97,3 +97,8 @@ sites:
     urls:
       - https://www.woodstockinn.net/events
       - https://www.woodstockinn.net/specials
+
+  - name: Amante Pizza & Pasta
+    address: 21 Liberty Road, Sykesville, MD 21784
+    urls:
+      - https://amantepizzasykesville.com/
