@@ -78,6 +78,8 @@ select{flex:1 1 auto;min-width:0;padding:7px 10px;border:1px solid var(--line);b
 .links{margin-top:8px;font-size:14px}
 .links a{color:var(--event);font-weight:700}
 .tag{display:inline-block;font-size:12px;font-weight:700;padding:1px 7px;border-radius:4px;margin-right:6px}
+.placelink{border:0;background:none;padding:0;font:inherit;color:inherit;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px;cursor:pointer;text-align:left}
+.placelink:hover{color:var(--ink);text-decoration-color:var(--ink)}
 .card .tag.today{background:var(--ink);color:var(--paper)}
 .event .tag{background:var(--event-soft);color:var(--event)}
 .special .tag{background:var(--special-soft);color:var(--special-ink)}
@@ -138,6 +140,9 @@ select{flex:1 1 auto;min-width:0;padding:7px 10px;border:1px solid var(--line);b
             <option value="30" selected>Next 30 days</option>
           </select>
         </div>
+        <select id="venue" class="filter" aria-label="Place">
+          <option value="">All places</option>
+        </select>
         <input class="filter" id="q" type="search" placeholder="Filter, e.g. trivia, wings, brunch" aria-label="Filter results">
       </div>
     </div>
@@ -152,7 +157,7 @@ select{flex:1 1 auto;min-width:0;padding:7px 10px;border:1px solid var(--line);b
 <script src="vendor/leaflet/leaflet.js"></script>
 <script>
 const $ = s => document.querySelector(s);
-const state = { lat: null, lng: null, label: null, radius: 10, kind: "", q: "", days: 30 };
+const state = { lat: null, lng: null, label: null, radius: 10, kind: "", q: "", days: 30, venue: "" };
 const store = {
   get(k){ try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
   set(k,v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
@@ -185,12 +190,15 @@ function stub(it){
 
 function card(it){
   const url = safeUrl(it.url);
-  const where = [it.venue, it.distance != null ? (it.distance < 0.1 ? "under 0.1 mi away" : `${it.distance} mi away`) : null].filter(Boolean).join(", ");
+  const dist = it.distance != null ? (it.distance < 0.1 ? "under 0.1 mi away" : `${it.distance} mi away`) : "";
+  const placeBtn = it.source && !state.venue
+    ? `<button type="button" class="placelink" data-venue="${esc(it.source)}" title="Show only ${esc(it.source)}">${esc(it.source)}</button>`
+    : esc(it.source || it.venue || "");
   return `<article class="card ${it.kind}" tabindex="0" data-id="${it.id}" aria-label="${esc(it.title)}">
     <div class="stub">${stub(it)}</div>
     <div class="body">
       <h2>${esc(it.title)}</h2>
-      <p class="meta">${it.today ? '<span class="tag today">Today</span>' : ""}<span class="tag">${it.kind === "special" ? "Special" : "Event"}</span>${esc(where)}${it.price ? ", " + esc(it.price) : ""}</p>
+      <p class="meta">${it.today ? '<span class="tag today">Today</span>' : ""}<span class="tag">${it.kind === "special" ? "Special" : "Event"}</span>${placeBtn}${dist ? ", " + dist : ""}${it.price ? ", " + esc(it.price) : ""}</p>
       ${it.description ? `<p class="desc">${esc(it.description)}</p>` : ""}
       ${safeUrl(it.image) ? `<a class="pic" href="${esc(it.image)}" target="_blank" rel="noopener" aria-label="See the full picture for ${esc(it.title)}"><img src="${esc(it.image)}" alt="" loading="lazy" onerror="this.parentNode.remove()"></a>` : ""}
       ${url ? `<div class="links"><a href="${esc(url)}" target="_blank" rel="noopener">Open ${esc(new URL(url).hostname.replace(/^www\./,""))}</a></div>` : ""}
@@ -248,6 +256,26 @@ function hasDays(it){
 
 const isoDay = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 
+// Every place on the map, with how many events and specials each has.
+function fillPlaces(){
+  const counts = {};
+  for (const it of ALL) if (it.source) counts[it.source] = (counts[it.source] || 0) + 1;
+  const names = Object.keys(counts).sort((a, b) => a.replace(/^the\s+/i, "").localeCompare(b.replace(/^the\s+/i, "")));
+  const sel = $("#venue");
+  sel.innerHTML = `<option value="">All places (${names.length})</option>` +
+    names.map(n => `<option value="${esc(n)}">${esc(n)} (${counts[n]})</option>`).join("");
+  if (state.venue && !counts[state.venue]) state.venue = "";
+  sel.value = state.venue;
+}
+
+function setVenue(name){
+  state.venue = name || "";
+  $("#venue").value = state.venue;
+  try { history.replaceState(null, "", state.venue ? "#place=" + encodeURIComponent(state.venue) : location.pathname + location.search); } catch {}
+  load();
+  if (state.venue) $(".list").scrollTop = 0;
+}
+
 async function load(){
   if (!ALL){
     $("#count").textContent = "Loading…";
@@ -256,6 +284,7 @@ async function load(){
       if (!r.ok) throw new Error(r.status);
       const data = await r.json();
       ALL = data.items || []; UPDATED = data.updated;
+      fillPlaces();
     } catch (e) {
       $("#count").textContent = "";
       $("#list").innerHTML = `<div class="empty"><h2>Couldn't load results</h2><p class="error">The results file didn't load. Refresh the page; if it keeps happening, check that the update workflow has run on GitHub.</p></div>`;
@@ -275,11 +304,12 @@ async function load(){
     it.today = isToday(it, today, now.getDay());
     // "Today" shows what's on today: skip weekly items set for other days.
     if (state.days === 0 && !it.today && hasDays(it)) continue;
-    if (needle && ![it.title, it.description, it.venue].join(" ").toLowerCase().includes(needle)) continue;
+    if (state.venue && it.source !== state.venue) continue;
+    if (needle && ![it.title, it.description, it.venue, it.source].join(" ").toLowerCase().includes(needle)) continue;
     if (state.lat != null){
       if (it.lat == null) continue;
       it.distance = Math.round(milesBetween(state.lat, state.lng, it.lat, it.lng) * 10) / 10;
-      if (it.distance > state.radius) continue;
+      if (it.distance > state.radius && !state.venue) continue;  // a chosen place shows however far it is
     }
     out.push(it);
   }
@@ -293,9 +323,9 @@ function render(items){
   const n = items.length;
   const upd = UPDATED ? new Date(UPDATED) : null;
   const updText = upd && !isNaN(upd) ? `. Updated ${upd.toLocaleString(undefined, { weekday: "short", hour: "numeric", minute: "2-digit" })}` : "";
-  $("#count").textContent = `${n} ${n === 1 ? "result" : "results"}${state.lat != null ? ` within ${state.radius} mi` : ""}${updText}`;
+  $("#count").textContent = `${n} ${n === 1 ? "result" : "results"}${state.venue ? ` at ${state.venue}` : state.lat != null ? ` within ${state.radius} mi` : ""}${updText}`;
   if (!n){
-    $("#list").innerHTML = `<div class="empty"><h2>Nothing here yet</h2><p>${state.lat != null ? "Try a wider distance, a longer date range, or clear the filter." : "No events or specials have been collected yet. Add sites to sources.yml in the GitHub repo."}</p></div>`;
+    $("#list").innerHTML = `<div class="empty"><h2>Nothing here yet</h2><p>${state.lat != null ? state.venue ? "Nothing coming up here for these dates. Try a longer date range, or pick All places." : "Try a wider distance, a longer date range, or clear the filter." : "No events or specials have been collected yet. Add sites to sources.yml in the GitHub repo."}</p></div>`;
   } else {
     $("#list").innerHTML = items.map(card).join("");
   }
@@ -310,7 +340,8 @@ function render(items){
     markers[it.id] = m; bounds.push([it.lat, it.lng]);
   }
   if (state.lat != null){
-    if (bounds.length) map.fitBounds(L.latLngBounds(bounds).extend([state.lat, state.lng]), { padding: [30, 30], maxZoom: 14 });
+    if (bounds.length && state.venue) map.fitBounds(bounds, { padding: [40, 40], maxZoom: 15 });
+    else if (bounds.length) map.fitBounds(L.latLngBounds(bounds).extend([state.lat, state.lng]), { padding: [30, 30], maxZoom: 14 });
     else if (radiusCircle) map.fitBounds(radiusCircle.getBounds());
   } else if (bounds.length) {
     map.fitBounds(bounds, { padding: [30, 30], maxZoom: 14 });
@@ -364,14 +395,25 @@ $("#radius").addEventListener("change", e => {
   load();
 });
 $("#days").addEventListener("change", e => { state.days = +e.target.value; load(); });
+$("#venue").addEventListener("change", e => setVenue(e.target.value));
 let qTimer; $("#q").addEventListener("input", e => { clearTimeout(qTimer); qTimer = setTimeout(() => { state.q = e.target.value.trim(); load(); }, 250); });
 
 $("#list").addEventListener("click", e => {
+  const pl = e.target.closest(".placelink");
+  if (pl){ setVenue(pl.dataset.venue); return; }
   if (e.target.closest("a")) return;
   const c = e.target.closest(".card"); if (c) activate(c.dataset.id, false);
 });
 $("#list").addEventListener("keydown", e => {
+  if (e.target.closest("a, button")) return;  // let links and the place button work
   const c = e.target.closest(".card"); if (c && (e.key === "Enter" || e.key === " ")){ e.preventDefault(); activate(c.dataset.id, false); }
+});
+
+// A shared link like …/#place=1623%20Brewing opens on that place.
+try { const m = location.hash.match(/^#place=(.+)$/); if (m) state.venue = decodeURIComponent(m[1]); } catch {}
+window.addEventListener("hashchange", () => {
+  const m = location.hash.match(/^#place=(.+)$/);
+  setVenue(m ? decodeURIComponent(m[1]) : "");
 });
 
 const savedRadius = store.get("radius");
