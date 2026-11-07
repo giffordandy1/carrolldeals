@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-07T16:28:10+00:00",
+ "updated": "2026-11-07T16:29:08+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -59,11 +59,9 @@
   },
   {
    "site": "Amante Pizza & Pasta",
-   "status": "error",
-   "found": 0,
-   "errors": [
-    "https://amantepizzasykesville.com/: HTTPStatusError 403"
-   ],
+   "status": "ok",
+   "found": 1,
+   "errors": [],
    "mapped": true
   }
  ]

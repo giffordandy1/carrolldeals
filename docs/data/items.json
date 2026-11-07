@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-07T16:28:10+00:00",
+ "updated": "2026-11-07T16:29:08+00:00",
  "items": [
   {
    "kind": "special",
@@ -1173,6 +1173,23 @@
    "lng": -76.8702295,
    "source": "The Woodstock Inn",
    "id": "13b62dd4929d"
+  },
+  {
+   "kind": "event",
+   "title": "Wine-tasting dinner",
+   "description": "Wine-tasting dinner on the first Monday of every month. Call ahead to reserve, as these fill up quickly.",
+   "start": "2026-12-07T18:30",
+   "end": null,
+   "recurring": "First Monday of every month 6:30 PM",
+   "url": "https://amantepizzasykesville.com/",
+   "image": null,
+   "price": "$59 per person",
+   "venue": "Amante Pizza & Pasta",
+   "address": "21 Liberty Road, Sykesville, MD 21784",
+   "lat": 39.4228742,
+   "lng": -76.9966048,
+   "source": "Amante Pizza & Pasta",
+   "id": "48023aeb38bd"
   }
  ]
 }
