@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-07T16:14:11+00:00",
+ "updated": "2026-11-07T16:16:13+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -53,7 +53,7 @@
   {
    "site": "The Woodstock Inn",
    "status": "ok",
-   "found": 13,
+   "found": 9,
    "errors": [],
    "mapped": true
   }
