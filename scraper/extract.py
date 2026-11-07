@@ -488,6 +488,11 @@ def heuristics(soup, base_url):
                         "venue": None, "address": None, "lat": None, "lng": None,
                     })
                     seen_text.add(_clean(details)[:200])
+                for sib in _following(nxt):
+                    for el in ([sib] if sib.name in ("p", "li") else sib.find_all(["p", "li"])):
+                        t = _clean(el.get_text(" "))
+                        if t:
+                            seen_text.add(t[:200])
                 continue
         link_text = " ".join(_clean(a.get_text(" ")) for sib in _following(h) for a in ([sib] if sib.name == "a" else sib.find_all("a")))
         bare = not body or (len(body.split()) <= 4 and _clean(body.replace(link_text, "")) == "") if link_text else not body
@@ -553,7 +558,8 @@ def heuristics(soup, base_url):
             label = re.sub(r"[_\-+~.]+", " ", re.sub(r"\.(jpe?g|png|gif|webp|avif)$", "", fname, flags=re.I))
             lines, size = [], 0
             for el in img.next_elements:
-                if getattr(el, "name", None) == "img" or getattr(el, "name", None) in HEADINGS:
+                tag = getattr(el, "name", None)
+                if tag == "img" or (tag in HEADINGS and _clean(el.get_text(" "))):
                     break
                 if isinstance(el, str):
                     t = _clean(el)
@@ -644,8 +650,7 @@ def heuristics(soup, base_url):
             label = unquote(urlparse(img.get("src") or "").path.rsplit("/", 1)[-1])
             label = re.sub(r"\.(jpe?g|png|gif|webp|avif)$", "", label, flags=re.I)
         label = re.sub(r"(?<=[a-z])(?=[A-Z])", " ", re.sub(r"[_\-+~]+", " ", label))
-        words = [w for w in label.split() if not re.search(r"\d", w)
-                 and w.lower() not in {"revised", "final", "copy", "new", "flyer", "img", "image", "edit", "mv"}]
+        words = [w for w in label.split() if not re.search(r"\d", w) and w.lower() not in FILE_JUNK]
         label = " ".join(words)
         if WEEKDAY_TITLE_RE.search(label) and 2 <= len(words) <= 5 and not DATE_RE.search(label):
             label = label[0].upper() + label[1:]
