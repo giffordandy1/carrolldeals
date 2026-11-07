@@ -43,6 +43,14 @@ Indentation matters: use spaces, lined up as shown. If a check fails right after
 
 Each item is placed at its own address if the page lists one, otherwise at the site's address. Addresses are looked up with OpenStreetMap and saved in `scraper/geocache.json`, so each one is only looked up once.
 
+## Sharing
+
+- The **Share** button opens the phone's share menu (or copies the link on a computer). With a place picked, it shares a link straight to that place.
+- Each card has its own **Share** link for sending one deal to a friend.
+- `docs/share-card.png` is the preview picture that shows when the link is pasted into a text, Facebook, etc.
+- `docs/qr-code.png` is a printable QR code that opens the site.
+- If you move to your own domain, update the two `og:` addresses near the top of `docs/index.html` and make a new QR code.
+
 ## Good to know
 
 - It costs nothing as long as the repo is **public**. That also means the repo, including your site list, is visible to anyone.

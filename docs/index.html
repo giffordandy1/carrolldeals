@@ -4,6 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Carroll Deals</title>
+<meta name="description" content="Happy hours, weekly specials, live music and events at restaurants and bars around Carroll County, MD, on one map. Updated every few hours.">
+<meta name="theme-color" content="#1E2A3A">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!-- Link previews in texts, Facebook, etc. If you move to your own domain, change the two addresses below. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Carroll Deals">
+<meta property="og:title" content="Carroll Deals: what's on near you">
+<meta property="og:description" content="Happy hours, weekly specials, live music and events at restaurants and bars around Carroll County, MD, on one map. Updated every few hours.">
+<meta property="og:url" content="https://giffordandy1.github.io/carrolldeals/">
+<meta property="og:image" content="https://giffordandy1.github.io/carrolldeals/share-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Carroll Deals: events and specials around Carroll County on a map">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
@@ -34,7 +49,12 @@ button,input,select{font:inherit;color:inherit}
 #mapwrap{height:100vh;min-width:0}
 #map{height:100%;z-index:0}
 
-header{padding:20px 20px 14px}
+header{padding:20px 20px 14px;display:grid;grid-template-columns:1fr auto;column-gap:12px;align-items:start}
+header .where{grid-column:1/-1}
+.share{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;border:1px solid var(--ink);background:var(--surface);cursor:pointer;font-weight:700;font-size:14px}
+.share svg{width:16px;height:16px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:8px;font-size:15px;z-index:1000;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.toast[hidden]{display:none}
 h1{font:800 clamp(28px,3.2vw,36px)/1 var(--display);letter-spacing:-.02em;margin:0 0 4px}
 .where{color:var(--muted);margin:0;font-size:15px}
 .where strong{color:var(--ink)}
@@ -76,7 +96,9 @@ select{flex:1 1 auto;min-width:0;padding:7px 10px;border:1px solid var(--line);b
 .pic img{display:block;width:100%;max-height:110px;object-fit:cover;background:var(--paper)}
 .desc{font-size:14px;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .links{margin-top:8px;font-size:14px}
+.links{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
 .links a{color:var(--event);font-weight:700}
+.sharecard{border:0;background:none;padding:0;font:inherit;font-weight:700;color:var(--event);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
 .tag{display:inline-block;font-size:12px;font-weight:700;padding:1px 7px;border-radius:4px;margin-right:6px}
 .placelink{border:0;background:none;padding:0;font:inherit;color:inherit;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px;cursor:pointer;text-align:left}
 .placelink:hover{color:var(--ink);text-decoration-color:var(--ink)}
@@ -112,6 +134,7 @@ select{flex:1 1 auto;min-width:0;padding:7px 10px;border:1px solid var(--line);b
     <div class="top">
       <header>
         <h1>Carroll Deals</h1>
+        <button type="button" class="share" id="shareSite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg><span>Share</span></button>
         <p class="where" id="where">Events and specials around Carroll County. Pick a place to see what's on near you.</p>
       </header>
       <div class="controls">
@@ -154,6 +177,7 @@ select{flex:1 1 auto;min-width:0;padding:7px 10px;border:1px solid var(--line);b
   <div id="mapwrap"><div id="map" role="region" aria-label="Map of results"></div></div>
 </div>
 
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script src="vendor/leaflet/leaflet.js"></script>
 <script>
 const $ = s => document.querySelector(s);
@@ -201,7 +225,7 @@ function card(it){
       <p class="meta">${it.today ? '<span class="tag today">Today</span>' : ""}<span class="tag">${it.kind === "special" ? "Special" : "Event"}</span>${placeBtn}${dist ? ", " + dist : ""}${it.price ? ", " + esc(it.price) : ""}</p>
       ${it.description ? `<p class="desc">${esc(it.description)}</p>` : ""}
       ${safeUrl(it.image) ? `<a class="pic" href="${esc(it.image)}" target="_blank" rel="noopener" aria-label="See the full picture for ${esc(it.title)}"><img src="${esc(it.image)}" alt="" loading="lazy" onerror="this.parentNode.remove()"></a>` : ""}
-      ${url ? `<div class="links"><a href="${esc(url)}" target="_blank" rel="noopener">Open ${esc(new URL(url).hostname.replace(/^www\./,""))}</a></div>` : ""}
+      <div class="links">${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">Open ${esc(new URL(url).hostname.replace(/^www\./,""))}</a>` : ""}<button type="button" class="sharecard" data-share="${esc(it.id)}">Share</button></div>
     </div>
   </article>`;
 }
@@ -319,6 +343,7 @@ async function load(){
 }
 
 function render(items){
+  window.__shown = items;
   layer.clearLayers(); markers = {};
   const n = items.length;
   const upd = UPDATED ? new Date(UPDATED) : null;
@@ -398,7 +423,37 @@ $("#days").addEventListener("change", e => { state.days = +e.target.value; load(
 $("#venue").addEventListener("change", e => setVenue(e.target.value));
 let qTimer; $("#q").addEventListener("input", e => { clearTimeout(qTimer); qTimer = setTimeout(() => { state.q = e.target.value.trim(); load(); }, 250); });
 
+// ---- Sharing --------------------------------------------------------------
+const SITE_URL = location.origin + location.pathname;   // works on github.io or your own domain
+let toastTimer;
+function toast(msg){
+  const t = $("#toast"); t.textContent = msg; t.hidden = false;
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 2600);
+}
+async function share({ title, text, url }){
+  if (navigator.share){
+    try { await navigator.share({ title, text, url }); return; }
+    catch (e) { if (e && e.name === "AbortError") return; }  // they closed the share menu
+  }
+  const line = text ? `${text} ${url}` : url;
+  try { await navigator.clipboard.writeText(line); toast("Link copied. Paste it anywhere to share."); }
+  catch { window.prompt("Copy this link:", line); }
+}
+const placeLink = name => SITE_URL + "#place=" + encodeURIComponent(name);
+$("#shareSite").addEventListener("click", () => {
+  if (state.venue) share({ title: `${state.venue} on Carroll Deals`, text: `Events and specials at ${state.venue}:`, url: placeLink(state.venue) });
+  else share({ title: "Carroll Deals", text: "Happy hours, specials and events around Carroll County, on one map:", url: SITE_URL });
+});
+function shareItem(it){
+  // Use the day's name, not "today": the message may be read tomorrow.
+  const when = it.today && !it.start ? new Date().toLocaleDateString(undefined, { weekday: "long" }) : it.start ? new Date(it.start.length <= 10 ? it.start + "T12:00:00" : it.start).toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" }) : (it.recurring || "");
+  const place = it.source || it.venue || "";
+  share({ title: it.title, text: `${it.title}${place ? " at " + place : ""}${when ? " (" + when + ")" : ""}`, url: place ? placeLink(place) : SITE_URL });
+}
+
 $("#list").addEventListener("click", e => {
+  const sh = e.target.closest(".sharecard");
+  if (sh){ const it = (window.__shown || []).find(x => String(x.id) === sh.dataset.share); if (it) shareItem(it); return; }
   const pl = e.target.closest(".placelink");
   if (pl){ setVenue(pl.dataset.venue); return; }
   if (e.target.closest("a")) return;
