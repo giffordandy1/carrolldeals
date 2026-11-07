@@ -743,6 +743,75 @@ async def _robots_allows(client, url):
     return rp.can_fetch(BOT_NAME, url)
 
 
+# ---------------------------------------------------------------- strategy: event cards
+
+READ_MORE_RE = re.compile(r"^(read|learn|see|view|find out) more|^more info|^details|^tickets?|^register|^rsvp", re.I)
+
+
+def event_cards(soup, base_url):
+    """Calendars that list events as repeated cards: a title link, a date, maybe a
+    time, place and picture. Finds groups of 3+ same-styled blocks that each have
+    a calendar date and their own link, and reads one event from each."""
+    for t in soup(["script", "style", "noscript", "svg"]):
+        t.decompose()
+    groups = {}
+    for el in soup.find_all(class_=True):
+        key = (el.name, " ".join(sorted(el.get("class", []))))
+        groups.setdefault(key, []).append(el)
+    good = []
+    for key, els in groups.items():
+        if len(els) < 3:
+            continue
+        hrefs, ok = set(), 0
+        for el in els:
+            text = _clean(el.get_text(" "))
+            links = [a for a in el.find_all("a", href=True) if not a["href"].startswith(("#", "mailto:", "tel:", "javascript"))]
+            if not (20 <= len(text) <= 800 and DATE_RE.search(text) and links):
+                continue
+            hrefs.add(links[0]["href"])
+            ok += 1
+        if ok >= 3 and ok >= 0.8 * len(els) and len(hrefs) >= 0.8 * ok:
+            good.append(els)
+    # Keep the innermost groups (the card, not the row of cards around it).
+    members = {id(e) for els in good for e in els}
+    good = [els for els in good if not any(id(d) in members for e in els for d in e.find_all(True))]
+    out = []
+    for els in good:
+        for el in els:
+            text = _clean(el.get_text(" "))
+            when = _parse_date(text)
+            if not when:
+                continue
+            title_el = (el.select_one("[class*=title] a, a[class*=title], [class*=title]")
+                        or next((h for h in el.find_all(HEADINGS) if not DATE_RE.search(h.get_text(" "))), None)
+                        or max((a for a in el.find_all("a") if not READ_MORE_RE.search(_clean(a.get_text(" ")))),
+                               key=lambda a: len(_clean(a.get_text(" "))), default=None))
+            title = _clean(title_el.get_text(" ") if title_el else "", 160)
+            if len(title) < 3:
+                continue
+            link = title_el if title_el is not None and title_el.name == "a" else (title_el.find("a", href=True) if title_el else None)
+            link = link or el.find("a", href=True)
+            t = TIMES_RE.search(text.replace(title, " "))
+            loc_el = el.select_one("[class*=location], [class*=address], [class*=venue]")
+            place = _clean(loc_el.get_text(" "), 160) if loc_el else None
+            img = el.find("img", src=True)
+            if img is None and el.parent is not None and len(el.parent.find_all(DATE_RE)) <= 1:
+                img = el.parent.find("img", src=True)  # picture sits beside the text block
+            desc_el = el.select_one("[class*=desc] p, [class*=summary], [class*=excerpt], p")
+            out.append({
+                "kind": "event", "title": title,
+                "description": _clean(desc_el.get_text(" "), 300) if desc_el else "",
+                "start": _with_time(when, t.group(0) if t else None), "end": None, "recurring": None,
+                "url": urljoin(base_url, link["href"]) if link else base_url,
+                "image": urljoin(base_url, img["src"]) if img else None,
+                "price": None, "venue": None,
+                # A street address places the event on the map; a bare town doesn't need to.
+                "address": place if place and re.search(r"\d", place) else None,
+                "lat": None, "lng": None,
+            })
+    return out
+
+
 def extract(html, url, source):
     soup = BeautifulSoup(html, "lxml")
     items = from_jsonld(soup, url)
@@ -752,7 +821,12 @@ def extract(html, url, source):
         # A page that publishes structured events is an events calendar; reading
         # its layout as well only adds clutter (calendar cells, repeated listings).
         if not items:
-            items += heuristics(soup, url)
+            cards = event_cards(BeautifulSoup(html, "lxml"), url)
+            if cards:
+                # A calendar of event cards: take the cards, and only specials from the rest.
+                items += cards + [i for i in heuristics(soup, url) if i["kind"] == "special"]
+            else:
+                items += heuristics(soup, url)
     return items
 
 

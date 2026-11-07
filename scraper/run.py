@@ -40,6 +40,7 @@ def load_sources():
             "name": s["name"],
             "urls": (s.get("urls") if isinstance(s.get("urls"), list) else [s["urls"]]) if s.get("urls") else [],
             "manual": s.get("manual") or [],
+            "skip": [str(x).lower() for x in (s.get("skip") if isinstance(s.get("skip"), list) else [s["skip"]] if s.get("skip") else [])],
             "only": [str(x).lower() for x in (s.get("only") if isinstance(s.get("only"), list) else [s["only"]] if s.get("only") else [])],
             "address": s.get("address"),
             "lat": s.get("lat"),
@@ -111,7 +112,7 @@ async def main():
             if items:
                 status = "error (showing last results)"
 
-        kept, seen = [], set()
+        kept, seen, seen_days = [], set(), set()
         for it in items:
             # Plain text only, whatever the source (including results kept from a previous run).
             for k, limit in (("title", 160), ("description", 500), ("venue", 120), ("address", 200), ("price", 40), ("recurring", 80)):
@@ -119,6 +120,8 @@ async def main():
                     it[k] = _clean(it[k], limit) or None
             if not it.get("title"):
                 continue
+            if any(w in it["title"].lower() for w in src["skip"]):
+                continue  # words listed under "skip:" for this site
             # One page shared by several locations ("Eldersburg: Monday", "Westminster: Tuesday"):
             # keep this location's items and the ones for all locations, and drop the label.
             if src["only"]:
@@ -132,6 +135,10 @@ async def main():
             start, end = (it.get("start") or "")[:10], (it.get("end") or "")[:10]
             if start and (end or start) < today:
                 continue  # already over
+            day_key = (it["title"].lower(), (it.get("start") or "")[:10])
+            if it.get("start") and day_key in seen_days:
+                continue
+            seen_days.add(day_key)
             key = hashlib.sha1(f"{src['name']}|{it['kind']}|{it['title'].lower()}|{it.get('start') or ''}".encode()).hexdigest()[:12]
             if key in seen:
                 continue
