@@ -100,5 +100,11 @@ sites:
 
   - name: Amante Pizza & Pasta
     address: 21 Liberty Road, Sykesville, MD 21784
-    urls:
-      - https://amantepizzasykesville.com/
+    # Their site blocks automated checks, so this comes from their homepage by hand.
+    manual:
+      - title: Wine-tasting dinner
+        kind: event
+        when: First Monday of every month 6:30 PM
+        price: $59 per person
+        details: Wine-tasting dinner on the first Monday of every month. Call ahead to reserve, as these fill up quickly.
+        url: https://amantepizzasykesville.com/

@@ -12,7 +12,7 @@ from datetime import datetime, timedelta, timezone
 
 import yaml
 
-from .extract import _clean, fetch_source
+from .extract import TIMES_RE, _clean, _monthly, _next_monthly, _with_time, fetch_source
 from .geo import Geocoder
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -80,10 +80,15 @@ async def main():
                 continue
             when = str(m.get("when") or "")
             dated = re.match(r"^\d{4}-\d{2}-\d{2}", when)
+            start = when if dated else None
+            monthly = None if dated else _monthly(when)
+            if monthly:  # "First Monday of every month 6:30 PM" -> next actual date
+                t = TIMES_RE.search(when)
+                start = _with_time(_next_monthly(monthly[0], monthly[1]), t.group(0) if t else None)
             items.append({
                 "kind": "event" if str(m.get("kind", "")).lower().startswith("event") else "special",
                 "title": str(m["title"]), "description": str(m.get("details") or ""),
-                "start": when if dated else None, "end": None, "recurring": None if dated else (when or None),
+                "start": start, "end": None, "recurring": None if dated else (when or None),
                 "url": m.get("url") or (src["urls"][0] if src["urls"] else None),
                 "image": None, "price": m.get("price"), "venue": None, "address": None, "lat": None, "lng": None,
             })
