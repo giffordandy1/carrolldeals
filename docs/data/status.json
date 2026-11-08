@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T18:48:37+00:00",
+ "updated": "2026-11-08T18:53:17+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -275,9 +275,13 @@
   },
   {
    "site": "City of Westminster events",
-   "status": "ok",
+   "status": "error (showing last results)",
    "found": 5,
-   "errors": [],
+   "errors": [
+    "https://westminstermd.gov/common/modules/iCalendar/iCalendar.aspx?catID=24&feed=calendar: ConnectTimeout",
+    "https://westminstermd.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar: ConnectTimeout",
+    "https://westminstermd.gov/common/modules/iCalendar/iCalendar.aspx?catID=29&feed=calendar: ConnectTimeout"
+   ],
    "empty_runs": 0,
    "mapped": true
   }
