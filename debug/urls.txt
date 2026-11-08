@@ -1,4 +1,1 @@
-home https://bastaeldersburg.com/
-specials https://bastaeldersburg.com/specials/
-events https://bastaeldersburg.com/events/
-happyhour https://bastaeldersburg.com/happy-hour/
+menu https://www.bastaeldersburg.com/menu/
