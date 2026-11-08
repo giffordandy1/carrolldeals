@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T19:00:25+00:00",
+ "updated": "2026-11-08T19:02:53+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -83,12 +83,9 @@
   },
   {
    "site": "Maggie's Restaurant",
-   "status": "error (showing last results)",
+   "status": "ok",
    "found": 8,
-   "errors": [
-    "https://maggiesrestaurant.com/specials/: ConnectTimeout",
-    "https://maggiesrestaurant.com/live-music/: ConnectTimeout"
-   ],
+   "errors": [],
    "empty_runs": 0,
    "mapped": true
   },
