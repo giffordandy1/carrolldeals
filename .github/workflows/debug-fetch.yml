@@ -10,19 +10,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - shell: bash {0}
+      - name: Fetch pages
+        continue-on-error: true
+        shell: bash {0}
         run: |
-          set +e
           mkdir -p debug/pages
           UA="LocalHappenings/1.0 (+https://github.com/${{ github.repository }})"
-          : > debug/results.txt
+          echo "start" > debug/results.txt
           while read -r slug url; do
-            [ -z "$slug" ] && continue
-            r=$(curl -sSL -m 30 -A "$UA" -o "debug/pages/$slug.html" -w "%{http_code} %{url_effective} %{content_type}" "$url" 2>&1 | tail -1 || true)
-            echo "$slug $r" >> debug/results.txt
+            if [ -z "$slug" ]; then continue; fi
+            code=$(curl -sSL -m 30 -A "$UA" -o "debug/pages/$slug.html" -w "%{http_code} %{content_type}" "$url" 2>/dev/null)
+            echo "$slug $code $url" >> debug/results.txt
             sleep 1
           done < debug/urls.txt
+          echo "done" >> debug/results.txt
+          find debug/pages -size +3M -delete
+      - name: Save
+        if: always()
+        shell: bash {0}
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          ls -la debug/pages
-          git add debug && git commit -m "Temporary page download" && git pull --rebase && git push
+          git add -A debug
+          git commit -m "Temporary page download"
+          for i in 1 2 3; do git pull --rebase -X theirs && git push && break; sleep 5; done
