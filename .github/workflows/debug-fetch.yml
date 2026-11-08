@@ -19,7 +19,7 @@ jobs:
           echo "start" > debug/results.txt
           while read -r slug url; do
             if [ -z "$slug" ]; then continue; fi
-            code=$(curl -sSL -m 30 -A "$UA" -o "debug/pages/$slug.html" -w "%{http_code} %{content_type}" "$url" 2>/dev/null)
+            code=$(curl -sSL -m 30 -A "$UA" -o "debug/pages/$slug$( case $slug in *.*) ;; *) echo .html;; esac )" -w "%{http_code} %{content_type}" "$url" 2>/dev/null)
             echo "$slug $code $url" >> debug/results.txt
             sleep 1
           done < debug/urls.txt
