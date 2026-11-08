@@ -86,6 +86,24 @@ def _clean(text, limit=None):
     return text
 
 
+def _local_dt(v):
+    """Structured-data date/time -> "YYYY-MM-DD" or "YYYY-MM-DDTHH:MM" as written on the
+    venue's own clock. Sites often label local times as UTC (+00:00), so offsets are
+    ignored; 1-5 AM usually means "all day" in event plugins, so that time is dropped;
+    odd forms like "2026-11-6T19-19-00-00" are repaired."""
+    v = str(v or "").strip()
+    m = re.match(r"^(\d{4})-(\d{1,2})-(\d{1,2})(?:[T ](\d{1,2})(?::(\d{2})|-\d{1,2}-(\d{2})))?", v)
+    if not m:
+        return v or None
+    day = f"{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+    if m.group(4) is None:
+        return day
+    h, mi = int(m.group(4)), int(m.group(5) or m.group(6) or 0)
+    if 1 <= h < 5 or h > 23 or mi > 59:
+        return day
+    return f"{day}T{h:02d}:{mi:02d}"
+
+
 def _types(obj):
     t = obj.get("@type", [])
     return [t] if isinstance(t, str) else [x for x in t if isinstance(x, str)]
@@ -313,8 +331,8 @@ def from_jsonld(soup, base_url):
                 "kind": "event",
                 "title": name,
                 "description": _clean(desc, 500),
-                "start": obj.get("startDate"),
-                "end": obj.get("endDate"),
+                "start": _local_dt(obj.get("startDate")),
+                "end": _local_dt(obj.get("endDate")),
                 "recurring": None,
                 "url": urljoin(base_url, _url_of(obj.get("url")) or "") or base_url,
                 "image": _url_of(obj.get("image")),
@@ -794,6 +812,7 @@ def heuristics(soup, base_url):
         if not WEEKDAY_TITLE_RE.search(label):
             label = unquote(urlparse(img.get("src") or "").path.rsplit("/", 1)[-1])
             label = re.sub(r"\.(jpe?g|png|gif|webp|avif)$", "", label, flags=re.I)
+        label = re.sub(r"\.(?:jpe?g|png|gif|webp|avif)\b", " ", label, flags=re.I)
         label = re.sub(r"(?<=[a-z])(?=[A-Z])", " ", re.sub(r"[_\-+~]+", " ", label))
         words = [w for w in label.split() if not re.search(r"\d", w) and w.lower() not in FILE_JUNK]
         label = " ".join(words)
@@ -958,6 +977,8 @@ def from_ical(text, base_url):
 
 # ---------------------------------------------------------------- strategy: event cards
 
+CAL_LINK_RE = re.compile(r"google\.com/calendar|calendar/render|format=ical|\.ics\b|outlook\.(?:live|office)|addtocalendar|ical=1", re.I)
+CAL_TEXT_RE = re.compile(r"^(?:google calendar|ics|ical|outlook|add to calendar|export)$", re.I)
 READ_MORE_RE = re.compile(r"^(read|learn|see|view|find out) more|^more info|^details|^tickets?|^register|^rsvp|^book|^reserve|^buy", re.I)
 
 
@@ -978,7 +999,8 @@ def event_cards(soup, base_url):
         hrefs, ok = set(), 0
         for el in els:
             text = _clean(el.get_text(" "))
-            links = [a for a in el.find_all("a", href=True) if not a["href"].startswith(("#", "mailto:", "tel:", "javascript"))]
+            links = [a for a in el.find_all("a", href=True) if not a["href"].startswith(("#", "mailto:", "tel:", "javascript"))
+                     and not CAL_LINK_RE.search(a["href"]) and not CAL_TEXT_RE.search(_clean(a.get_text(" ")))]
             is_row = el.name == "tr"
             if not (20 <= len(text) <= (1500 if is_row else 800) and DATE_RE.search(text) and (links or is_row)):
                 continue
@@ -1003,6 +1025,9 @@ def event_cards(soup, base_url):
                         or max((a for a in el.find_all("a") if not READ_MORE_RE.search(_clean(a.get_text(" ")))),
                                key=lambda a: len(_clean(a.get_text(" "))), default=None))
             title = _clean(title_el.get_text(" ") if title_el else "", 160)
+            if CAL_TEXT_RE.search(title):
+                continue
+            title = re.sub(r"^(?:(?:mon|tue|wed|thu|fri|sat|sun)[a-z]*\.?,?\s+)?(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s+\d{1,2}(?:st|nd|rd|th)?,?\s*[-–:|]?\s*", "", title, flags=re.I) or title
             if len(title) < 3:
                 continue
             link = title_el if title_el is not None and title_el.name == "a" else (title_el.find("a", href=True) if title_el else None)

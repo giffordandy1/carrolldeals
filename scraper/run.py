@@ -121,6 +121,11 @@ async def main():
                     it[k] = _clean(it[k], limit) or None
             if not it.get("title"):
                 continue
+            # "Sat, Nov 21 Line Dancing Workshop" -> "Line Dancing Workshop" (the date is shown on the card)
+            if it.get("start"):
+                t2 = re.sub(r"^(?:(?:mon|tue|wed|thu|fri|sat|sun)[a-z]*\.?,?\s+)?(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s+\d{1,2}(?:st|nd|rd|th)?,?\s*[-–:|]?\s*", "", it["title"], flags=re.I)
+                if len(t2) >= 3:
+                    it["title"] = t2
             if src["no_details"]:
                 it["description"] = ""  # the site's descriptions are wrong or copied; show names only
             tl = it["title"].lower()
