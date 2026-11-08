@@ -1,0 +1,5 @@
+calendar https://westminstermd.gov/calendar.aspx
+icalendar https://westminstermd.gov/iCalendar.aspx
+oyster https://westminstermd.gov/417/Oyster-Stroll
+miracle https://www.westminstermd.gov/574/Miracle-on-Main-Street
+whats https://westminstermd.gov/380/Whats-Happening
