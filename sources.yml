@@ -14,6 +14,7 @@
 #   only: Eldersburg   for a page that lists several locations' specials
 #                      ("Eldersburg: Monday", "Westminster: Tuesday"), keep just this
 #                      location's items plus "Both Locations" ones
+#   no_details: true   show deal names only, when a site's descriptions are wrong
 #   skip:           words that mark items to leave out, e.g. "meeting"; "^brunch$" matches a title exactly
 #   manual:         items you type in yourself, for sites that block the checker
 #                   or only post on Facebook. Each one has:
@@ -204,3 +205,16 @@ sites:
     # Chain-wide menu page; its day specials apply to every location.
     urls:
       - https://biggreekcafe.com/menu/
+
+  # Chains: their promotions pages cover every location, so each is pinned at the local one.
+  - name: Buffalo Wild Wings (Westminster)
+    address: 404 Englar Road, Westminster, MD 21157
+    urls:
+      - https://www.buffalowildwings.com/promotions/
+
+  - name: Texas Roadhouse (Westminster)
+    address: 21 S Cranberry Road, Westminster, MD 21157
+    # Their page repeats one appetizer description under every promo, so show names only.
+    no_details: true
+    urls:
+      - https://www.texasroadhouse.com/locations/57-westminstermd

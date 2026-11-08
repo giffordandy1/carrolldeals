@@ -40,6 +40,7 @@ def load_sources():
             "name": s["name"],
             "urls": (s.get("urls") if isinstance(s.get("urls"), list) else [s["urls"]]) if s.get("urls") else [],
             "manual": s.get("manual") or [],
+            "no_details": bool(s.get("no_details")),
             "skip": [str(x).lower() for x in (s.get("skip") if isinstance(s.get("skip"), list) else [s["skip"]] if s.get("skip") else [])],
             "only": [str(x).lower() for x in (s.get("only") if isinstance(s.get("only"), list) else [s["only"]] if s.get("only") else [])],
             "address": s.get("address"),
@@ -120,6 +121,8 @@ async def main():
                     it[k] = _clean(it[k], limit) or None
             if not it.get("title"):
                 continue
+            if src["no_details"]:
+                it["description"] = ""  # the site's descriptions are wrong or copied; show names only
             tl = it["title"].lower()
             # Skip words: plain words match anywhere in the title; "^brunch$" style matches exactly.
             if any((re.search(w, tl) if re.search(r"[\^$]", w) else w in tl) for w in src["skip"]):

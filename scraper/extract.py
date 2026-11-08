@@ -828,6 +828,66 @@ async def _robots_allows(client, url):
     return rp.can_fetch(BOT_NAME, url)
 
 
+# ---------------------------------------------------------------- strategy: page data (Next.js sites)
+
+WEEKDAY_WORD_RE = re.compile(r"\b(?:mon|tues|wednes|thurs|fri|satur|sun)days?\b", re.I)
+
+
+def from_page_data(html, base_url):
+    """Many chain sites (Next.js + a content system) ship their promo cards as JSON
+    inside the page instead of as text. Read cards that name a weekday."""
+    m = re.search(r'<script[^>]*id="__NEXT_DATA__"[^>]*>(.*?)</script>', html, re.S) or \
+        re.search(r"<!--NEXT_DATA\n(.*?)\n-->", html, re.S)
+    if not m:
+        return []
+    try:
+        data = json.loads(m.group(1).replace("- -", "--") if "<!--NEXT_DATA" in m.group(0) else m.group(1))
+    except (ValueError, TypeError):
+        return []
+
+    def text_of(v):
+        if isinstance(v, str):
+            return _clean(v)
+        if isinstance(v, dict):
+            f = v.get("fields", v)
+            return _clean(f.get("text") or f.get("title") or "") if isinstance(f, dict) else ""
+        if isinstance(v, list):
+            return _clean(" ".join(text_of(x) for x in v))
+        return ""
+
+    out, seen = [], set()
+
+    def walk(o):
+        if isinstance(o, dict):
+            if isinstance(o.get("description"), str) and any(k in o for k in ("title", "subtitle", "name", "heading")):
+                parts = {k: text_of(o.get(k)) for k in ("title", "subtitle", "name", "heading")}
+                desc = _clean(o["description"])
+                joined = " ".join(list(parts.values()) + [desc])
+                if WEEKDAY_WORD_RE.search(joined) and (SPECIAL_RE.search(joined) or EVENT_RE.search(joined) or re.search(r"free|bogo|off\b", joined, re.I)):
+                    title = next((parts[k] for k in ("subtitle", "name", "heading", "title") if parts[k] and len(parts[k]) > 3
+                                  and not re.fullmatch(r"(?:every\s+)?" + DAYS_RE.pattern, parts[k], re.I)), "")
+                    title = title or desc[:80]
+                    day = WEEKDAY_WORD_RE.search(joined).group(0).capitalize()
+                    day = day if day.endswith("s") else day + "s"
+                    key = title.lower()
+                    if key not in seen:
+                        seen.add(key)
+                        out.append({
+                            "kind": "event" if EVENT_RE.search(joined) and not SPECIAL_RE.search(joined) else "special",
+                            "title": _clean(title, 120), "description": _clean(desc, 400),
+                            "start": None, "end": None, "recurring": day, "url": base_url,
+                            "image": None, "price": None, "venue": None, "address": None, "lat": None, "lng": None,
+                        })
+            for v in o.values():
+                walk(v)
+        elif isinstance(o, list):
+            for v in o:
+                walk(v)
+
+    walk(data)
+    return out
+
+
 # ---------------------------------------------------------------- strategy: calendar feeds (iCal)
 
 def _ical_unfold(text):
@@ -972,7 +1032,7 @@ def extract(html, url, source):
     if html.lstrip().startswith("BEGIN:VCALENDAR"):
         return from_ical(html, url)
     soup = BeautifulSoup(html, "lxml")
-    items = from_jsonld(soup, url)
+    items = from_jsonld(soup, url) + from_page_data(html, url)
     if source.get("item_selector"):
         items += from_selectors(soup, url, source["item_selector"], source.get("title_selector"), source.get("date_selector"))
     else:
