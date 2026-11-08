@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T14:14:11+00:00",
+ "updated": "2026-11-08T14:22:37+00:00",
  "items": [
   {
    "kind": "special",
@@ -107,8 +107,8 @@
    "kind": "event",
    "title": "Football Sunday in the Taproom!",
    "description": "Repeats: 4 upcoming dates listed on their site. Join us every Sunday for fun food & drink specials! All games on the TVs... priority Game Volume on...beer buckets & beer pitchers!",
-   "start": "2026-11-08T00:00:00-05:00",
-   "end": "2026-11-08T23:59:59-05:00",
+   "start": "2026-11-08T00:00",
+   "end": "2026-11-08T23:59",
    "recurring": null,
    "url": "https://1623brewing.com/event/football-sunday-in-the-taproom/2026-11-08/",
    "image": "https://1623brewing.com/wp-content/uploads/2026/09/1788970083203-92c775d6-d86b-4975-a4fd-06a64aa6e4215x11_1.png",
@@ -118,14 +118,14 @@
    "lat": 39.4163621,
    "lng": -76.977291,
    "source": "1623 Brewing",
-   "id": "920832c8c9b9"
+   "id": "6ceb4984e19d"
   },
   {
    "kind": "event",
    "title": "Open at 9am!",
    "description": "Join us for Football Sunday! We will open at 9am for the 9:30 kickoff between the Bengals and Falcons in Madrid!",
-   "start": "2026-11-08T09:00:00-05:00",
-   "end": "2026-11-08T09:00:00-05:00",
+   "start": "2026-11-08T09:00",
+   "end": "2026-11-08T09:00",
    "recurring": null,
    "url": "https://1623brewing.com/event/open-at-9am-5/",
    "image": null,
@@ -135,14 +135,14 @@
    "lat": 39.4163621,
    "lng": -76.977291,
    "source": "1623 Brewing",
-   "id": "636a5106223a"
+   "id": "b9b9d9343b7f"
   },
   {
    "kind": "event",
    "title": "Taco & Tequila Tuesdays",
    "description": "Repeats: 4 upcoming dates listed on their site. 🌮🍹 Taco & Tequila Tuesdays at 1623 Brewing & Craft Culture! 🍹🌮 ✨ $3.50 Single Tacos✨ Taco Specials All Night Tuesdays never tasted this good... grab your crew and let’s…",
-   "start": "2026-11-10T14:00:00-05:00",
-   "end": "2026-11-10T21:00:00-05:00",
+   "start": "2026-11-10T14:00",
+   "end": "2026-11-10T21:00",
    "recurring": null,
    "url": "https://1623brewing.com/event/taco-tequila-tuesdays/2026-11-10/",
    "image": null,
@@ -152,14 +152,14 @@
    "lat": 39.4163621,
    "lng": -76.977291,
    "source": "1623 Brewing",
-   "id": "190d7c212137"
+   "id": "639431c9a179"
   },
   {
    "kind": "event",
    "title": "Wine Down Wednesdays",
    "description": "Repeats: 4 upcoming dates listed on their site. 🍷✨ Wine Down Wednesday ✨🍷Midweek never tasted so good at 1623 Brewing & Craft Culture! 🍾 25% Off All Wine Bottles🥖 $13 Specialty Flatbreads The perfect pairing to get you…",
-   "start": "2026-11-11T14:00:00-05:00",
-   "end": "2026-11-11T21:00:00-05:00",
+   "start": "2026-11-11T14:00",
+   "end": "2026-11-11T21:00",
    "recurring": null,
    "url": "https://1623brewing.com/event/wine-down-wednesdays/2026-11-11/",
    "image": null,
@@ -169,14 +169,14 @@
    "lat": 39.4163621,
    "lng": -76.977291,
    "source": "1623 Brewing",
-   "id": "2bb145fce812"
+   "id": "426392cc1b52"
   },
   {
    "kind": "event",
    "title": "Trivia Wednesdays!",
    "description": "Repeats: 3 upcoming dates listed on their site. Join us in the Taproom every Wednesday for Trivia Night with King Trivia at 6:30pm!",
-   "start": "2026-11-11T18:30:00-05:00",
-   "end": "2026-11-11T20:30:00-05:00",
+   "start": "2026-11-11T18:30",
+   "end": "2026-11-11T20:30",
    "recurring": null,
    "url": "https://1623brewing.com/event/trivia-wednesdays/2026-11-11/",
    "image": "https://1623brewing.com/wp-content/uploads/2026/03/1623-Brewing-Starting-Post-3-2025-1.jpg",
@@ -186,14 +186,14 @@
    "lat": 39.4163621,
    "lng": -76.977291,
    "source": "1623 Brewing",
-   "id": "f771854d479f"
+   "id": "bd3839ec5b4b"
   },
   {
    "kind": "event",
    "title": "Burger Night Thursdays",
    "description": "Repeats: 3 upcoming dates listed on their site. Join us every Thursday for $11 Craft Smashburgers and brews that pair just right🍔✨ Start your weekend early with Thirsty Thursdays, cheers!",
-   "start": "2026-11-12T14:00:00-05:00",
-   "end": "2026-11-12T21:00:00-05:00",
+   "start": "2026-11-12T14:00",
+   "end": "2026-11-12T21:00",
    "recurring": null,
    "url": "https://1623brewing.com/event/burger-night-thursdays-2/2026-11-12/",
    "image": null,
@@ -203,14 +203,14 @@
    "lat": 39.4163621,
    "lng": -76.977291,
    "source": "1623 Brewing",
-   "id": "3b7e0a3f6b51"
+   "id": "0bc8a8e1a0dc"
   },
   {
    "kind": "event",
    "title": "Music Bingo Thursdays!",
    "description": "Repeats: 3 upcoming dates listed on their site. Join us in the Taproom every Wednesday for Music Bingo with King Trivia at 6:30pm!",
-   "start": "2026-11-12T18:30:00-05:00",
-   "end": "2026-11-12T20:30:00-05:00",
+   "start": "2026-11-12T18:30",
+   "end": "2026-11-12T20:30",
    "recurring": null,
    "url": "https://1623brewing.com/event/music-bingo-thursdays/2026-11-12/",
    "image": "https://1623brewing.com/wp-content/uploads/2026/03/1623-Brewing-Starting-Post-3-2025-1-1.jpg",
@@ -220,14 +220,14 @@
    "lat": 39.4163621,
    "lng": -76.977291,
    "source": "1623 Brewing",
-   "id": "2add01feb437"
+   "id": "587c97f5a57f"
   },
   {
    "kind": "event",
    "title": "Live Music with Ryan Rote",
    "description": "Join us in the Taproom for live music from 6-9pm!",
-   "start": "2026-11-13T18:00:00-05:00",
-   "end": "2026-11-13T21:00:00-05:00",
+   "start": "2026-11-13T18:00",
+   "end": "2026-11-13T21:00",
    "recurring": null,
    "url": "https://1623brewing.com/event/live-music-with-ryan-rote/",
    "image": null,
@@ -237,14 +237,14 @@
    "lat": 39.4163621,
    "lng": -76.977291,
    "source": "1623 Brewing",
-   "id": "77bcfc1a0f2e"
+   "id": "2daa755dbd51"
   },
   {
    "kind": "event",
    "title": "Open at 9am!",
    "description": "Join us for Football Sunday! We will open at 9am for the 9:30 kickoff between the Patriots and Lions in Munich!",
-   "start": "2026-11-15T09:00:00-05:00",
-   "end": "2026-11-15T09:00:00-05:00",
+   "start": "2026-11-15T09:00",
+   "end": "2026-11-15T09:00",
    "recurring": null,
    "url": "https://1623brewing.com/event/open-at-9am-6/",
    "image": null,
@@ -254,14 +254,14 @@
    "lat": 39.4163621,
    "lng": -76.977291,
    "source": "1623 Brewing",
-   "id": "db7834ee7bdf"
+   "id": "62816c0791d3"
   },
   {
    "kind": "event",
    "title": "Friendsgiving with Hi Honey Charm Bar",
    "description": "A little Friendsgiving fun! Join us and Hi Honey Charm Bar on November 20th for a night filled with good drinks, great company, and live music! Grab your favorite people…",
-   "start": "2026-11-20T18:00:00-05:00",
-   "end": "2026-11-20T21:00:00-05:00",
+   "start": "2026-11-20T18:00",
+   "end": "2026-11-20T21:00",
    "recurring": null,
    "url": "https://1623brewing.com/event/friendsgiving-with-hi-honey-charm-bar/",
    "image": "https://1623brewing.com/wp-content/uploads/2026/11/Brown-and-White-Minimalist-Thanksgiving-Poster-1-scaled.png",
@@ -271,14 +271,14 @@
    "lat": 39.4163621,
    "lng": -76.977291,
    "source": "1623 Brewing",
-   "id": "be641f061541"
+   "id": "68b4aaa5ee03"
   },
   {
    "kind": "event",
    "title": "Live Music with Curtis Tyler",
    "description": "Join us in the Taproom for Live Music from 6-9pm!",
-   "start": "2026-11-20T18:00:00-05:00",
-   "end": "2026-11-20T21:00:00-05:00",
+   "start": "2026-11-20T18:00",
+   "end": "2026-11-20T21:00",
    "recurring": null,
    "url": "https://1623brewing.com/event/live-music-with-curtis-tyler/",
    "image": null,
@@ -288,14 +288,14 @@
    "lat": 39.4163621,
    "lng": -76.977291,
    "source": "1623 Brewing",
-   "id": "65ca17d9c8e2"
+   "id": "331a3d1f63aa"
   },
   {
    "kind": "event",
    "title": "Thanksgiving Eve!",
    "description": "Join us for one of the best nights of the year! Grab your friends and family and join us for a night of live music with Chris Compton from 6-9pm!",
-   "start": "2026-11-25T00:00:00-05:00",
-   "end": "2026-11-25T23:59:59-05:00",
+   "start": "2026-11-25T00:00",
+   "end": "2026-11-25T23:59",
    "recurring": null,
    "url": "https://1623brewing.com/event/thanksgiving-eve/",
    "image": null,
@@ -305,14 +305,14 @@
    "lat": 39.4163621,
    "lng": -76.977291,
    "source": "1623 Brewing",
-   "id": "89fa1ac3732f"
+   "id": "9170868fd32a"
   },
   {
    "kind": "event",
    "title": "Live Music with Chris Compton",
    "description": "Join us in the Taproom from 6-9pm!",
-   "start": "2026-11-25T18:00:00-05:00",
-   "end": "2026-11-25T21:00:00-05:00",
+   "start": "2026-11-25T18:00",
+   "end": "2026-11-25T21:00",
    "recurring": null,
    "url": "https://1623brewing.com/event/live-music-with-chris-compton/",
    "image": null,
@@ -322,14 +322,14 @@
    "lat": 39.4163621,
    "lng": -76.977291,
    "source": "1623 Brewing",
-   "id": "3ad20326d457"
+   "id": "9fb00f8c015c"
   },
   {
    "kind": "event",
    "title": "CLOSED! Happy Thanksgiving",
    "description": "",
-   "start": "2026-11-26T00:00:00-05:00",
-   "end": "2026-11-26T23:59:59-05:00",
+   "start": "2026-11-26T00:00",
+   "end": "2026-11-26T23:59",
    "recurring": null,
    "url": "https://1623brewing.com/event/closed-happy-thanksgiving/",
    "image": null,
@@ -339,7 +339,7 @@
    "lat": 39.4163621,
    "lng": -76.977291,
    "source": "1623 Brewing",
-   "id": "051656d18c92"
+   "id": "9699760042bd"
   },
   {
    "kind": "special",
