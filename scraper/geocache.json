@@ -1,4 +1,8 @@
 {
+ "124 n market street, frederick, md 21701": {
+  "lat": 39.4160562,
+  "lng": -77.4104247
+ },
  "1320 w. old liberty road, sykesville, md, 21784": null,
  "1415 woodstock road, woodstock, md 21163": {
   "lat": 39.3305664,
@@ -15,6 +19,10 @@
  "1601 washington road, westminster, md, 21157": {
   "lat": 39.5633427,
   "lng": -76.9882542
+ },
+ "1781 n market street, frederick, md 21701": {
+  "lat": 39.4403205,
+  "lng": -77.3989904
  },
  "2 college hill, westminster, md, 21157": {
   "lat": 39.5851682,
@@ -45,6 +53,11 @@
   "lat": 39.5694405,
   "lng": -76.9904244
  },
+ "223 w potomac street, brunswick, md 21716": {
+  "lat": 39.3138246,
+  "lng": -77.6302917
+ },
+ "2465 route 97, suite 1, glenwood, md 21738": null,
  "28 john street, westminster, md, 21157": {
   "lat": 39.5765207,
   "lng": -76.9952205
@@ -65,11 +78,17 @@
   "lat": 39.5942101,
   "lng": -76.9992083
  },
+ "340 e patrick street, suite 102, frederick, md 21701": null,
+ "3733 old columbia pike, ellicott city, md 21043": {
+  "lat": 39.2670128,
+  "lng": -76.7987397
+ },
  "3838 niner road, finksburg": null,
  "4 w main street, westminster, md 21157": {
   "lat": 39.5753896,
   "lng": -76.9959315
  },
+ "400 sagner avenue, suite 100, frederick, md 21701": null,
  "404 englar road, westminster, md 21157": {
   "lat": 39.5861668,
   "lng": -76.9880519
@@ -78,6 +97,10 @@
   "lat": 39.6095157,
   "lng": -76.8488503
  },
+ "4411 manor lane, ellicott city, md 21042": {
+  "lat": 39.2503392,
+  "lng": -76.8850593
+ },
  "495 south center street, westminster, md, 21157": {
   "lat": 39.5603453,
   "lng": -76.9916901
@@ -85,6 +108,10 @@
  "500 south center st, westminster, md, 21157": {
   "lat": 39.5578214,
   "lng": -76.9923786
+ },
+ "526 n market street, frederick, md 21701": {
+  "lat": 39.4207185,
+  "lng": -77.4100111
  },
  "5975 exchange drive, eldersburg, md 21784": {
   "lat": 39.4163621,
@@ -120,6 +147,19 @@
   "lat": 39.3644509,
   "lng": -76.968696
  },
+ "800 n east street, suite 201, frederick, md 21701": null,
+ "8201 snowden river parkway, columbia, md 21045": {
+  "lat": 39.2108553,
+  "lng": -76.800395
+ },
+ "8253 dollyhyde road, mount airy, md 21771": null,
+ "8411 broadband drive, suite k, frederick, md 21701": null,
+ "8601 mapleville road, mount airy, md 21771": null,
+ "8980 md-108 ste mno columbia, md 21045": null,
+ "8980 md-108, columbia, md 21045": {
+  "lat": 39.229533,
+  "lng": -76.8234465
+ },
  "91 w main street, westminster, md 21157": {
   "lat": 39.5774219,
   "lng": -76.998688
@@ -133,6 +173,7 @@
   "lng": -76.9651567
  },
  "alumni hall @ mcdaniel college, 2 college hill, westminster, md, 21157": null,
+ "broadband drive, suite k, frederick, md 21701": null,
  "carroll arts center, 91 west main st, westminster, md, 21157": {
   "lat": 39.5774219,
   "lng": -76.998688
@@ -146,6 +187,11 @@
   "lat": 39.5703792,
   "lng": -76.989148
  },
+ "dollyhyde road, mount airy, md 21771": null,
+ "e patrick street, suite 102, frederick, md 21701": {
+  "lat": 39.4010802,
+  "lng": -77.3723473
+ },
  "eldersburg branch, 6400 w. hemlock drive, eldersburg, md, 21784": null,
  "exchange drive, suite l, eldersburg, md, 21784": null,
  "gamber & community fire company, 3838 niner road, finksburg": null,
@@ -154,18 +200,50 @@
  "historical society of carroll county, 210 east main street, westminster, md, 21157": null,
  "john street quarters, 28 john street, westminster, md, 21157": null,
  "main street, mount airy, 110 s main street, mount airy, 21771": null,
+ "manor hill farm, 4411 manor lane, ellicott city, md, 21042": {
+  "lat": 39.2503392,
+  "lng": -76.8850593
+ },
+ "mapleville road, mount airy, md 21771": null,
  "mcdaniel college, 2 college hill, westminster, md, 21157": null,
  "mcdaniel lounge, 2 college hill, westminster, md, 21157": null,
+ "md": {
+  "lat": 39.5162401,
+  "lng": -76.9382069
+ },
+ "md-108 ste mno columbia, md 21045": null,
+ "monocacy brewing company, 1781 north market street, frederick, md, 21701": {
+  "lat": 39.4403205,
+  "lng": -77.3989904
+ },
  "mount airy, 110 s main street, mount airy, 21771": {
   "lat": 39.3766225,
   "lng": -77.1549618
  },
+ "mount airy, md 21771": {
+  "lat": 39.3765918,
+  "lng": -77.1549078
+ },
+ "n east street, suite 201, frederick, md 21701": {
+  "lat": 39.4156101,
+  "lng": -77.4051539
+ },
  "pleasant valley fire co, 2030 pleasant valley rd, westminster, md, 21158": null,
+ "route 97, suite 1, glenwood, md 21738": null,
+ "sagner avenue, suite 100, frederick, md 21701": {
+  "lat": 39.4122381,
+  "lng": -77.4015912
+ },
  "saint paul\u2019s united church of christ, 17 bond street, westminster, 21157": {
   "lat": 39.5756032,
   "lng": -76.9981867
  },
  "st. paul united methodist church \u2013 new windsor, 200 main st., new windsor, 21776": null,
+ "suite 1, glenwood, md 21738": {
+  "lat": 39.2875302,
+  "lng": -77.0276051
+ },
+ "suite k, frederick, md 21701": null,
  "suite l, eldersburg, md, 21784": null,
  "sykesville main street, 7547 main st, sykesville, md, 21784": {
   "lat": 39.3659792,

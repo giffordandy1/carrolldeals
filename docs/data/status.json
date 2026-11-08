@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T14:22:37+00:00",
+ "updated": "2026-11-08T14:26:32+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -122,6 +122,113 @@
   },
   {
    "site": "Texas Roadhouse (Westminster)",
+   "status": "ok",
+   "found": 1,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Brewer's Alley",
+   "status": "ok",
+   "found": 9,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Monocacy Brewing Company",
+   "status": "ok",
+   "found": 7,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "RAK Brewing Co",
+   "status": "ok",
+   "found": 4,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Rockwell Brewery",
+   "status": "ok",
+   "found": 15,
+   "errors": [],
+   "mapped": false
+  },
+  {
+   "site": "Sandbox Brewhouse",
+   "status": "ok",
+   "found": 27,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Steinhardt Brewing",
+   "status": "ok",
+   "found": 18,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Olde Mother Brewing",
+   "status": "ok",
+   "found": 2,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Smoketown Brewing Station",
+   "status": "ok",
+   "found": 2,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Frey's Brewing Company",
+   "status": "ok",
+   "found": 1,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Milkhouse Brewery",
+   "status": "ok",
+   "found": 1,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Manor Hill Brewing",
+   "status": "ok",
+   "found": 9,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Manor Hill Tavern",
+   "status": "partial",
+   "found": 4,
+   "errors": [
+    "https://www.manorhilltavern.com/specials/: HTTPStatusError 404"
+   ],
+   "mapped": true
+  },
+  {
+   "site": "Victoria Gastro Pub",
+   "status": "ok",
+   "found": 12,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Sapwood Cellars",
+   "status": "ok",
+   "found": 2,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Walker's Tap & Table",
    "status": "ok",
    "found": 1,
    "errors": [],
