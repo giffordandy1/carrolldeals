@@ -1,0 +1,6 @@
+start
+b1623-events 200 text/html; charset=UTF-8 https://1623brewing.com/1623-events/
+b1623-menu 200 text/html; charset=UTF-8 https://1623brewing.com/food-menu/
+antrim 200 text/html; charset=UTF-8 https://www.antrim1844.com/taneytown-events-calendar
+oldemother 200 text/html; charset=UTF-8 https://www.oldemother.com/events/
+done
