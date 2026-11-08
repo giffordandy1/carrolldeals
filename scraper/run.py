@@ -53,6 +53,14 @@ def load_sources():
     return out
 
 
+def load_previous_status():
+    try:
+        with open(STATUS) as f:
+            return {x["site"]: x for x in json.load(f).get("sites", [])}
+    except (FileNotFoundError, json.JSONDecodeError, KeyError, TypeError):
+        return {}
+
+
 def load_previous():
     try:
         with open(ITEMS) as f:
@@ -64,6 +72,7 @@ def load_previous():
 async def main():
     sources = load_sources()
     previous = load_previous()
+    prev_status = load_previous_status()
     geo = Geocoder(GEOCACHE)
     today = (datetime.now(timezone.utc) - timedelta(days=1)).date().isoformat()
     all_items, report = [], []
@@ -112,6 +121,15 @@ async def main():
             items = [p for p in previous if p.get("source") == src["name"]]
             if items:
                 status = "error (showing last results)"
+        # A site that suddenly comes back empty (often a temporary bot check) keeps its
+        # last results for up to 4 checks in a row (about a day) before it counts as empty.
+        empty_runs = 0
+        if not items and not errors:
+            empty_runs = int(prev_status.get(src["name"], {}).get("empty_runs", 0)) + 1
+            if empty_runs <= 4:
+                items = [p for p in previous if p.get("source") == src["name"]]
+                if items:
+                    status = f"empty this time (showing last results, {empty_runs} of 4)"
 
         kept, seen, seen_days = [], set(), set()
         for it in items:
@@ -185,7 +203,7 @@ async def main():
 
         all_items += kept
 
-        report.append({"site": src["name"], "status": status, "found": len(kept), "errors": errors,
+        report.append({"site": src["name"], "status": status, "found": len(kept), "errors": errors, "empty_runs": empty_runs,
                        "mapped": src["lat"] is not None})
         flag = "" if src["lat"] is not None else "  (no map location: add an address or lat/lng)"
         print(f"{src['name']}: {len(kept)} items, {status}{flag}")
