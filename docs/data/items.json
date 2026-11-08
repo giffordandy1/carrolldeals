@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T14:09:22+00:00",
+ "updated": "2026-11-08T14:14:11+00:00",
  "items": [
   {
    "kind": "special",
@@ -2312,6 +2312,57 @@
    "lng": -76.9333601,
    "source": "Big Greek Cafe (Eldersburg)",
    "id": "d15ad4e5f0f3"
+  },
+  {
+   "kind": "special",
+   "title": "BOGO Wing Tuesday",
+   "description": "Rewards Members score BOGO 100% off bone-in wings.",
+   "start": null,
+   "end": null,
+   "recurring": "Tuesdays",
+   "url": "https://www.buffalowildwings.com/promos/",
+   "image": null,
+   "price": null,
+   "venue": "Buffalo Wild Wings (Westminster)",
+   "address": "404 Englar Road, Westminster, MD 21157",
+   "lat": 39.5861668,
+   "lng": -76.9880519,
+   "source": "Buffalo Wild Wings (Westminster)",
+   "id": "80a420faf99f"
+  },
+  {
+   "kind": "special",
+   "title": "Boneless Thursdays",
+   "description": "Every Thursday with takeout & delivery from Buffalo Wild Wings GO.",
+   "start": null,
+   "end": null,
+   "recurring": "Thursdays",
+   "url": "https://www.buffalowildwings.com/promos/",
+   "image": null,
+   "price": null,
+   "venue": "Buffalo Wild Wings (Westminster)",
+   "address": "404 Englar Road, Westminster, MD 21157",
+   "lat": 39.5861668,
+   "lng": -76.9880519,
+   "source": "Buffalo Wild Wings (Westminster)",
+   "id": "5ad3fb4033fb"
+  },
+  {
+   "kind": "special",
+   "title": "WILD WEST WEDNESDAY",
+   "description": "",
+   "start": null,
+   "end": null,
+   "recurring": "Wednesdays",
+   "url": "https://www.texasroadhouse.com/locations/57-westminstermd",
+   "image": null,
+   "price": null,
+   "venue": "Texas Roadhouse (Westminster)",
+   "address": "21 S Cranberry Road, Westminster, MD 21157",
+   "lat": 39.5749248,
+   "lng": -76.9799336,
+   "source": "Texas Roadhouse (Westminster)",
+   "id": "eb3c84257bb5"
   }
  ]
 }
