@@ -458,6 +458,12 @@ def heuristics(soup, base_url):
     out, seen_text = [], set()
 
     def add(title, body, anchor, weekly=False):
+        if re.fullmatch(r"\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}", title.strip()):
+            return  # a phone number
+        if DATE_RE.fullmatch(title.strip(" -–:")) and body:
+            rest = re.sub(r"^\s*" + re.escape(title.strip(" -–:")) + r"\s*[-–:|]?\s*", "", body)
+            title = re.split(r"\s+(?:-|–|\|)\s+|(?<=[.!])\s", rest)[0][:90] or title
+        title = re.sub(r"^is\s+", "", title.strip(), flags=re.I)
         title = _tidy_title(title)
         full = f"{title} {body}"
         bare = _clean(TIMES_RE.sub(" ", DAYS_RE.sub(" ", re.sub(r"\b(?:every|each|on|at|from)\b", " ", title, flags=re.I))))
@@ -487,6 +493,9 @@ def heuristics(soup, base_url):
             kind = "event" if EVENT_RE.search(title) or (EVENT_RE.search(body) and not SPECIAL_RE.search(full)) else "special"
         else:
             start = _parse_date(full)
+            if start:
+                tm = TIMES_RE.search(full)
+                start = _with_time(start, tm.group(0) if tm else None)
             recurring = None if start else _recurring(full)
             monthly = None if start else _monthly(full)
             if monthly:
@@ -609,7 +618,10 @@ def heuristics(soup, base_url):
         if sum(1 for x in lines if SPECIAL_RE.search(x.get_text(" ")) or EVENT_RE.search(x.get_text(" "))) >= 2:
             continue
         day_only = bool(DAYS_RE.fullmatch(title.rstrip(":!").strip()))
-        if not body and (SPECIAL_RE.search(title) or day_only):
+        nxt_t = _clean(heads[idx + 1].get_text(" ")) if idx + 1 < len(heads) else ""
+        schedule_next = bool(nxt_t) and not day_only and len(nxt_t) <= 60 and bool(DAYS_RE.search(nxt_t) or TIMES_RE.search(nxt_t)) \
+            and not DATE_RE.search(title) and not DATE_RE.search(nxt_t)
+        if not body and (SPECIAL_RE.search(title) or day_only or schedule_next):
             # Some layouts put the details in the next headings instead of text:
             # "Tuesday" / "$4.50 Any Single Taco", "Happy Hour" / "$1 off drafts" /
             # "Tues-Fri 2-6pm", or "Burger of the Week" / "Miss Mary's Mac Burger".
@@ -625,7 +637,7 @@ def heuristics(soup, base_url):
                     if of_week and _section_text(nxt):
                         extra.append(_section_text(nxt))
                     break
-                if re.search(r"\$\s?\d|%|\boff\b", t) or TIMES_RE.search(t):
+                if re.search(r"\$\s?\d|%|\boff\b", t) or TIMES_RE.search(t) or (schedule_next and (DAYS_RE.search(t) or re.search(r"\d", t))):
                     extra.append(t)
                     used.add(id(nxt))
                 else:

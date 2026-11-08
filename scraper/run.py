@@ -126,6 +126,12 @@ async def main():
                 t2 = re.sub(r"^(?:(?:mon|tue|wed|thu|fri|sat|sun)[a-z]*\.?,?\s+)?(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s+\d{1,2}(?:st|nd|rd|th)?,?\s*[-–:|]?\s*", "", it["title"], flags=re.I)
                 if len(t2) >= 3:
                     it["title"] = t2
+            # Small title tidy-ups: "2026 ~ The Few", "We have live music every Saturday! Click here for more"
+            t3 = re.sub(r"^\d{4}\s*~\s*", "", it["title"])
+            t3 = re.sub(r"\s*click here.*$", "", t3, flags=re.I)
+            t3 = re.sub(r"^we (?:have|host|offer)\s+", "", t3, flags=re.I)
+            if len(t3) >= 3 and t3 != it["title"]:
+                it["title"] = t3[0].upper() + t3[1:]
             if src["no_details"]:
                 it["description"] = ""  # the site's descriptions are wrong or copied; show names only
             tl = it["title"].lower()

@@ -218,3 +218,107 @@ sites:
     no_details: true
     urls:
       - https://www.texasroadhouse.com/locations/57-westminstermd
+
+  # ---------------- Frederick County breweries and taprooms ----------------
+  - name: Brewer's Alley
+    address: 124 N Market Street, Frederick, MD 21701
+    urls:
+      - https://www.brewers-alley.com/events/
+
+  - name: Monocacy Brewing Company
+    address: 1781 N Market Street, Frederick, MD 21701
+    urls:
+      - https://www.monocacybrewing.com/events/?ical=1
+
+  - name: RAK Brewing Co
+    address: 400 Sagner Avenue, Suite 100, Frederick, MD 21701
+    skip:
+      - choose your brunch
+      - per person
+      - grab your friends
+      - monday to friday
+    manual:
+      - title: Happy hour
+        when: Monday-Friday 3pm-6pm
+        url: https://www.rakbrewing.com/events/
+    urls:
+      - https://www.rakbrewing.com/events/
+
+  - name: Rockwell Brewery
+    address: 8411 Broadband Drive, Suite K, Frederick, MD 21701
+    skip:
+      - don't miss out
+      - ^saturday night
+      - promise tomorrow!
+      - purple flo live in concert for the
+      - ^live band$
+    urls:
+      - https://www.rockwellbrewery.com/
+
+  - name: Sandbox Brewhouse
+    address: 800 N East Street, Suite 201, Frederick, MD 21701
+    urls:
+      - https://www.sandboxbrewhouse.com/
+
+  - name: Steinhardt Brewing
+    address: 340 E Patrick Street, Suite 102, Frederick, MD 21701
+    urls:
+      - https://www.steinhardtbrewing.com/live-music-events
+      - https://www.steinhardtbrewing.com/
+
+  - name: Olde Mother Brewing
+    address: 526 N Market Street, Frederick, MD 21701
+    urls:
+      - https://www.oldemother.com/events/
+
+  - name: Smoketown Brewing Station
+    address: 223 W Potomac Street, Brunswick, MD 21716
+    urls:
+      - https://www.smoketownbrewing.com/upstairsevents
+
+  - name: Frey's Brewing Company
+    address: 8601 Mapleville Road, Mount Airy, MD 21771
+    urls:
+      - https://www.freys.farm/events/
+
+  - name: Milkhouse Brewery
+    address: 8253 Dollyhyde Road, Mount Airy, MD 21771
+    skip:
+      - black friday
+      - taproom hours
+    urls:
+      - https://www.milkhousebrewery.com/
+
+  # ---------------- Howard County breweries and taprooms ----------------
+  - name: Manor Hill Brewing
+    address: 4411 Manor Lane, Ellicott City, MD 21042
+    urls:
+      - https://www.manorhillbrewing.com/events/?ical=1
+
+  - name: Manor Hill Tavern
+    address: 3733 Old Columbia Pike, Ellicott City, MD 21043
+    skip:
+      - gift card
+    urls:
+      - https://www.manorhilltavern.com/events/
+      - https://www.manorhilltavern.com/specials/
+
+  - name: Victoria Gastro Pub
+    address: 8201 Snowden River Parkway, Columbia, MD 21045
+    skip:
+      - gift card
+      - special menu saturday
+    urls:
+      - https://www.victoriagastropub.com/events/
+      - https://www.victoriagastropub.com/specials/
+
+  - name: Sapwood Cellars
+    address: 8980 MD-108, Columbia, MD 21045
+    urls:
+      - https://www.sapwoodcellars.com/events/
+
+  - name: Walker's Tap & Table
+    address: 2465 Route 97, Suite 1, Glenwood, MD 21738
+    urls:
+      - https://www.walkerstapandtable.com/
+
