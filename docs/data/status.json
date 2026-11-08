@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T18:37:41+00:00",
+ "updated": "2026-11-08T18:48:37+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -268,7 +268,7 @@
   {
    "site": "Barrington Tap & Table",
    "status": "ok",
-   "found": 17,
+   "found": 18,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
