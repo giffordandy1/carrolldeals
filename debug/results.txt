@@ -1,3 +1,0 @@
-start
-menu 200 text/html; charset=UTF-8 https://www.bastaeldersburg.com/menu/
-done
