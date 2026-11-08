@@ -152,12 +152,17 @@ async def main():
         for it in kept:
             if it.get("start"):
                 counts[it["title"].lower()] = counts.get(it["title"].lower(), 0) + 1
+        try:
+            from zoneinfo import ZoneInfo
+            local_today = datetime.now(ZoneInfo(os.environ.get("TIMEZONE", "America/New_York"))).date().isoformat()
+        except Exception:
+            local_today = today
         shown, slim = set(), []
         for it in sorted(kept, key=lambda x: x.get("start") or "9999"):
             k = it["title"].lower()
             if counts.get(k, 0) >= 3:
-                if k in shown:
-                    continue
+                if k in shown or (it.get("end") or it["start"])[:10] < local_today:
+                    continue  # show the next upcoming date only
                 shown.add(k)
                 desc = re.sub(r"^Repeats: \d+ upcoming dates listed on their site\. ", "", it.get("description") or "")
                 it["description"] = _clean(f"Repeats: {counts[k]} upcoming dates listed on their site. " + desc, 500)
