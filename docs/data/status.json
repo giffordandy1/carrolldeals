@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T12:56:50+00:00",
+ "updated": "2026-11-08T14:00:47+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -18,7 +18,7 @@
   {
    "site": "1623 Brewing",
    "status": "ok",
-   "found": 36,
+   "found": 21,
    "errors": [],
    "mapped": true
   },
@@ -68,6 +68,41 @@
    "site": "Downtown Sykesville Connection",
    "status": "ok",
    "found": 6,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Maggie's Restaurant",
+   "status": "ok",
+   "found": 8,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Johansson's Dining House",
+   "status": "ok",
+   "found": 3,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Antrim 1844",
+   "status": "ok",
+   "found": 4,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Carroll County Tourism events",
+   "status": "ok",
+   "found": 36,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Carroll County Arts Council events",
+   "status": "ok",
+   "found": 24,
    "errors": [],
    "mapped": true
   }

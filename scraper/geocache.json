@@ -1,4 +1,5 @@
 {
+ "1320 w. old liberty road, sykesville, md, 21784": null,
  "1415 woodstock road, woodstock, md 21163": {
   "lat": 39.3305664,
   "lng": -76.8702295
@@ -7,24 +8,85 @@
   "lat": 39.402333,
   "lng": -76.9432281
  },
+ "15 east main st, westminster, md, 21157": {
+  "lat": 39.5748347,
+  "lng": -76.9954038
+ },
+ "1601 washington road, westminster, md, 21157": {
+  "lat": 39.5633427,
+  "lng": -76.9882542
+ },
+ "2 college hill, westminster, md, 21157": {
+  "lat": 39.5851682,
+  "lng": -77.0037276
+ },
+ "200 main st., new windsor, 21776": {
+  "lat": 39.543224,
+  "lng": -77.108226
+ },
  "2021 liberty road, eldersburg, md 21784": {
   "lat": 39.3956079,
   "lng": -76.9179985
  },
  "2021 liberty road, sykesville, md 21784": null,
+ "2030 pleasant valley rd, westminster, md, 21158": {
+  "lat": 39.6276415,
+  "lng": -77.0178617
+ },
  "21 liberty road, sykesville, md 21784": {
   "lat": 39.4228742,
   "lng": -76.9966048
  },
+ "210 east main street, westminster, md, 21157": {
+  "lat": 39.5694405,
+  "lng": -76.9904244
+ },
+ "28 john street, westminster, md, 21157": {
+  "lat": 39.5765207,
+  "lng": -76.9952205
+ },
+ "30 trevanion road, taneytown, md 21787": {
+  "lat": 39.6548672,
+  "lng": -77.1731006
+ },
+ "310 e green street, westminster, md 21157": {
+  "lat": 39.5650377,
+  "lng": -76.9882836
+ },
  "32 w main st, westminster, md 21157": {
   "lat": 39.5760132,
   "lng": -76.9965814
+ },
+ "3311 littlestown pike, westminster, md, 21158": {
+  "lat": 39.5942101,
+  "lng": -76.9992083
+ },
+ "3838 niner road, finksburg": null,
+ "4 w main street, westminster, md 21157": {
+  "lat": 39.5753896,
+  "lng": -76.9959315
+ },
+ "4125 hillcrest ave, hampstead, 21074": {
+  "lat": 39.6095157,
+  "lng": -76.8488503
+ },
+ "495 south center street, westminster, md, 21157": {
+  "lat": 39.5603453,
+  "lng": -76.9916901
+ },
+ "500 south center st, westminster, md, 21157": {
+  "lat": 39.5578214,
+  "lng": -76.9923786
  },
  "5975 exchange drive, eldersburg, md 21784": {
   "lat": 39.4163621,
   "lng": -76.977291
  },
  "5975 exchange drive, suite l, eldersburg, md, 21784": null,
+ "615 center st., mount airy, 21771": {
+  "lat": 39.3744795,
+  "lng": -77.1502877
+ },
  "710 lisbon center drive, woodbine, md 21797": {
   "lat": 39.3491531,
   "lng": -77.0670716
@@ -46,14 +108,79 @@
   "lat": 39.3644509,
   "lng": -76.968696
  },
+ "91 w main street, westminster, md 21157": {
+  "lat": 39.5774219,
+  "lng": -76.998688
+ },
+ "91 west main street, westminster, md, 21157": {
+  "lat": 39.5774219,
+  "lng": -76.998688
+ },
  "915 liberty road eldersburg, md 21784": {
   "lat": 39.4066248,
   "lng": -76.9651567
  },
+ "alumni hall @ mcdaniel college, 2 college hill, westminster, md, 21157": null,
+ "carroll arts center, 91 west main st, westminster, md, 21157": {
+  "lat": 39.5774219,
+  "lng": -76.998688
+ },
+ "carroll community college, 1601 washington road, westminster, md, 21157": null,
+ "carroll county farm museum, 500 south center st, westminster, md, 21157": null,
+ "carroll county public library, eldersburg branch, 6400 w. hemlock drive, eldersburg, md, 21784": null,
+ "carroll county public library, taneytown branch, 10 grand drive, taneytown, md, 21787": null,
+ "carroll springs school, 495 south center street, westminster, md, 21157": null,
+ "church of the ascension, 23 north court street, westminster, md, 21157": {
+  "lat": 39.5703792,
+  "lng": -76.989148
+ },
+ "eldersburg branch, 6400 w. hemlock drive, eldersburg, md, 21784": null,
  "exchange drive, suite l, eldersburg, md, 21784": null,
+ "gamber & community fire company, 3838 niner road, finksburg": null,
+ "hampstead lions club park, 4125 hillcrest ave, hampstead, 21074": null,
+ "historic downtown westminster, 15 east main st, westminster, md, 21157": null,
+ "historical society of carroll county, 210 east main street, westminster, md, 21157": null,
+ "john street quarters, 28 john street, westminster, md, 21157": null,
+ "main street, mount airy, 110 s main street, mount airy, 21771": null,
+ "mcdaniel college, 2 college hill, westminster, md, 21157": null,
+ "mcdaniel lounge, 2 college hill, westminster, md, 21157": null,
+ "mount airy, 110 s main street, mount airy, 21771": {
+  "lat": 39.3766225,
+  "lng": -77.1549618
+ },
+ "pleasant valley fire co, 2030 pleasant valley rd, westminster, md, 21158": null,
+ "saint paul\u2019s united church of christ, 17 bond street, westminster, 21157": {
+  "lat": 39.5756032,
+  "lng": -76.9981867
+ },
+ "st. paul united methodist church \u2013 new windsor, 200 main st., new windsor, 21776": null,
  "suite l, eldersburg, md, 21784": null,
+ "sykesville main street, 7547 main st, sykesville, md, 21784": {
+  "lat": 39.3659792,
+  "lng": -76.9688803
+ },
+ "taneytown branch, 10 grand drive, taneytown, md, 21787": {
+  "lat": 39.6493861,
+  "lng": -77.1608975
+ },
+ "the carroll arts center, 91 west main street, westminster, md, 21157": null,
+ "union mills homestead, 3311 littlestown pike, westminster, md, 21158": null,
  "w main sykesville, md 21784": {
   "lat": 39.3654056,
   "lng": -76.9690372
- }
+ },
+ "watkins park, 615 center st., mount airy, 21771": null,
+ "westminster high school, 1225 washington rd, westminster, 21157": {
+  "lat": 39.5414903,
+  "lng": -76.9924815
+ },
+ "westminster high school, 1225 washington road, westminster, md, 21157": {
+  "lat": 39.5414903,
+  "lng": -76.9924815
+ },
+ "westminster, md 21157": {
+  "lat": 39.5751717,
+  "lng": -76.9959168
+ },
+ "winfield volunteer fire hall, 1320 w. old liberty road, sykesville, md, 21784": null
 }
