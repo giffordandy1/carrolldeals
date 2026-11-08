@@ -1,22 +1,9 @@
-johanssons https://johanssonsdininghouse.com/
-olordans https://www.olordans.com/
-oldwestminster https://www.oldwestminster.com/
-gallopinggoose https://www.gallopinggoosevineyards.com/
-ruhlman https://www.ruhlmanbrewery.com/
-bigtruck https://www.bigtruckfarmbrewery.com/
-pipetheside https://www.pipethesidebrewing.com/
-cygnus https://www.cygnuswinecellars.com/
-maggies https://www.maggiesrestaurant.com/
-84east https://www.84eastwoodfire.com/
-countycork https://www.thecountycork.com/
-serpentridge https://www.serpentridge.com/
-antrim https://www.antrim1844.com/
-baldwins https://www.baldwinsstation.com/
-glorydays https://www.glorydaysgrill.com/locations/eldersburg/
-sykesvillestation https://www.sykesvillestation.com/
-tourism-ical https://carrollcountytourism.org/events/list/?ical=1
-tourism-list https://carrollcountytourism.org/events/list/
-mountairy-ical https://mountairymd.org/events/list/?ical=1
-artscenter https://www.carrollcountyartscouncil.org/
-# retry 1794145448
-# retry 1794145971
+maggies-hh https://maggiesrestaurant.com/menu/happy-hour/
+maggies-specials https://maggiesrestaurant.com/specials/
+maggies-music https://maggiesrestaurant.com/live-music/
+johanssons-bar https://www.johanssonsdininghouse.com/bar
+serpentridge-events https://serpentridge.com/events/
+antrim-cal https://www.antrim1844.com/taneytown-events-calendar
+arts-ical https://www.carrollcountyartscouncil.org/events/list/?ical=1
+tourism-ical2 https://carrollcountytourism.org/events/list/page/2/?ical=1
+glorydays-promos https://www.glorydaysgrill.com/promotions/
