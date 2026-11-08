@@ -49,6 +49,7 @@ def load_sources():
             "urls": (s.get("urls") if isinstance(s.get("urls"), list) else [s["urls"]]) if s.get("urls") else [],
             "manual": s.get("manual") or [],
             "no_details": bool(s.get("no_details")),
+            "read_images": s.get("read_images") or False,
             "skip": [str(x).lower() for x in (s.get("skip") if isinstance(s.get("skip"), list) else [s["skip"]] if s.get("skip") else [])],
             "only": [str(x).lower() for x in (s.get("only") if isinstance(s.get("only"), list) else [s["only"]] if s.get("only") else [])],
             "address": s.get("address"),

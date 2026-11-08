@@ -22,6 +22,9 @@
 #       kind: event            (event or special)
 #       when: Thursdays 7pm    (a schedule, or a date like 2026-12-05)
 #       details: Live music    (optional)
+#   read_images:    true to also read text in the page's pictures (flyers, specials
+#                   boards) with OCR. Or a word the picture file names share, e.g.
+#                   "live-music|specials", to read only those pictures.
 #   selectors:      tell the scraper exactly which parts of the page to read
 #     item:  CSS selector for each event or special block, e.g. ".event-card"
 #     title: selector for the title inside that block, e.g. "h3"
@@ -335,105 +338,13 @@ sites:
 
   - name: Barrington Tap & Table
     address: 2050 Marriottsville Road, Marriottsville, MD 21104
-    # Their events and specials are posted as pictures, so they're typed in here.
-    # The live music list comes from the monthly flyers on their Events page; add the next month's when it's posted.
-    manual:
-      - title: Happy hour
-        kind: special
-        when: Monday-Friday 3pm-6pm
-        details: $2 off specialty cocktails and wines by the glass, $2 off all draft beers, $1.50 off all bottles and cans, $2 off all pizzas.
-        url: https://eatatbarrington.com/events/
-      - title: Hospitality & Heroes Day, 20% off
-        kind: special
-        when: Mondays all day
-        details: 20% off the entire check for restaurant/hotel industry workers and first responders (police, fire, EMS, hospital) with proof of current employment. Applies to the qualifying guest's food and drinks only; not valid with other discounts.
-        url: https://eatatbarrington.com/events/
-      - title: Flight Night, $2 off beer & wine flights
-        kind: special
-        when: Tuesdays 4pm-close
-        details: $2 off beer and wine flights.
-        url: https://eatatbarrington.com/events/
-      - title: Half-price wine bottles
-        kind: special
-        when: Wednesdays 4pm-close
-        details: Half-price bottles of wine (house wines not included).
-        url: https://eatatbarrington.com/events/
-      - title: "Live music: Tim Morrison"
-        kind: event
-        when: "2026-11-04T18:00:00"
-        details: Live acoustic music with Tim Morrison, 6-9 PM.
-        url: https://eatatbarrington.com/events/
-      - title: "Live music: Damon Foreman"
-        kind: event
-        when: "2026-11-05T18:00:00"
-        details: Live acoustic music with Damon Foreman, 6-9 PM.
-        url: https://eatatbarrington.com/events/
-      - title: "Live music: Joe Smith"
-        kind: event
-        when: "2026-11-11T18:00:00"
-        details: Live acoustic music with Joe Smith, 6-9 PM.
-        url: https://eatatbarrington.com/events/
-      - title: "Live music: Simon Walker"
-        kind: event
-        when: "2026-11-12T18:00:00"
-        details: Live acoustic music with Simon Walker, 6-9 PM.
-        url: https://eatatbarrington.com/events/
-      - title: "Live music: Luke Hale"
-        kind: event
-        when: "2026-11-18T18:00:00"
-        details: Live acoustic music with Luke Hale, 6-9 PM.
-        url: https://eatatbarrington.com/events/
-      - title: "Live music: Jim Lewis"
-        kind: event
-        when: "2026-11-19T18:00:00"
-        details: Live acoustic music with Jim Lewis, 6-9 PM.
-        url: https://eatatbarrington.com/events/
-      - title: "Live music: One Step Down"
-        kind: event
-        when: "2026-11-25T18:00:00"
-        details: Live acoustic music with One Step Down, 6-9 PM.
-        url: https://eatatbarrington.com/events/
-      - title: "Live music: Tim Morrison"
-        kind: event
-        when: "2026-12-02T18:00:00"
-        details: Live acoustic music with Tim Morrison, 6-9 PM.
-        url: https://eatatbarrington.com/events/
-      - title: "Live music: Damon Foreman"
-        kind: event
-        when: "2026-12-03T18:00:00"
-        details: Live acoustic music with Damon Foreman, 6-9 PM.
-        url: https://eatatbarrington.com/events/
-      - title: "Live music: Brett Taylor"
-        kind: event
-        when: "2026-12-09T18:00:00"
-        details: Live acoustic music with Brett Taylor, 6-9 PM.
-        url: https://eatatbarrington.com/events/
-      - title: "Live music: Simon Walker"
-        kind: event
-        when: "2026-12-10T18:00:00"
-        details: Live acoustic music with Simon Walker, 6-9 PM.
-        url: https://eatatbarrington.com/events/
-      - title: "Live music: Luke Hale"
-        kind: event
-        when: "2026-12-16T18:00:00"
-        details: Live acoustic music with Luke Hale, 6-9 PM.
-        url: https://eatatbarrington.com/events/
-      - title: "Live music: One Step Down"
-        kind: event
-        when: "2026-12-17T18:00:00"
-        details: Live acoustic music with One Step Down, 6-9 PM.
-        url: https://eatatbarrington.com/events/
-      - title: "Live music: Jim Lewis"
-        kind: event
-        when: "2026-12-23T18:00:00"
-        details: Live acoustic music with Jim Lewis, 6-9 PM.
-        url: https://eatatbarrington.com/events/
-      - title: "Live music: Shane Gamble"
-        kind: event
-        when: "2026-12-30T18:00:00"
-        details: Live acoustic music with Shane Gamble, 6-9 PM.
-        url: https://eatatbarrington.com/events/
-
+    # Their live music schedule and specials are posted as pictures, so the
+    # checker reads the pictures' text (read_images). New monthly flyers are picked up on their own.
+    read_images: true
+    skip:
+      - fundraiser
+    urls:
+      - https://eatatbarrington.com/events/
 
   - name: City of Westminster events
     address: 56 W Main Street, Westminster, MD 21157

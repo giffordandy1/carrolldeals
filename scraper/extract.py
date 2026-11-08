@@ -1110,4 +1110,32 @@ async def fetch_source(source: dict):
                 items += extract(r.text, str(r.url), source)
             except Exception as e:  # a broken page shouldn't stop the run
                 errors.append(f"{url}: could not read page ({e})")
+            if source.get("read_images") and "html" in r.headers.get("content-type", "html"):
+                items += await _items_from_images(client, r.text, str(r.url), source, errors)
     return items, errors
+
+
+async def _items_from_images(client, page_html, page_url, source, errors):
+    """Read flyers and specials boards on the page with OCR (sources.yml: read_images)."""
+    from . import ocr
+    if not ocr.available():
+        errors.append("read_images is on, but the OCR program (tesseract) isn't installed")
+        return []
+    pattern = source["read_images"] if isinstance(source["read_images"], str) else None
+    out = []
+    for img_url in ocr.page_images(BeautifulSoup(page_html, "lxml"), page_url, pattern):
+        if not await _robots_allows(client, img_url):
+            continue
+        await asyncio.sleep(1)
+        try:
+            r = await client.get(img_url, headers={"Accept": "image/*"})
+            r.raise_for_status()
+            if not r.headers.get("content-type", "").startswith("image/"):
+                continue
+            lines = await asyncio.to_thread(ocr.image_lines, r.content)
+            found = ocr.items_from_lines(lines, page_url, img_url, source.get("name", ""))
+            print(f"    picture {img_url.rsplit('/', 1)[-1]}: {len(found)} items")
+            out += found
+        except Exception as e:  # one unreadable picture shouldn't stop the rest
+            print(f"    picture {img_url}: skipped ({type(e).__name__})")
+    return out

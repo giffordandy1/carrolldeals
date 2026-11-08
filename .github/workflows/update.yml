@@ -27,6 +27,9 @@ jobs:
           python-version: "3.12"
           cache: pip
 
+      - name: Install OCR (reads specials posted as pictures)
+        run: sudo apt-get install -y -qq tesseract-ocr > /dev/null
+
       - run: pip install -r requirements.txt
 
       - name: Check every site
