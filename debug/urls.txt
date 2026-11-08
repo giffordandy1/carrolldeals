@@ -1,0 +1,4 @@
+home https://eatatbarrington.com/
+events https://eatatbarrington.com/events/
+ical https://eatatbarrington.com/events/?ical=1
+menus https://eatatbarrington.com/menus/
