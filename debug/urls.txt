@@ -1,0 +1,8 @@
+texasroadhouse https://www.texasroadhouse.com/locations/57-westminstermd
+ledo-eldersburg https://ledopizza.com/store/md-eldersburg
+ledo-westminster https://ledopizza.com/store/md-westminster
+ledo-hampstead https://ledopizza.com/store/md-hampstead
+ledo-specials https://ledopizza.com/specials/
+bww-promos https://www.buffalowildwings.com/promotions/
+bww-deals https://www.buffalowildwings.com/deals/
+applebees-deals https://www.applebees.com/en/deals
