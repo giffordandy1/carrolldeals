@@ -30,13 +30,18 @@ class Geocoder:
         "Liberty Road, Sykesville, MD 21784", then "Sykesville, MD 21784".
         """
         q = (query or "").strip()
+        # Suite / unit numbers confuse the map lookup: "8411 Broadband Drive, Suite K, Frederick".
+        q = re.sub(r",?\s*(?:suite|ste\.?|unit|#|apt\.?)\s*[\w-]+\b", "", q, flags=re.I).strip(" ,")
         tries = [q]
         no_number = re.sub(r"^\s*\d+[A-Za-z]?\s+", "", q)
         if no_number != q:
             tries.append(no_number)
-        parts = [x.strip() for x in q.split(",")]
+        parts = [x.strip() for x in q.split(",") if x.strip()]
         if len(parts) >= 3:
             tries.append(", ".join(parts[1:]))
+        if len(parts) >= 2:
+            tries.append(", ".join(parts[-2:]))  # last resort: just the town
+        tries = list(dict.fromkeys(tries))
         for t in tries:
             hit = await self._lookup_one(t)
             if hit:

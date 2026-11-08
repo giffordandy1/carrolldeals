@@ -257,6 +257,8 @@ sites:
 
   - name: Sandbox Brewhouse
     address: 800 N East Street, Suite 201, Frederick, MD 21701
+    skip:
+      - closed for
     urls:
       - https://www.sandboxbrewhouse.com/
 
@@ -301,13 +303,13 @@ sites:
       - gift card
     urls:
       - https://www.manorhilltavern.com/events/
-      - https://www.manorhilltavern.com/specials/
 
   - name: Victoria Gastro Pub
     address: 8201 Snowden River Parkway, Columbia, MD 21045
     skip:
       - gift card
       - special menu saturday
+      - ^wednesday: burger night$
     urls:
       - https://www.victoriagastropub.com/events/
       - https://www.victoriagastropub.com/specials/
