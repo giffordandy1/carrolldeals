@@ -1,0 +1,10 @@
+start
+texasroadhouse 200 text/html; charset=utf-8 https://www.texasroadhouse.com/locations/57-westminstermd
+ledo-eldersburg 200 text/html; charset=UTF-8 https://ledopizza.com/store/md-eldersburg
+ledo-westminster 200 text/html; charset=UTF-8 https://ledopizza.com/store/md-westminster
+ledo-hampstead 200 text/html; charset=UTF-8 https://ledopizza.com/store/md-hampstead
+ledo-specials 404 text/html; charset=UTF-8 https://ledopizza.com/specials/
+bww-promos 200 text/html; charset=utf-8 https://www.buffalowildwings.com/promotions/
+bww-deals 404 text/html; charset=utf-8 https://www.buffalowildwings.com/deals/
+applebees-deals 403 text/html; charset=UTF-8 https://www.applebees.com/en/deals
+done
