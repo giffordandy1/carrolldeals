@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T14:02:21+00:00",
+ "updated": "2026-11-08T14:09:22+00:00",
  "items": [
   {
    "kind": "special",
@@ -2295,6 +2295,23 @@
    "lng": -76.998688,
    "source": "Carroll County Arts Council events",
    "id": "fcaec5c983d4"
+  },
+  {
+   "kind": "special",
+   "title": "HOME OF THE $7 GYRO WEDNESDAYS",
+   "description": "Every Wednesday we offer our famous Gyros for only $7!",
+   "start": null,
+   "end": null,
+   "recurring": "Wednesdays",
+   "url": "https://biggreekcafe.com/menu/",
+   "image": null,
+   "price": null,
+   "venue": "Big Greek Cafe (Eldersburg)",
+   "address": "6400 Ridge Road, Sykesville, MD 21784",
+   "lat": 39.3966699,
+   "lng": -76.9333601,
+   "source": "Big Greek Cafe (Eldersburg)",
+   "id": "d15ad4e5f0f3"
   }
  ]
 }

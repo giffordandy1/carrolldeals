@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T14:02:21+00:00",
+ "updated": "2026-11-08T14:09:22+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -103,6 +103,13 @@
    "site": "Carroll County Arts Council events",
    "status": "ok",
    "found": 24,
+   "errors": [],
+   "mapped": true
+  },
+  {
+   "site": "Big Greek Cafe (Eldersburg)",
+   "status": "ok",
+   "found": 1,
    "errors": [],
    "mapped": true
   }
