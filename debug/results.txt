@@ -1,0 +1,18 @@
+start
+springfield-cal 200 text/html; charset=utf-8 https://www.springfieldmanor.com/event-calendar.html
+attaboy-trucks 200 text/html; charset=UTF-8 https://www.attaboybeer.com/food-trucks
+smoketown-upstairs 200 text/html; charset=UTF-8 https://www.smoketownbrewing.com/upstairsevents
+smoketown-ical 200 text/html; charset=UTF-8 https://www.smoketownbrewing.com/events/?ical=1
+steinhardt-music 200 text/html;charset=utf-8 https://www.steinhardtbrewing.com/live-music-events
+victoria-specials 200 text/html; charset=UTF-8 https://www.victoriagastropub.com/specials/
+rak-cal 200 text/html; charset=UTF-8 https://www.rakbrewing.com/calendar/event-calendar/
+rak-ical 200 text/html; charset=UTF-8 https://www.rakbrewing.com/events/?ical=1
+flyingdog-ical 200 text/html; charset=UTF-8 https://www.flyingdog.com/events/?ical=1
+hysteria-ical 200 text/html; charset=utf-8 https://www.hysteriabrewing.com/events?format=ical
+milkhouse-ical 200 text/html; charset=UTF-8 https://www.milkhousebrewery.com/events/?ical=1
+redshedman-ical 200 text/html; charset=UTF-8 https://redshedman.com/events/?ical=1
+monocacy-ical 200 text/calendar; charset=UTF-8 https://www.monocacybrewing.com/events/?ical=1
+manorhill-ical 200 text/calendar; charset=UTF-8 https://www.manorhillbrewing.com/events/?ical=1
+sandbox-ical 200 text/html;charset=utf-8 https://www.sandboxbrewhouse.com/calendar?format=ical
+oldemother-taplist 200 text/html; charset=UTF-8 https://www.oldemother.com/taplist
+done
