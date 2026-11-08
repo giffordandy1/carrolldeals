@@ -1,0 +1,4 @@
+start
+home 403 text/html; charset=UTF-8 https://thefiamata.com/
+www 403 text/html; charset=UTF-8 https://www.thefiamata.com/
+done
