@@ -198,3 +198,9 @@ sites:
       - registration
     urls:
       - https://www.carrollcountyartscouncil.org/events/list/?ical=1
+
+  - name: Big Greek Cafe (Eldersburg)
+    address: 6400 Ridge Road, Sykesville, MD 21784
+    # Chain-wide menu page; its day specials apply to every location.
+    urls:
+      - https://biggreekcafe.com/menu/
