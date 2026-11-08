@@ -31,7 +31,7 @@ class Geocoder:
         """
         q = (query or "").strip()
         # Suite / unit numbers confuse the map lookup: "8411 Broadband Drive, Suite K, Frederick".
-        q = re.sub(r",?\s*(?:suite|ste\.?|unit|#|apt\.?)\s*[\w-]+\b", "", q, flags=re.I).strip(" ,")
+        q = re.sub(r",?\s*\b(?:suite|ste\.?|unit|apt\.?)\s+[\w-]+\b|,?\s*#\s*[\w-]+", "", q, flags=re.I).strip(" ,")
         tries = [q]
         no_number = re.sub(r"^\s*\d+[A-Za-z]?\s+", "", q)
         if no_number != q:
