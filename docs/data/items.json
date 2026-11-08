@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T19:02:53+00:00",
+ "updated": "2026-11-08T19:39:51+00:00",
  "items": [
   {
    "kind": "special",
@@ -4556,6 +4556,23 @@
    "recurring": "Tuesdays 4pm-close",
    "source": "Barrington Tap & Table",
    "id": "7a22de308671"
+  },
+  {
+   "kind": "special",
+   "title": "Happy hour: $12 app duos and panino + fries",
+   "description": "App duos, $12 each: Awww Shucks (oysters Rockefeller + clams casino), What Nonna Made (meatballs + arancini, marinara), Fry Me a River (fried calamari + Enzo's wings), Girls' Night (truffle fries + bruschetta Roma), Under the Sea (jumbo Gulf shrimp + mussels, sun-dried tomato scampi, crostini). Panino + fries, $12 each: Meat Me Halfway (trinity meatballs, pomodoro, mozzarella + provolone), Chick Magnet (breaded chicken cutlet, arugula, cherry tomato, shaved parmesan, lemon vinaigrette), Basil…",
+   "start": null,
+   "end": null,
+   "recurring": "Monday-Thursday 3pm-6pm",
+   "url": "https://www.thefiamata.com/files/fiamata-happyhour-pdf.pdf",
+   "image": null,
+   "price": "$12",
+   "venue": "Fiamata",
+   "address": "2900 Baltimore Blvd, Finksburg, MD 21048",
+   "lat": 39.497534,
+   "lng": -76.893138,
+   "source": "Fiamata",
+   "id": "bfb3be84a670"
   },
   {
    "kind": "event",
