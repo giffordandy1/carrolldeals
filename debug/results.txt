@@ -1,5 +1,0 @@
-start
-nov.jpg 200 image/jpeg https://eatatbarrington.com/wp-content/uploads/2026/10/Live-Music-November-2026.jpg
-dec.jpg 200 image/jpeg https://eatatbarrington.com/wp-content/uploads/2026/10/Live-Music-December-2026.jpg
-info.jpg 200 image/jpeg https://eatatbarrington.com/wp-content/uploads/2026/05/Info-Menu-5.8.26-1-pdf.jpg
-done
