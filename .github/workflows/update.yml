@@ -46,6 +46,10 @@ jobs:
             echo "No changes."
           else
             git commit -m "Update events and specials"
-            git pull --rebase
-            git push
+            # If another check saved results meanwhile, these newer results win.
+            for i in 1 2 3; do
+              git pull --rebase -X theirs && git push && exit 0
+              git rebase --abort 2>/dev/null; sleep 5
+            done
+            exit 1
           fi
