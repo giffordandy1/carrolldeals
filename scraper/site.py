@@ -70,18 +70,21 @@ def _time_text(d):
     return d.strftime("%I:%M %p").lstrip("0").replace(":00 ", " ")
 
 
+def _local_today():
+    try:
+        from zoneinfo import ZoneInfo
+        return datetime.now(ZoneInfo("America/New_York")).date()
+    except Exception:
+        return datetime.now().date()
+
+
 def when_text(it):
     """Readable date or schedule: "Sat, Nov 14, 8 PM", "Nov 14 to Nov 20", "Thursdays 7pm"."""
     start = it.get("start") or ""
     d = _dt(start)
     if d is not None:
         end = _dt(it.get("end") or "")
-        try:
-            from zoneinfo import ZoneInfo
-            today = datetime.now(ZoneInfo("America/New_York")).date()
-        except Exception:
-            today = datetime.now().date()
-        if end is not None and d.date() < today <= end.date():
+        if end is not None and d.date() < _local_today() <= end.date():
             return "Now through " + end.strftime("%a, %b ") + str(end.day)
         txt = d.strftime("%a, %b ") + str(d.day)
         if len(start) > 10:
@@ -108,6 +111,11 @@ def _upcoming(items, today, days):
 
 def _stub(it):
     d = _dt(it.get("start") or "")
+    end = _dt(it.get("end") or "")
+    if d is not None and end is not None and d.date() < _local_today() <= end.date():
+        # A multi-day event already under way: show when it ends, not its past first day.
+        return (f'<span class="small">Now thru</span><span class="big">{end.day}</span>'
+                f'<span class="small">{end.strftime("%b")}</span>')
     if d is not None:
         tm = f"<br>{esc(_time_text(d))}" if len(it["start"]) > 10 else ""
         return (f'<span class="small">{d.strftime("%a")}</span><span class="big">{d.day}</span>'
