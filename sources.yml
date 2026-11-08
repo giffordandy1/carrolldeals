@@ -346,6 +346,17 @@ sites:
     urls:
       - https://eatatbarrington.com/events/
 
+  - name: Fiamata
+    address: 2900 Baltimore Blvd, Finksburg, MD 21048
+    # Their website blocks automated checks, so this is typed in from their happy hour PDF.
+    manual:
+      - title: "Happy hour: $12 app duos and panino + fries"
+        kind: special
+        when: Monday-Thursday 3pm-6pm
+        price: $12
+        details: "App duos, $12 each: Awww Shucks (oysters Rockefeller + clams casino), What Nonna Made (meatballs + arancini, marinara), Fry Me a River (fried calamari + Enzo's wings), Girls' Night (truffle fries + bruschetta Roma), Under the Sea (jumbo Gulf shrimp + mussels, sun-dried tomato scampi, crostini). Panino + fries, $12 each: Meat Me Halfway (trinity meatballs, pomodoro, mozzarella + provolone), Chick Magnet (breaded chicken cutlet, arugula, cherry tomato, shaved parmesan, lemon vinaigrette), Basil Instinct (fresh mozzarella, Roma tomato, artichoke, arugula, pesto balsamic), The Big Tipper (seared tenderloin, chopped bacon, lettuce, tomato, sun-dried aioli)."
+        url: https://www.thefiamata.com/files/fiamata-happyhour-pdf.pdf
+
   - name: City of Westminster events
     address: 56 W Main Street, Westminster, MD 21157
     # City calendar feeds: downtown events, Recreation & Parks, and city-sponsored events.
