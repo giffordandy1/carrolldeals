@@ -57,6 +57,15 @@ The Carroll Deals logo is a price tag with a map pin punched into it: deals, nea
 `carroll-deals-logo.png` (logo with name, transparent background), `carroll-deals-mark.svg` (symbol only, any size)
 and `carroll-deals-app-icon.svg` (symbol on a dark square). Colors: navy `#1E2A3A`, yellow `#F2B705`.
 
+## Search engines
+
+Each update also builds:
+- `docs/places/<place>/`: a page per place listing its specials and events, with Google's event format (schema.org) so events can show up in Google search.
+- The homepage's listings as plain text (the coming week), links to every place page, and the page's canonical address.
+- `docs/sitemap.xml` and `docs/robots.txt`.
+
+The site address comes from `site_url` at the top of `sources.yml`. To connect Google Search Console, choose the "HTML tag" verification method, paste its code into `google_site_verification` in `sources.yml`, commit, wait for the update to finish, then click Verify and submit `sitemap.xml`.
+
 ## Good to know
 
 - It costs nothing as long as the repo is **public**. That also means the repo, including your site list, is visible to anyone.

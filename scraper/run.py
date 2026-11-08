@@ -14,6 +14,7 @@ import yaml
 
 from .extract import TIMES_RE, _clean, _monthly, _next_monthly, _with_time, fetch_source
 from .geo import Geocoder
+from . import site
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SOURCES = os.path.join(ROOT, "sources.yml")
@@ -21,6 +22,13 @@ OUT_DIR = os.path.join(ROOT, "docs", "data")
 ITEMS = os.path.join(OUT_DIR, "items.json")
 STATUS = os.path.join(OUT_DIR, "status.json")
 GEOCACHE = os.path.join(ROOT, "scraper", "geocache.json")
+
+
+def load_config():
+    """Site settings at the top of sources.yml (site_url, google_site_verification)."""
+    with open(SOURCES) as f:
+        data = yaml.safe_load(f) or {}
+    return {k: v for k, v in data.items() if k != "sites"}
 
 
 def load_sources():
@@ -228,6 +236,10 @@ async def main():
     with open(STATUS, "w") as f:
         json.dump({"updated": stamp, "sites": report}, f, indent=1, ensure_ascii=False)
     print(f"\nSaved {len(all_items)} items from {len(sources)} sites.")
+    try:
+        site.build(all_items, sources, load_config(), stamp)
+    except Exception as e:  # the listings still save even if page-building has a problem
+        print(f"Could not build place pages: {e}")
 
 
 if __name__ == "__main__":

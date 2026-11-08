@@ -28,6 +28,15 @@
 #     date:  selector for the date inside that block, e.g. "time"
 #
 # Tip: point at a business's Events or Specials page, not its homepage.
+
+# The site's public address, used for search engines, link previews and the sitemap.
+# Change it if you move to your own domain (keep the / at the end).
+site_url: https://giffordandy1.github.io/carrolldeals/
+
+# Paste the code from Google Search Console's "HTML tag" option here (just the
+# content="..." part), then commit. Leave empty until you have one.
+google_site_verification: ""
+
 # Lines starting with # are notes and are ignored.
 
 sites:

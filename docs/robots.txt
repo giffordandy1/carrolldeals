@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://giffordandy1.github.io/carrolldeals/sitemap.xml
