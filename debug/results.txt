@@ -1,0 +1,6 @@
+start
+home 200 text/html; charset=UTF-8 https://bastaeldersburg.com/
+specials 404 text/html; charset=UTF-8 https://bastaeldersburg.com/specials/
+events 404 text/html; charset=UTF-8 https://bastaeldersburg.com/events/
+happyhour 404 text/html; charset=UTF-8 https://bastaeldersburg.com/happy-hour/
+done
