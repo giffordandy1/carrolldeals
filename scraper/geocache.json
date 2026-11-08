@@ -1,4 +1,8 @@
 {
+ "- westminster md 21157": {
+  "lat": 39.5751717,
+  "lng": -76.9959168
+ },
  "124 n market street, frederick, md 21701": {
   "lat": 39.4160562,
   "lng": -77.4104247
@@ -123,6 +127,10 @@
   "lat": 39.4207185,
   "lng": -77.4100111
  },
+ "56 w main street, westminster, md 21157": {
+  "lat": 39.5767578,
+  "lng": -76.9969999
+ },
  "5975 exchange drive, eldersburg, md 21784": {
   "lat": 39.4163621,
   "lng": -76.977291
@@ -213,6 +221,7 @@
   "lat": 39.5703792,
   "lng": -76.989148
  },
+ "conaway parking lot - across from 27 railroad avenue westminster md 21157": null,
  "dollyhyde road, mount airy, md 21771": null,
  "e patrick street, suite 102, frederick, md 21701": {
   "lat": 39.4010802,
@@ -235,6 +244,7 @@
  "historic downtown westminster, 15 east main st, westminster, md, 21157": null,
  "historical society of carroll county, 210 east main street, westminster, md, 21157": null,
  "john street quarters, 28 john street, westminster, md, 21157": null,
+ "locust lane - 43 e. main st. across from the ccpl westminster westminster md 21157": null,
  "main street, mount airy, 110 s main street, mount airy, 21771": null,
  "manor hill farm, 4411 manor lane, ellicott city, md, 21042": {
   "lat": 39.2503392,
