@@ -324,3 +324,16 @@ sites:
     urls:
       - https://www.walkerstapandtable.com/
 
+
+  - name: City of Westminster events
+    address: 56 W Main Street, Westminster, MD 21157
+    # City calendar feeds: downtown events, Recreation & Parks, and city-sponsored events.
+    # (Council meetings, trash schedules and holiday closures are left out.)
+    skip:
+      - meeting
+      - closed
+      - trash
+    urls:
+      - https://westminstermd.gov/common/modules/iCalendar/iCalendar.aspx?catID=24&feed=calendar
+      - https://westminstermd.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar
+      - https://westminstermd.gov/common/modules/iCalendar/iCalendar.aspx?catID=29&feed=calendar
