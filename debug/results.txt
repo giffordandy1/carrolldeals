@@ -1,0 +1,6 @@
+start
+home 200 text/html; charset=UTF-8 https://eatatbarrington.com/
+events 200 text/html; charset=UTF-8 https://eatatbarrington.com/events/
+ical 200 text/html; charset=UTF-8 https://eatatbarrington.com/events/?ical=1
+menus 200 text/html; charset=UTF-8 https://eatatbarrington.com/menus/
+done
