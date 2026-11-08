@@ -24,7 +24,26 @@ jobs:
             sleep 1
           done < debug/urls.txt
           echo "done" >> debug/results.txt
-          find debug/pages -size +3M -delete
+          pip install -q beautifulsoup4 lxml
+          python3 - <<'PY'
+          import glob, re
+          from bs4 import BeautifulSoup
+          KEEP = {"href","src","data-src","class","alt","datetime","id","itemprop","itemtype","type","title","content","property","name"}
+          for f in glob.glob("debug/pages/*.html"):
+              raw = open(f, errors="ignore").read()
+              if raw.lstrip().startswith("BEGIN:VCALENDAR"):
+                  continue
+              s = BeautifulSoup(raw, "lxml")
+              for t in s.find_all(["script","style","noscript","iframe","svg","link"]):
+                  if t.name == "script" and "ld+json" in (t.get("type") or ""):
+                      continue
+                  t.decompose()
+              for t in s.find_all(True):
+                  t.attrs = {k: v for k, v in t.attrs.items() if k in KEEP}
+              out = str(s)
+              out = re.sub(r"AIza[0-9A-Za-z_\-]{20,}|sk_live_[0-9A-Za-z]+|pk_live_[0-9A-Za-z]+|ghp_[0-9A-Za-z]+|xox[bap]-[0-9A-Za-z-]+|[?&](key|token|api_key|apikey)=[^\s\"'&]+", "REDACTED", out)
+              open(f, "w").write(out[:2_000_000])
+          PY
       - name: Save
         if: always()
         shell: bash {0}
@@ -33,4 +52,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A debug
           git commit -m "Temporary page download"
-          for i in 1 2 3; do git pull --rebase -X theirs && git push && break; sleep 5; done
+          for i in 1 2 3; do git pull --rebase -X theirs && git push && exit 0; sleep 5; done
+          exit 1
