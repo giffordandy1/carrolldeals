@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T18:53:17+00:00",
+ "updated": "2026-11-08T19:00:25+00:00",
  "items": [
   {
    "kind": "special",
@@ -1381,7 +1381,7 @@
   {
    "kind": "event",
    "title": "Live Piano Music",
-   "description": "Repeats: 52 upcoming dates listed on their site. We have live piano music by a local musician every Friday and Saturday from 6:45-10:00 pm in the restaurant.",
+   "description": "Repeats: 51 upcoming dates listed on their site. We have live piano music by a local musician every Friday and Saturday from 6:45-10:00 pm in the restaurant.",
    "start": "2026-11-14T18:45",
    "end": null,
    "recurring": null,
@@ -2703,23 +2703,6 @@
    "lng": -77.4031743,
    "source": "RAK Brewing Co",
    "id": "1f7b74b1729e"
-  },
-  {
-   "kind": "event",
-   "title": "THE 19TH STREET BAND 8PM",
-   "description": "11/7 - THE 19TH STREET BAND 8PM",
-   "start": "2026-11-07T20:00",
-   "end": null,
-   "recurring": null,
-   "url": "https://www.rockwellbrewery.com/",
-   "image": null,
-   "price": null,
-   "venue": "Rockwell Brewery",
-   "address": "8411 Broadband Drive, Suite K, Frederick, MD 21701",
-   "lat": 39.4403691,
-   "lng": -77.3807201,
-   "source": "Rockwell Brewery",
-   "id": "3c3813884003"
   },
   {
    "kind": "event",

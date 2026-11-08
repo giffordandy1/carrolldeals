@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T18:53:17+00:00",
+ "updated": "2026-11-08T19:00:25+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -83,9 +83,12 @@
   },
   {
    "site": "Maggie's Restaurant",
-   "status": "ok",
+   "status": "error (showing last results)",
    "found": 8,
-   "errors": [],
+   "errors": [
+    "https://maggiesrestaurant.com/specials/: ConnectTimeout",
+    "https://maggiesrestaurant.com/live-music/: ConnectTimeout"
+   ],
    "empty_runs": 0,
    "mapped": true
   },
@@ -172,7 +175,7 @@
   {
    "site": "Rockwell Brewery",
    "status": "ok",
-   "found": 15,
+   "found": 14,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -275,13 +278,9 @@
   },
   {
    "site": "City of Westminster events",
-   "status": "error (showing last results)",
+   "status": "ok",
    "found": 5,
-   "errors": [
-    "https://westminstermd.gov/common/modules/iCalendar/iCalendar.aspx?catID=24&feed=calendar: ConnectTimeout",
-    "https://westminstermd.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar: ConnectTimeout",
-    "https://westminstermd.gov/common/modules/iCalendar/iCalendar.aspx?catID=29&feed=calendar: ConnectTimeout"
-   ],
+   "errors": [],
    "empty_runs": 0,
    "mapped": true
   }
