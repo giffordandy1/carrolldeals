@@ -83,7 +83,11 @@ async def main():
     previous = load_previous()
     prev_status = load_previous_status()
     geo = Geocoder(GEOCACHE)
-    today = (datetime.now(timezone.utc) - timedelta(days=1)).date().isoformat()
+    try:  # "today" where the places are, so yesterday's events drop off overnight
+        from zoneinfo import ZoneInfo
+        today = datetime.now(ZoneInfo(os.environ.get("TIMEZONE", "America/New_York"))).date().isoformat()
+    except Exception:
+        today = (datetime.now(timezone.utc) - timedelta(hours=5)).date().isoformat()
     all_items, report = [], []
 
     for src in sources:

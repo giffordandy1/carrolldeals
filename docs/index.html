@@ -214,6 +214,14 @@ const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&l
 const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : null;
 
 function stub(it){
+  // A multi-day event that started before today: show when it ends, not its (past) first day.
+  const s0 = (it.start || "").slice(0, 10), e0 = (it.end || "").slice(0, 10);
+  if (s0 && e0 && s0 < isoDay(new Date()) && e0 >= isoDay(new Date())){
+    const e = new Date(e0 + "T12:00:00");
+    if (!isNaN(e)) return `<span class="small">Now thru</span>
+              <span class="big">${e.getDate()}</span>
+              <span class="small">${e.toLocaleDateString(undefined,{month:"short"})}</span>`;
+  }
   if (it.start){
     const d = new Date(it.start.length <= 10 ? it.start + "T12:00:00" : it.start);
     if (!isNaN(d)){

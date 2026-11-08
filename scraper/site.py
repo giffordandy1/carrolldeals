@@ -75,6 +75,14 @@ def when_text(it):
     start = it.get("start") or ""
     d = _dt(start)
     if d is not None:
+        end = _dt(it.get("end") or "")
+        try:
+            from zoneinfo import ZoneInfo
+            today = datetime.now(ZoneInfo("America/New_York")).date()
+        except Exception:
+            today = datetime.now().date()
+        if end is not None and d.date() < today <= end.date():
+            return "Now through " + end.strftime("%a, %b ") + str(end.day)
         txt = d.strftime("%a, %b ") + str(d.day)
         if len(start) > 10:
             txt += ", " + _time_text(d)
