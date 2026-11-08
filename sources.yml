@@ -14,7 +14,7 @@
 #   only: Eldersburg   for a page that lists several locations' specials
 #                      ("Eldersburg: Monday", "Westminster: Tuesday"), keep just this
 #                      location's items plus "Both Locations" ones
-#   skip:           words that mark items to leave out, e.g. "meeting"
+#   skip:           words that mark items to leave out, e.g. "meeting"; "^brunch$" matches a title exactly
 #   manual:         items you type in yourself, for sites that block the checker
 #                   or only post on Facebook. Each one has:
 #     - title: Thirsty Thursdays
@@ -157,3 +157,44 @@ sites:
     urls:
       - https://www.downtownsykesville.com/calendar/
       - https://www.downtownsykesville.com/merchant-events/
+
+  - name: Maggie's Restaurant
+    address: 310 E Green Street, Westminster, MD 21157
+    skip:
+      - contact us
+      - logo
+      - ^brunch$
+      - 3:00 pm - 6:00 pm
+      - burgers square
+      - trivia thursdays pm
+      - fish fry friday at maggies
+    urls:
+      - https://maggiesrestaurant.com/specials/
+      - https://maggiesrestaurant.com/live-music/
+
+  - name: Johansson's Dining House
+    address: 4 W Main Street, Westminster, MD 21157
+    urls:
+      - https://www.johanssonsdininghouse.com/
+
+  - name: Antrim 1844
+    address: 30 Trevanion Road, Taneytown, MD 21787
+    urls:
+      - https://www.antrim1844.com/taneytown-events-calendar
+
+  # County-wide calendars. Each event is placed at its own address on the map.
+  - name: Carroll County Tourism events
+    address: Westminster, MD 21157
+    urls:
+      - https://carrollcountytourism.org/events/list/?ical=1
+      - https://carrollcountytourism.org/events/list/page/2/?ical=1
+
+  - name: Carroll County Arts Council events
+    address: 91 W Main Street, Westminster, MD 21157
+    skip:
+      - call for
+      - application
+      - calling all creatives
+      - registration
+    urls:
+      - https://www.carrollcountyartscouncil.org/events/list/?ical=1

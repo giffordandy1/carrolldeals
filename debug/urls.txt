@@ -1,9 +1,0 @@
-maggies-hh https://maggiesrestaurant.com/menu/happy-hour/
-maggies-specials https://maggiesrestaurant.com/specials/
-maggies-music https://maggiesrestaurant.com/live-music/
-johanssons-bar https://www.johanssonsdininghouse.com/bar
-serpentridge-events https://serpentridge.com/events/
-antrim-cal https://www.antrim1844.com/taneytown-events-calendar
-arts-ical https://www.carrollcountyartscouncil.org/events/list/?ical=1
-tourism-ical2 https://carrollcountytourism.org/events/list/page/2/?ical=1
-glorydays-promos https://www.glorydaysgrill.com/promotions/

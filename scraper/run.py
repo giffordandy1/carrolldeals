@@ -120,7 +120,9 @@ async def main():
                     it[k] = _clean(it[k], limit) or None
             if not it.get("title"):
                 continue
-            if any(w in it["title"].lower() for w in src["skip"]):
+            tl = it["title"].lower()
+            # Skip words: plain words match anywhere in the title; "^brunch$" style matches exactly.
+            if any((re.search(w, tl) if re.search(r"[\^$]", w) else w in tl) for w in src["skip"]):
                 continue  # words listed under "skip:" for this site
             # One page shared by several locations ("Eldersburg: Monday", "Westminster: Tuesday"):
             # keep this location's items and the ones for all locations, and drop the label.
@@ -145,6 +147,23 @@ async def main():
             seen.add(key)
             it["id"] = key
             kept.append(it)
+        # A listing repeated on many dates (weekly piano night) shows its next date only.
+        counts = {}
+        for it in kept:
+            if it.get("start"):
+                counts[it["title"].lower()] = counts.get(it["title"].lower(), 0) + 1
+        shown, slim = set(), []
+        for it in sorted(kept, key=lambda x: x.get("start") or "9999"):
+            k = it["title"].lower()
+            if counts.get(k, 0) >= 3:
+                if k in shown:
+                    continue
+                shown.add(k)
+                desc = re.sub(r"^Repeats: \d+ upcoming dates listed on their site\. ", "", it.get("description") or "")
+                it["description"] = _clean(f"Repeats: {counts[k]} upcoming dates listed on their site. " + desc, 500)
+            slim.append(it)
+        kept = slim
+
         all_items += kept
 
         report.append({"site": src["name"], "status": status, "found": len(kept), "errors": errors,
@@ -153,6 +172,16 @@ async def main():
         print(f"{src['name']}: {len(kept)} items, {status}{flag}")
         for e in errors:
             print(f"   - {e}")
+
+    # The same event listed by two sources (a venue and the county calendar): show it once.
+    once, seen_any = [], set()
+    for it in all_items:
+        k = (re.sub(r"[^a-z0-9]+", " ", it["title"].lower()).strip(), (it.get("start") or "")[:10])
+        if it.get("start") and k in seen_any:
+            continue
+        seen_any.add(k)
+        once.append(it)
+    all_items = once
 
     geo.save()
     os.makedirs(OUT_DIR, exist_ok=True)

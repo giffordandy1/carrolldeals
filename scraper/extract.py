@@ -137,10 +137,22 @@ def _with_time(day, time_text):
     """"2026-11-24" + "6:30 PM" -> "2026-11-24T18:30" (start time of a range)."""
     if not (day and time_text):
         return day
-    m = re.search(r"(\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.m\.|p\.m\.)", time_text, re.I)
-    if not m:
-        return day
-    h, mnt, ap = int(m.group(1)), int(m.group(2) or 0), m.group(3).lower()[0]
+    # A range that names am/pm once, "6:45-10:00 pm": the start shares the end's
+    # am/pm unless that would put it after the end ("11-2pm" starts at 11am).
+    rng = re.search(r"(\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.m\.|p\.m\.)?\s*(?:-|–|—|to|until|til)\s*"
+                    r"(\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.m\.|p\.m\.)", time_text, re.I)
+    if rng:
+        h, mnt = int(rng.group(1)), int(rng.group(2) or 0)
+        if rng.group(3):
+            ap = rng.group(3).lower()[0]
+        else:
+            end_ap, end_h = rng.group(6).lower()[0], int(rng.group(4))
+            ap = end_ap if (h % 12) <= (end_h % 12) else ("a" if end_ap == "p" else "p")
+    else:
+        m = re.search(r"(\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.m\.|p\.m\.)", time_text, re.I)
+        if not m:
+            return day
+        h, mnt, ap = int(m.group(1)), int(m.group(2) or 0), m.group(3).lower()[0]
     if h > 12 or mnt > 59:
         return day
     h = h % 12 + (12 if ap == "p" else 0)
@@ -430,6 +442,13 @@ def heuristics(soup, base_url):
     def add(title, body, anchor, weekly=False):
         title = _tidy_title(title)
         full = f"{title} {body}"
+        bare = _clean(TIMES_RE.sub(" ", DAYS_RE.sub(" ", re.sub(r"\b(?:every|each|on|at|from)\b", " ", title, flags=re.I))))
+        if len(bare.split()) == 0:
+            # Title is only a schedule ("Every Friday"): name it by what happens.
+            m = re.search(r"live music|live band|music bingo|trivia|karaoke|bingo|open mic|comedy|happy\s*hour|brunch|wine tasting|dj\b", body, re.I)
+            if m:
+                t = m.group(0).lower()
+                title = t[0].upper() + t[1:]
         if PRIVATE_RE.search(full):
             return
         if re.search(r"facebook|instagram|follow us|newsletter|subscribe", title, re.I):
@@ -594,6 +613,7 @@ def heuristics(soup, base_url):
                 else:
                     break
             if extra:
+                used.add(id(h))
                 if day_only:
                     title, body = f"{title.rstrip(':!').strip()}: {extra[0]}", extra[0]
                 elif of_week:
@@ -668,6 +688,64 @@ def heuristics(soup, base_url):
             for l in lines:
                 seen_text.add(l[:200])
 
+    # Site builders (Wix, Squarespace...) split one notice into short lines:
+    # "TUESDAY NIGHT" / "TRIVIA!" / "Every Tuesday 6:30pm" / "Bar Area".
+    lines = []
+    for el in soup.find_all(["p", "li"] + HEADINGS):
+        if el.find(["p", "li"] + HEADINGS):
+            continue
+        t = _clean(el.get_text(" ")).strip("\u200b ")
+        if t:
+            lines.append((el, t, id(el) in used))  # used = already read by the headings pass
+    bare_day = lambda t: bool(DAYS_RE.fullmatch(t.rstrip(":!").strip()))
+    for blk in soup.find_all(["div", "section"]):
+        ps = [p for p in blk.find_all("p", recursive=False)]
+        if len(ps) < 2:
+            continue
+        ls = [x for x in (_clean(p.get_text(" ")).strip("\u200b ") for p in ps) if x]
+        text = " ".join(ls)
+        if not (2 <= len(ls) <= 8 and 15 <= len(text) <= 400) or any(bare_day(x) for x in ls):
+            continue
+        if not ((EVENT_RE.search(text) or SPECIAL_RE.search(text)) and (DAYS_RE.search(text) or TIMES_RE.search(text))):
+            continue
+        # The title is the lines before the schedule line ("Every Tuesday 6:30pm").
+        k = next((i for i, x in enumerate(ls) if i and (TIMES_RE.search(x) or re.match(r"(?:every|on|from|each)\b|\d", x, re.I))), 0)
+        title = " ".join(ls[:k]) if k else ls[0]
+        if len(title) > 80:
+            continue
+        add(title, text, blk)
+        for x in ls:
+            seen_text.add(x[:200])
+
+    # A day on its own line ("Mondays") with the deal on the next lines.
+    STOP = re.compile(r"^(?:from |read more|by [A-Z]|follow|contact|hours|menu$)", re.I)
+    for i, (el, t, was_used) in enumerate(lines):
+        if not bare_day(t) or was_used:
+            continue
+        body = []
+        for el2, t2, used2 in lines[i + 1:i + 7]:
+            if used2 or bare_day(t2) or len(t2) > 150 or STOP.search(t2):
+                break
+            body.append(t2)
+        joined = " ".join(body)
+        if not body or not re.search(r"\$\s?\d|%|\boff\b|free|half|bogo|special|night|happy", joined, re.I):
+            continue
+        day = t.rstrip(":!").strip()
+        plural = day[0].upper() + day[1:].lower()
+        plural = plural if plural.endswith("s") else plural + "s"
+        clock = next((m.group(0) for m in TIMES_RE.finditer(joined) if re.search(r"\d", m.group(0))), "")
+        title = f"{plural.rstrip('s')}: {re.sub(r'[!.]+$', '', body[0])}"
+        if any(re.sub(r"[^a-z0-9]+", " ", o["title"].lower()).strip() == re.sub(r"[^a-z0-9]+", " ", title.lower()).strip() for o in out):
+            continue
+        out.append({
+            "kind": "event" if EVENT_RE.search(joined) and not SPECIAL_RE.search(joined) else "special",
+            "title": _clean(title, 120), "description": _clean("; ".join(body), 500),
+            "start": None, "end": None, "recurring": _clean(f"{plural} {clock}"), "url": base_url,
+            "image": None, "price": None, "venue": None, "address": None, "lat": None, "lng": None,
+        })
+        for b in body:
+            seen_text.add(b[:200])
+
     # Stand-alone paragraphs / list items that describe a special with a day or time.
     for el in soup.find_all(["p", "li", "dd", "td"]):
         text = _clean(el.get_text(" "))
@@ -696,6 +774,13 @@ def heuristics(soup, base_url):
             add(title, text, el)
         elif EVENT_RE.search(text) and (DATE_RE.search(text) or (DAYS_RE.search(text) and not re.search(r"private|book|rent", text, re.I))):
             title = re.split(r"(?<=[.!:])\s|\s[–—-]\s", text)[0]
+            bare = _clean(TIMES_RE.sub(" ", DAYS_RE.sub(" ", re.sub(r"\b(?:every|each|on|at|from)\b", " ", title, flags=re.I))))
+            if len(bare.split()) <= 1 or len(title) > 80:
+                # Title is only a schedule ("Every Friday"): name it by what happens.
+                m = re.search(r"live music|live band|trivia|karaoke|bingo|open mic|comedy|dj\b|music bingo|wine tasting|tasting", text, re.I)
+                if m:
+                    title = m.group(0).capitalize() if m.group(0).islower() else m.group(0)
+                    title = title[0].upper() + title[1:].lower()
             add(title, text, el)
 
     # Weekly specials posted only as pictures, labelled by their alt text or
@@ -743,9 +828,77 @@ async def _robots_allows(client, url):
     return rp.can_fetch(BOT_NAME, url)
 
 
+# ---------------------------------------------------------------- strategy: calendar feeds (iCal)
+
+def _ical_unfold(text):
+    return re.sub(r"\r?\n[ \t]", "", text)
+
+
+def _ical_text(v):
+    return (v or "").replace("\\n", " ").replace("\\N", " ").replace("\\,", ",").replace("\\;", ";").replace("\\\\", "\\")
+
+
+def from_ical(text, base_url):
+    """Events from an .ics calendar feed (WordPress "The Events Calendar", Google
+    Calendar and most calendar tools publish one)."""
+    out = []
+    for block in _ical_unfold(text).split("BEGIN:VEVENT")[1:]:
+        block = block.split("END:VEVENT")[0]
+        f = {}
+        for line in block.splitlines():
+            m = re.match(r"^([A-Z-]+)((?:;[^:]*)?):(.*)$", line)
+            if m and m.group(1) not in f:
+                f[m.group(1)] = (m.group(2), m.group(3))
+        def when(key):
+            if key not in f:
+                return None
+            v = f[key][1].strip()
+            m = re.match(r"^(\d{4})(\d{2})(\d{2})(?:T(\d{2})(\d{2}))?", v)
+            if not m:
+                return None
+            d = f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+            if m.group(4) and not ("VALUE=DATE" in f[key][0] and "T" not in v):
+                if v.endswith("Z"):  # UTC: convert to local time
+                    try:
+                        from zoneinfo import ZoneInfo
+                        dt = datetime.strptime(v[:15], "%Y%m%dT%H%M%S").replace(tzinfo=ZoneInfo("UTC")).astimezone(ZoneInfo(LOCAL_TZ))
+                        return dt.strftime("%Y-%m-%dT%H:%M")
+                    except Exception:
+                        pass
+                return f"{d}T{m.group(4)}:{m.group(5)}"
+            return d
+        title = _clean(_ical_text(f.get("SUMMARY", ("", ""))[1]), 160)
+        start = when("DTSTART")
+        if not title or not start:
+            continue
+        end = when("DTEND")
+        if end and len(end) == 10 and start and len(start) == 10 and end > start:
+            # all-day events end the morning after; make the end inclusive
+            end = (datetime.strptime(end, "%Y-%m-%d") - timedelta(days=1)).date().isoformat()
+        loc = _clean(_ical_text(f.get("LOCATION", ("", ""))[1]), 200) or None
+        geo_v = f.get("GEO", ("", ""))[1]
+        lat = lng = None
+        if ";" in geo_v:
+            try:
+                lat, lng = (float(x) for x in geo_v.split(";")[:2])
+            except ValueError:
+                lat = lng = None
+        out.append({
+            "kind": "special" if SPECIAL_RE.search(title) and not EVENT_RE.search(title) else "event",
+            "title": title,
+            "description": _clean(_ical_text(f.get("DESCRIPTION", ("", ""))[1]), 400),
+            "start": start, "end": end if end and end != start else None, "recurring": None,
+            "url": (f.get("URL", ("", ""))[1].strip() or base_url),
+            "image": None, "price": None, "venue": None,
+            "address": re.sub(r",\s*United States$", "", loc) if loc else None,
+            "lat": lat, "lng": lng,
+        })
+    return out
+
+
 # ---------------------------------------------------------------- strategy: event cards
 
-READ_MORE_RE = re.compile(r"^(read|learn|see|view|find out) more|^more info|^details|^tickets?|^register|^rsvp", re.I)
+READ_MORE_RE = re.compile(r"^(read|learn|see|view|find out) more|^more info|^details|^tickets?|^register|^rsvp|^book|^reserve|^buy", re.I)
 
 
 def event_cards(soup, base_url):
@@ -755,7 +908,7 @@ def event_cards(soup, base_url):
     for t in soup(["script", "style", "noscript", "svg"]):
         t.decompose()
     groups = {}
-    for el in soup.find_all(class_=True):
+    for el in soup.find_all(lambda t: t.get("class") or t.name == "tr"):
         key = (el.name, " ".join(sorted(el.get("class", []))))
         groups.setdefault(key, []).append(el)
     good = []
@@ -766,11 +919,13 @@ def event_cards(soup, base_url):
         for el in els:
             text = _clean(el.get_text(" "))
             links = [a for a in el.find_all("a", href=True) if not a["href"].startswith(("#", "mailto:", "tel:", "javascript"))]
-            if not (20 <= len(text) <= 800 and DATE_RE.search(text) and links):
+            is_row = el.name == "tr"
+            if not (20 <= len(text) <= (1500 if is_row else 800) and DATE_RE.search(text) and (links or is_row)):
                 continue
-            hrefs.add(links[0]["href"])
+            hrefs.add(links[0]["href"] if links else id(el))
             ok += 1
-        if ok >= 3 and ok >= 0.8 * len(els) and len(hrefs) >= 0.8 * ok:
+        rows = key[0] == "tr"
+        if ok >= 3 and ok >= (0.6 if rows else 0.8) * len(els) and len(hrefs) >= (1 if rows else 0.8 * ok):
             good.append(els)
     # Keep the innermost groups (the card, not the row of cards around it).
     members = {id(e) for els in good for e in els}
@@ -783,6 +938,7 @@ def event_cards(soup, base_url):
             if not when:
                 continue
             title_el = (el.select_one("[class*=title] a, a[class*=title], [class*=title]")
+                        or (el.select_one("strong, b") if el.name == "tr" else None)
                         or next((h for h in el.find_all(HEADINGS) if not DATE_RE.search(h.get_text(" "))), None)
                         or max((a for a in el.find_all("a") if not READ_MORE_RE.search(_clean(a.get_text(" ")))),
                                key=lambda a: len(_clean(a.get_text(" "))), default=None))
@@ -813,6 +969,8 @@ def event_cards(soup, base_url):
 
 
 def extract(html, url, source):
+    if html.lstrip().startswith("BEGIN:VCALENDAR"):
+        return from_ical(html, url)
     soup = BeautifulSoup(html, "lxml")
     items = from_jsonld(soup, url)
     if source.get("item_selector"):
