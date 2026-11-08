@@ -1,0 +1,52 @@
+start
+freys 200 text/html; charset=UTF-8 https://www.freys.farm/
+freys--events 200 text/html; charset=UTF-8 https://www.freys.farm/events/
+milkhouse 200 text/html; charset=UTF-8 https://www.milkhousebrewery.com/
+milkhouse--events 200 text/html; charset=UTF-8 https://www.milkhousebrewery.com/events/
+redshedman 200 text/html; charset=UTF-8 https://redshedman.com/
+redshedman--events 200 text/html; charset=UTF-8 https://redshedman.com/events/
+springfield 200 text/html; charset=utf-8 https://www.springfieldmanor.com/
+springfield--events 404 text/html;charset=utf-8 https://www.springfieldmanor.com/events/
+attaboy 200 text/html; charset=UTF-8 https://www.attaboybeer.com/
+attaboy--events 404 text/html; charset=UTF-8 https://www.attaboybeer.com/events/
+brewersalley 200 text/html; charset=UTF-8 https://www.brewers-alley.com/
+brewersalley--events 200 text/html; charset=UTF-8 https://www.brewers-alley.com/events/
+midnightrun 200 text/html; charset=UTF-8 https://www.midnightrunbrewing.com/
+midnightrun--events 404 text/html; charset=UTF-8 https://www.midnightrunbrewing.com/events/
+monocacy 200 text/html; charset=UTF-8 https://www.monocacybrewing.com/
+monocacy--events 200 text/html; charset=UTF-8 https://www.monocacybrewing.com/events/
+oldemother 200 text/html; charset=UTF-8 https://www.oldemother.com/
+oldemother--events 200 text/html; charset=UTF-8 https://www.oldemother.com/events/
+rak 200 text/html; charset=UTF-8 https://www.rakbrewing.com/
+rak--events 200 text/html; charset=UTF-8 https://www.rakbrewing.com/events/
+rockwell 200 text/html;charset=utf-8 https://www.rockwellbrewery.com/
+rockwell--events 200 text/html;charset=utf-8 https://www.rockwellbrewery.com/events/
+sandbox 200 text/html;charset=utf-8 https://www.sandboxbrewhouse.com/
+sandbox--events 404 text/html;charset=utf-8 https://www.sandboxbrewhouse.com/events/
+smoketown 200 text/html; charset=UTF-8 https://www.smoketownbrewing.com/
+smoketown--events 200 text/html; charset=UTF-8 https://www.smoketownbrewing.com/events/
+steinhardt 200 text/html;charset=utf-8 https://www.steinhardtbrewing.com/
+steinhardt--events 404 text/html;charset=utf-8 https://www.steinhardtbrewing.com/events/
+flyingdog 200 text/html; charset=UTF-8 https://www.flyingdog.com/
+flyingdog--events 200 text/html; charset=UTF-8 https://www.flyingdog.com/events/
+manorhill 200 text/html; charset=UTF-8 https://www.manorhillbrewing.com/
+manorhill--events 200 text/html; charset=UTF-8 https://www.manorhillbrewing.com/events/
+manorhilltavern 200 text/html; charset=UTF-8 https://www.manorhilltavern.com/
+manorhilltavern--events 200 text/html; charset=UTF-8 https://www.manorhilltavern.com/events/
+jailbreak 200 text/html; charset=UTF-8 https://www.jailbreakbrewing.com/
+jailbreak--events 200 text/html; charset=UTF-8 https://www.jailbreakbrewing.com/events/
+sapwood 200 text/html; charset=UTF-8 https://www.sapwoodcellars.com/
+sapwood--events 200 text/html; charset=UTF-8 https://www.sapwoodcellars.com/events/
+hysteria 200 text/html; charset=utf-8 https://www.hysteriabrewing.com/
+hysteria--events 200 text/html; charset=utf-8 https://www.hysteriabrewing.com/events/
+blackflag 000  https://www.blackflagbrewing.com/
+blackflag--events 000  https://www.blackflagbrewing.com/events/
+ellicottmills 403 text/html; charset=UTF-8 https://www.ellicottmillsbrewing.com/
+ellicottmills--events 403 text/html; charset=UTF-8 https://www.ellicottmillsbrewing.com/events/
+victoria 200 text/html; charset=UTF-8 https://www.victoriagastropub.com/
+victoria--events 200 text/html; charset=UTF-8 https://www.victoriagastropub.com/events/
+frisco 200 text/html; charset=UTF-8 https://www.friscotaphouse.com/
+frisco--events 200 text/html; charset=UTF-8 https://www.friscotaphouse.com/events/
+walkers 200 text/html; charset=UTF-8 https://www.walkerstapandtable.com/
+walkers--events 404  https://www.walkerstapandtable.com/events/
+done
