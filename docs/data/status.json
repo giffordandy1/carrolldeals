@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-09T18:54:43+00:00",
+ "updated": "2026-11-09T19:02:59+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -251,10 +251,10 @@
   },
   {
    "site": "Sapwood Cellars",
-   "status": "empty this time (showing last results, 1 of 2)",
+   "status": "ok",
    "found": 2,
    "errors": [],
-   "empty_runs": 1,
+   "empty_runs": 0,
    "mapped": true
   },
   {
@@ -267,10 +267,10 @@
   },
   {
    "site": "Barrington Tap & Table",
-   "status": "empty this time (showing last results, 1 of 2)",
+   "status": "ok",
    "found": 18,
    "errors": [],
-   "empty_runs": 1,
+   "empty_runs": 0,
    "mapped": true
   },
   {
@@ -283,9 +283,13 @@
   },
   {
    "site": "City of Westminster events",
-   "status": "ok",
+   "status": "error (showing last results)",
    "found": 5,
-   "errors": [],
+   "errors": [
+    "https://westminstermd.gov/common/modules/iCalendar/iCalendar.aspx?catID=24&feed=calendar: ConnectTimeout",
+    "https://westminstermd.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar: ConnectTimeout",
+    "https://westminstermd.gov/common/modules/iCalendar/iCalendar.aspx?catID=29&feed=calendar: ConnectTimeout"
+   ],
    "empty_runs": 0,
    "mapped": true
   }
