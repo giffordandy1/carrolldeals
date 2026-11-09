@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-09T01:15:07+00:00",
+ "updated": "2026-11-09T07:33:34+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -20,7 +20,7 @@
   {
    "site": "1623 Brewing",
    "status": "ok",
-   "found": 21,
+   "found": 20,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -188,7 +188,7 @@
   {
    "site": "Steinhardt Brewing",
    "status": "ok",
-   "found": 18,
+   "found": 16,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -228,7 +228,7 @@
   {
    "site": "Manor Hill Brewing",
    "status": "ok",
-   "found": 9,
+   "found": 7,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
