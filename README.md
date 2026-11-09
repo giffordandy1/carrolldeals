@@ -1,6 +1,6 @@
 # Carroll Deals
 
-A free map of local events and specials. GitHub checks the websites you list once a day, early each morning, and publishes the results as a web page. There's no server to pay for or keep running.
+A free map of local events and specials. GitHub checks the websites you list twice a day (early morning and evening) and publishes the results as a web page. There's no server to pay for or keep running.
 
 - **The map page** lets visitors use their location or type a ZIP code or city, then filter by distance, events or specials, date range and keyword.
 - **The site list** lives in [`sources.yml`](sources.yml). Edit it on GitHub to add, pause or remove sites.

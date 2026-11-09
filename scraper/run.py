@@ -139,10 +139,10 @@ async def main():
         empty_runs = 0
         if not items and not errors:
             empty_runs = int(prev_status.get(src["name"], {}).get("empty_runs", 0)) + 1
-            if empty_runs <= 2:
+            if empty_runs <= 4:
                 items = [p for p in previous if p.get("source") == src["name"]]
                 if items:
-                    status = f"empty this time (showing last results, {empty_runs} of 2)"
+                    status = f"empty this time (showing last results, {empty_runs} of 4)"
 
         kept, seen, seen_days = [], set(), set()
         for it in items:
