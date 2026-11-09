@@ -2,7 +2,7 @@ name: Update events and specials
 
 on:
   schedule:
-    - cron: "17 */6 * * *"     # every 6 hours (times are UTC)
+    - cron: "17 9 * * *"       # once a day, 9:17 UTC = 4:17 AM Eastern (5:17 in summer)
   push:
     branches: [main]
     paths: [sources.yml, "scraper/**"]   # re-check right away when the site list or scraper changes
