@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T19:39:51+00:00",
+ "updated": "2026-11-09T01:15:07+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -108,7 +108,7 @@
   {
    "site": "Carroll County Tourism events",
    "status": "ok",
-   "found": 36,
+   "found": 32,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -116,7 +116,7 @@
   {
    "site": "Carroll County Arts Council events",
    "status": "ok",
-   "found": 24,
+   "found": 22,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
