@@ -61,6 +61,10 @@
   "lat": 39.5694405,
   "lng": -76.9904244
  },
+ "222 east baltimore street, taneytown, md, 21787": {
+  "lat": 39.6559225,
+  "lng": -77.1722232
+ },
  "223 w potomac street, brunswick, md 21716": {
   "lat": 39.3138246,
   "lng": -77.6302917
@@ -218,6 +222,7 @@
   "lat": 39.4066248,
   "lng": -76.9651567
  },
+ "acnb bank \u2013 taneytown branch, 222 east baltimore street, taneytown, md, 21787": null,
  "alumni hall @ mcdaniel college, 2 college hill, westminster, md, 21157": null,
  "broadband drive, suite k, frederick, md 21701": null,
  "carroll arts center, 91 west main st, westminster, md, 21157": {

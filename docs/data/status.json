@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-09T13:21:15+00:00",
+ "updated": "2026-11-09T18:54:43+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -100,7 +100,7 @@
   {
    "site": "Antrim 1844",
    "status": "ok",
-   "found": 4,
+   "found": 5,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -108,7 +108,7 @@
   {
    "site": "Carroll County Tourism events",
    "status": "ok",
-   "found": 32,
+   "found": 29,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -116,7 +116,7 @@
   {
    "site": "Carroll County Arts Council events",
    "status": "ok",
-   "found": 22,
+   "found": 24,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -251,10 +251,10 @@
   },
   {
    "site": "Sapwood Cellars",
-   "status": "ok",
+   "status": "empty this time (showing last results, 1 of 2)",
    "found": 2,
    "errors": [],
-   "empty_runs": 0,
+   "empty_runs": 1,
    "mapped": true
   },
   {
@@ -267,10 +267,10 @@
   },
   {
    "site": "Barrington Tap & Table",
-   "status": "ok",
+   "status": "empty this time (showing last results, 1 of 2)",
    "found": 18,
    "errors": [],
-   "empty_runs": 0,
+   "empty_runs": 1,
    "mapped": true
   },
   {
