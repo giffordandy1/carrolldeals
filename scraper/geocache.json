@@ -225,6 +225,10 @@
  "acnb bank \u2013 taneytown branch, 222 east baltimore street, taneytown, md, 21787": null,
  "alumni hall @ mcdaniel college, 2 college hill, westminster, md, 21157": null,
  "broadband drive, suite k, frederick, md 21701": null,
+ "carroll arts center": {
+  "lat": 39.5774219,
+  "lng": -76.998688
+ },
  "carroll arts center, 91 west main st, westminster, md, 21157": {
   "lat": 39.5774219,
   "lng": -76.998688
