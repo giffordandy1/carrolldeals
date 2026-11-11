@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-10T10:12:45+00:00",
+ "updated": "2026-11-11T02:16:29+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -60,7 +60,7 @@
   {
    "site": "The Woodstock Inn",
    "status": "ok",
-   "found": 9,
+   "found": 14,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -108,7 +108,7 @@
   {
    "site": "Carroll County Tourism events",
    "status": "ok",
-   "found": 29,
+   "found": 28,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -148,7 +148,7 @@
   {
    "site": "Brewer's Alley",
    "status": "ok",
-   "found": 9,
+   "found": 10,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -180,7 +180,7 @@
   {
    "site": "Sandbox Brewhouse",
    "status": "ok",
-   "found": 24,
+   "found": 25,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
