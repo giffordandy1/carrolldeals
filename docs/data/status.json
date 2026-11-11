@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11T02:16:29+00:00",
+ "updated": "2026-11-11T10:19:31+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -107,9 +107,12 @@
   },
   {
    "site": "Carroll County Tourism events",
-   "status": "ok",
-   "found": 28,
-   "errors": [],
+   "status": "error (showing last results)",
+   "found": 26,
+   "errors": [
+    "https://carrollcountytourism.org/events/list/?ical=1: ConnectTimeout",
+    "https://carrollcountytourism.org/events/list/page/2/?ical=1: ConnectTimeout"
+   ],
    "empty_runs": 0,
    "mapped": true
   },
@@ -156,7 +159,7 @@
   {
    "site": "Monocacy Brewing Company",
    "status": "ok",
-   "found": 7,
+   "found": 8,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -252,7 +255,7 @@
   {
    "site": "Sapwood Cellars",
    "status": "ok",
-   "found": 2,
+   "found": 3,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
