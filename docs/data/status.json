@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-12T10:23:01+00:00",
+ "updated": "2026-11-13T02:17:57+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -19,10 +19,10 @@
   },
   {
    "site": "1623 Brewing",
-   "status": "ok",
+   "status": "empty this time (showing last results, 1 of 4)",
    "found": 21,
    "errors": [],
-   "empty_runs": 0,
+   "empty_runs": 1,
    "mapped": true
   },
   {
@@ -99,16 +99,16 @@
   },
   {
    "site": "Antrim 1844",
-   "status": "ok",
+   "status": "empty this time (showing last results, 1 of 4)",
    "found": 5,
    "errors": [],
-   "empty_runs": 0,
+   "empty_runs": 1,
    "mapped": true
   },
   {
    "site": "Carroll County Tourism events",
    "status": "ok",
-   "found": 30,
+   "found": 32,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -116,7 +116,7 @@
   {
    "site": "Carroll County Arts Council events",
    "status": "ok",
-   "found": 22,
+   "found": 24,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -131,10 +131,10 @@
   },
   {
    "site": "Buffalo Wild Wings (Westminster)",
-   "status": "empty this time (showing last results, 2 of 4)",
+   "status": "empty this time (showing last results, 3 of 4)",
    "found": 2,
    "errors": [],
-   "empty_runs": 2,
+   "empty_runs": 3,
    "mapped": true
   },
   {
@@ -148,7 +148,7 @@
   {
    "site": "Brewer's Alley",
    "status": "ok",
-   "found": 10,
+   "found": 9,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -195,10 +195,10 @@
   },
   {
    "site": "Olde Mother Brewing",
-   "status": "ok",
+   "status": "empty this time (showing last results, 1 of 4)",
    "found": 2,
    "errors": [],
-   "empty_runs": 0,
+   "empty_runs": 1,
    "mapped": true
   },
   {

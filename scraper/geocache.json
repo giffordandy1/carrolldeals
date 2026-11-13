@@ -1,4 +1,5 @@
 {
+ "(corner of rt.140 and royer road), westminster, maryland, 21158": null,
  "- westminster md 21157": {
   "lat": 39.5751717,
   "lng": -76.9959168
@@ -272,6 +273,10 @@
   "lng": -76.8850593
  },
  "mapleville road, mount airy, md 21771": null,
+ "maryland, 21158": {
+  "lat": 39.5945893,
+  "lng": -77.0250679
+ },
  "mcdaniel college, 2 college hill, westminster, md, 21157": null,
  "mcdaniel lounge, 2 college hill, westminster, md, 21157": null,
  "md": {
@@ -291,6 +296,7 @@
   "lng": -76.9666681
  },
  "md-108 ste mno columbia, md 21045": null,
+ "meadowbranch church coffeehouse, (corner of rt.140 and royer road), westminster, maryland, 21158": null,
  "monocacy brewing company, 1781 north market street, frederick, md, 21701": {
   "lat": 39.4403205,
   "lng": -77.3989904
