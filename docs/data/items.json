@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-14T02:16:29+00:00",
+ "updated": "2026-11-14T10:02:24+00:00",
  "items": [
   {
    "kind": "special",
@@ -102,23 +102,6 @@
    "lng": -76.9690372,
    "source": "E W Beck's Restaurant & Pub",
    "id": "43b987256d57"
-  },
-  {
-   "kind": "event",
-   "title": "Live Music with Ryan Rote",
-   "description": "Join us in the Taproom for live music from 6-9pm!",
-   "start": "2026-11-13T18:00",
-   "end": "2026-11-13T21:00",
-   "recurring": null,
-   "url": "https://1623brewing.com/event/live-music-with-ryan-rote/",
-   "image": null,
-   "price": null,
-   "venue": "1623 Brewing Co. Taproom",
-   "address": "5975 Exchange Drive, Suite L, Eldersburg, MD, 21784",
-   "lat": 39.4163621,
-   "lng": -76.977291,
-   "source": "1623 Brewing",
-   "id": "2daa755dbd51"
   },
   {
    "kind": "event",
@@ -2791,23 +2774,6 @@
   },
   {
    "kind": "event",
-   "title": "Purple Flow live in concert 8PM",
-   "description": "11/13 - Purple Flow live in concert 8PM",
-   "start": "2026-11-13T20:00",
-   "end": null,
-   "recurring": null,
-   "url": "https://www.rockwellbrewery.com/",
-   "image": null,
-   "price": null,
-   "venue": "Rockwell Brewery",
-   "address": "8411 Broadband Drive, Suite K, Frederick, MD 21701",
-   "lat": 39.4403691,
-   "lng": -77.3807201,
-   "source": "Rockwell Brewery",
-   "id": "cd766da2c9fd"
-  },
-  {
-   "kind": "event",
    "title": "Books & Brews Market Event",
    "description": "11/14 - Books & Brews Market Event - All are welcome to come shop, browse and have a blast! NOON",
    "start": "2026-11-14",
@@ -3043,23 +3009,6 @@
    "lng": -77.3807201,
    "source": "Rockwell Brewery",
    "id": "dbafb58e3518"
-  },
-  {
-   "kind": "event",
-   "title": "WDYM Frederick Got Raves",
-   "description": "House beats, EDM bass, and you on the dance floor!",
-   "start": "2026-11-13T19:00",
-   "end": null,
-   "recurring": null,
-   "url": "https://www.sandboxbrewhouse.com/sandbox-home/wdym-frederick-got-raves",
-   "image": "https://images.squarespace-cdn.com/content/v1/671f0891696546050f847977/1794098978975-GESQN6TJORI45A02IO00/Your+paragraph+text.PNG",
-   "price": null,
-   "venue": "Sandbox Brewhouse",
-   "address": "800 N East Street, Suite 201, Frederick, MD 21701",
-   "lat": 39.4156101,
-   "lng": -77.4051539,
-   "source": "Sandbox Brewhouse",
-   "id": "06adb007ab4f"
   },
   {
    "kind": "event",
@@ -3468,23 +3417,6 @@
    "lng": -77.4051539,
    "source": "Sandbox Brewhouse",
    "id": "8141378c4744"
-  },
-  {
-   "kind": "event",
-   "title": "Garrett Mabe",
-   "description": "Garrett Mabe Music",
-   "start": "2026-11-13T19:00",
-   "end": null,
-   "recurring": null,
-   "url": "https://www.steinhardtbrewing.com/live-music-events/event-one-hdege-zyn5e-92swz-mm483-l88n7-rfk3p-pl36d-2b46h-aazl5",
-   "image": "https://images.squarespace-cdn.com/content/v1/5f9ef850cc5c2c1189e6fb4a/1677535292465-XGNGJ0MXGWWRVMXOV5OQ/Garrett+Mabe.jpg",
-   "price": null,
-   "venue": "Steinhardt Brewing",
-   "address": "340 E Patrick Street, Suite 102, Frederick, MD 21701",
-   "lat": 39.4136776,
-   "lng": -77.4042008,
-   "source": "Steinhardt Brewing",
-   "id": "818fef2f3dc3"
   },
   {
    "kind": "event",
@@ -4015,23 +3947,6 @@
   },
   {
    "kind": "event",
-   "title": "Happy Hour at Manor Hill Tavern",
-   "description": "Join us every Monday through Friday for our 3|4|5|6 Happy Hour at Manor Hill Tavern!$3 OFF apps, $4 drafts, $5 wines, $6 cocktails!",
-   "start": "2026-11-13T15:00",
-   "end": "2026-11-13T18:00",
-   "recurring": null,
-   "url": "https://www.manorhilltavern.com/event/happy-hour-mht/2026-11-13/",
-   "image": "https://www.manorhilltavern.com/wp-content/uploads/2026/06/mht-happy-hour.png",
-   "price": null,
-   "venue": "Manor Hill Tavern",
-   "address": "3733 Old Columbia Pike, Ellicott City, MD 21043",
-   "lat": 39.2670128,
-   "lng": -76.7987397,
-   "source": "Manor Hill Tavern",
-   "id": "f2406c618de7"
-  },
-  {
-   "kind": "event",
    "title": "Sunday Night Football Happy Hour at Manor Hill Tavern",
    "description": "Join us every Sunday throughout the NFL season for our 3|4|5|6 Happy Hour at Manor Hill Tavern! Sound will be on in the bar!",
    "start": "2026-11-15",
@@ -4083,6 +3998,23 @@
   },
   {
    "kind": "event",
+   "title": "Happy Hour at Manor Hill Tavern",
+   "description": "Join us every Monday through Friday for our 3|4|5|6 Happy Hour at Manor Hill Tavern!$3 OFF apps, $4 drafts, $5 wines, $6 cocktails!",
+   "start": "2026-11-17T15:00",
+   "end": "2026-11-17T18:00",
+   "recurring": null,
+   "url": "https://www.manorhilltavern.com/event/happy-hour-mht/2026-11-17/",
+   "image": "https://www.manorhilltavern.com/wp-content/uploads/2026/06/mht-happy-hour.png",
+   "price": null,
+   "venue": "Manor Hill Tavern",
+   "address": "3733 Old Columbia Pike, Ellicott City, MD 21043",
+   "lat": 39.2670128,
+   "lng": -76.7987397,
+   "source": "Manor Hill Tavern",
+   "id": "76ea16e21496"
+  },
+  {
+   "kind": "event",
    "title": "A Victoria Thanksgiving 2026",
    "description": "Our Thanksgiving To-Go Menu is LIVE! Starters, mains, sides, sauces, desserts — we’ve got everything to make your holiday stress-free!",
    "start": "2026-09-28",
@@ -4100,25 +4032,8 @@
   },
   {
    "kind": "event",
-   "title": "Wine Night at Victoria Gastro Pub",
-   "description": "Every Thursday enjoy any of our bottles of wine at 50% off! The perfect way to treat yourself before kicking off the weekend!",
-   "start": "2026-11-12",
-   "end": "2026-11-13",
-   "recurring": null,
-   "url": "https://www.victoriagastropub.com/event/wine-night-vgp/2026-11-12/",
-   "image": "https://www.victoriagastropub.com/wp-content/uploads/2026/01/vgp-wine-thursday-03272025-scaled.jpg",
-   "price": null,
-   "venue": "Victoria Gastro Pub",
-   "address": "8201 Snowden River Parkway, Columbia, MD, 21045",
-   "lat": 39.2100458,
-   "lng": -76.800088,
-   "source": "Victoria Gastro Pub",
-   "id": "61d31a4c584a"
-  },
-  {
-   "kind": "event",
    "title": "Brunch at Victoria Gastro Pub",
-   "description": "Every Saturday and Sunday from 10am to 2pm enjoy our incredible brunch offerings! Lunch selection available as well. See you this weekend!",
+   "description": "Repeats: 3 upcoming dates listed on their site. Every Saturday and Sunday from 10am to 2pm enjoy our incredible brunch offerings! Lunch selection available as well. See you this weekend!",
    "start": "2026-11-14T10:00",
    "end": "2026-11-14T14:00",
    "recurring": null,
@@ -4148,23 +4063,6 @@
    "lng": -76.800088,
    "source": "Victoria Gastro Pub",
    "id": "13d8848eef2d"
-  },
-  {
-   "kind": "event",
-   "title": "Brunch at Victoria Gastro Pub",
-   "description": "Every Saturday and Sunday from 10am to 2pm enjoy our incredible brunch offerings! Lunch selection available as well. See you this weekend!",
-   "start": "2026-11-15T10:00",
-   "end": "2026-11-15T14:00",
-   "recurring": null,
-   "url": "https://www.victoriagastropub.com/event/brunch-vgp/2026-11-15/",
-   "image": "https://www.victoriagastropub.com/wp-content/uploads/2026/01/vgp-frit-brunch-promo-presentation-scaled.jpg",
-   "price": null,
-   "venue": "Victoria Gastro Pub",
-   "address": "8201 Snowden River Parkway, Columbia, MD, 21045",
-   "lat": 39.2100458,
-   "lng": -76.800088,
-   "source": "Victoria Gastro Pub",
-   "id": "945191e29795"
   },
   {
    "kind": "event",

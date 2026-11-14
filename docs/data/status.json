@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-14T02:16:29+00:00",
+ "updated": "2026-11-14T10:02:24+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -19,10 +19,10 @@
   },
   {
    "site": "1623 Brewing",
-   "status": "ok",
-   "found": 23,
+   "status": "empty this time (showing last results, 1 of 4)",
+   "found": 22,
    "errors": [],
-   "empty_runs": 0,
+   "empty_runs": 1,
    "mapped": true
   },
   {
@@ -99,10 +99,10 @@
   },
   {
    "site": "Antrim 1844",
-   "status": "ok",
+   "status": "empty this time (showing last results, 1 of 4)",
    "found": 5,
    "errors": [],
-   "empty_runs": 0,
+   "empty_runs": 1,
    "mapped": true
   },
   {
@@ -134,7 +134,7 @@
    "status": "ok",
    "found": 0,
    "errors": [],
-   "empty_runs": 5,
+   "empty_runs": 6,
    "mapped": true
   },
   {
@@ -172,7 +172,7 @@
   {
    "site": "Rockwell Brewery",
    "status": "ok",
-   "found": 15,
+   "found": 14,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -180,7 +180,7 @@
   {
    "site": "Sandbox Brewhouse",
    "status": "ok",
-   "found": 25,
+   "found": 24,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -188,17 +188,17 @@
   {
    "site": "Steinhardt Brewing",
    "status": "ok",
-   "found": 18,
+   "found": 17,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
   },
   {
    "site": "Olde Mother Brewing",
-   "status": "ok",
+   "status": "empty this time (showing last results, 1 of 4)",
    "found": 2,
    "errors": [],
-   "empty_runs": 0,
+   "empty_runs": 1,
    "mapped": true
   },
   {
@@ -244,7 +244,7 @@
   {
    "site": "Victoria Gastro Pub",
    "status": "ok",
-   "found": 12,
+   "found": 10,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
