@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-13T10:18:52+00:00",
+ "updated": "2026-11-14T02:16:29+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -108,7 +108,7 @@
   {
    "site": "Carroll County Tourism events",
    "status": "ok",
-   "found": 32,
+   "found": 31,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -131,10 +131,10 @@
   },
   {
    "site": "Buffalo Wild Wings (Westminster)",
-   "status": "empty this time (showing last results, 4 of 4)",
-   "found": 2,
+   "status": "ok",
+   "found": 0,
    "errors": [],
-   "empty_runs": 4,
+   "empty_runs": 5,
    "mapped": true
   },
   {
