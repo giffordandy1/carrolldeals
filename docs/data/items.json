@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-15T02:20:03+00:00",
+ "updated": "2026-11-15T10:03:25+00:00",
  "items": [
   {
    "kind": "special",
@@ -1466,8 +1466,8 @@
   {
    "kind": "event",
    "title": "Live Piano Music",
-   "description": "Repeats: 51 upcoming dates listed on their site. We have live piano music by a local musician every Friday and Saturday from 6:45-10:00 pm in the restaurant.",
-   "start": "2026-11-14T18:45",
+   "description": "Repeats: 50 upcoming dates listed on their site. We have live piano music by a local musician every Friday and Saturday from 6:45-10:00 pm in the restaurant.",
+   "start": "2026-11-21T18:45",
    "end": null,
    "recurring": null,
    "url": "https://www.antrim1844.com/taneytown-events-calendar",
@@ -1478,7 +1478,7 @@
    "lat": 39.6548672,
    "lng": -77.1731006,
    "source": "Antrim 1844",
-   "id": "c6522dbc3db9"
+   "id": "82b8e2474704"
   },
   {
    "kind": "event",
@@ -2655,40 +2655,6 @@
   },
   {
    "kind": "event",
-   "title": "Books & Brews Market Event",
-   "description": "11/14 - Books & Brews Market Event - All are welcome to come shop, browse and have a blast! NOON",
-   "start": "2026-11-14",
-   "end": null,
-   "recurring": null,
-   "url": "https://www.rockwellbrewery.com/",
-   "image": null,
-   "price": null,
-   "venue": "Rockwell Brewery",
-   "address": "8411 Broadband Drive, Suite K, Frederick, MD 21701",
-   "lat": 39.4403691,
-   "lng": -77.3807201,
-   "source": "Rockwell Brewery",
-   "id": "cfa911a41c79"
-  },
-  {
-   "kind": "event",
-   "title": "CAN’T PROMISE TOMORROW Live in Concert 7:30PM",
-   "description": "11/14 - CAN’T PROMISE TOMORROW Live in Concert 7:30PM",
-   "start": "2026-11-14T19:30",
-   "end": null,
-   "recurring": null,
-   "url": "https://www.rockwellbrewery.com/",
-   "image": null,
-   "price": null,
-   "venue": "Rockwell Brewery",
-   "address": "8411 Broadband Drive, Suite K, Frederick, MD 21701",
-   "lat": 39.4403691,
-   "lng": -77.3807201,
-   "source": "Rockwell Brewery",
-   "id": "b394f7a4246a"
-  },
-  {
-   "kind": "event",
    "title": "WHISKEY & JUSTICE FOR ALL Band Live in Concert",
    "description": "11/15 - WHISKEY & JUSTICE FOR ALL Band Live in Concert - SUNDAY 4PM-8PM",
    "start": "2026-11-15T16:00",
@@ -2890,23 +2856,6 @@
    "lng": -77.3807201,
    "source": "Rockwell Brewery",
    "id": "dbafb58e3518"
-  },
-  {
-   "kind": "event",
-   "title": "Rays Of Violet",
-   "description": "Dancing, jamming, grooving to Grateful Dead covers. What better way to spend Saturday night?",
-   "start": "2026-11-14T19:00",
-   "end": null,
-   "recurring": null,
-   "url": "https://www.sandboxbrewhouse.com/sandbox-home/rays-of-violet",
-   "image": "https://images.squarespace-cdn.com/content/v1/671f0891696546050f847977/1791919555898-J0PLX3CE7FXH4FGDHNCB/Rays+of+Violet+1114.jpg",
-   "price": null,
-   "venue": "Sandbox Brewhouse",
-   "address": "800 N East Street, Suite 201, Frederick, MD 21701",
-   "lat": 39.4156101,
-   "lng": -77.4051539,
-   "source": "Sandbox Brewhouse",
-   "id": "4f05e8dbac64"
   },
   {
    "kind": "event",
@@ -3301,23 +3250,6 @@
   },
   {
    "kind": "event",
-   "title": "Ginada Pinata",
-   "description": "Ginada Pinata",
-   "start": "2026-11-14T19:00",
-   "end": null,
-   "recurring": null,
-   "url": "https://www.steinhardtbrewing.com/live-music-events/event-one-hdege-zyn5e-92swz-mm483-l88n7-rfk3p-pl36d-2b46h-aazl5-xbfxh-k5bxc-5mzhx-jbfy4",
-   "image": "https://images.squarespace-cdn.com/content/v1/5f9ef850cc5c2c1189e6fb4a/1682991662498-P4MAKBATGVXIU4MG96AD/Screen+Shot+2023-05-01+at+9.39.54+PM.png",
-   "price": null,
-   "venue": "Steinhardt Brewing",
-   "address": "340 E Patrick Street, Suite 102, Frederick, MD 21701",
-   "lat": 39.4136776,
-   "lng": -77.4042008,
-   "source": "Steinhardt Brewing",
-   "id": "34fcb8ca0ef7"
-  },
-  {
-   "kind": "event",
    "title": "Michelle & Jason Hannon",
    "description": "Michelle & Jason Hannon",
    "start": "2026-11-15T15:00",
@@ -3624,23 +3556,6 @@
   },
   {
    "kind": "event",
-   "title": "The Few",
-   "description": "",
-   "start": "2026-11-14",
-   "end": null,
-   "recurring": null,
-   "url": "https://buytickets.at/upstairsatsmoketown/2148388/r/up",
-   "image": null,
-   "price": null,
-   "venue": "Smoketown Brewing Station",
-   "address": "223 W Potomac Street, Brunswick, MD 21716",
-   "lat": 39.3138246,
-   "lng": -77.6302917,
-   "source": "Smoketown Brewing Station",
-   "id": "fed6b926a519"
-  },
-  {
-   "kind": "event",
    "title": "Doc Marten & the Flannels",
    "description": "",
    "start": "2026-11-27",
@@ -3913,23 +3828,6 @@
   },
   {
    "kind": "event",
-   "title": "Brunch at Victoria Gastro Pub",
-   "description": "Repeats: 3 upcoming dates listed on their site. Every Saturday and Sunday from 10am to 2pm enjoy our incredible brunch offerings! Lunch selection available as well. See you this weekend!",
-   "start": "2026-11-14T10:00",
-   "end": "2026-11-14T14:00",
-   "recurring": null,
-   "url": "https://www.victoriagastropub.com/event/brunch-vgp/2026-11-14/",
-   "image": "https://www.victoriagastropub.com/wp-content/uploads/2026/01/vgp-frit-brunch-promo-presentation-scaled.jpg",
-   "price": null,
-   "venue": "Victoria Gastro Pub",
-   "address": "8201 Snowden River Parkway, Columbia, MD, 21045",
-   "lat": 39.2100458,
-   "lng": -76.800088,
-   "source": "Victoria Gastro Pub",
-   "id": "6ebe06bf862c"
-  },
-  {
-   "kind": "event",
    "title": "VGP Miles for Mimosas",
    "description": "Calling all runners! If you are looking for a fun weekend run club that rewards you with Mimosas, then we\\'ve got great news for you!",
    "start": "2026-11-15T09:30",
@@ -3944,6 +3842,23 @@
    "lng": -76.800088,
    "source": "Victoria Gastro Pub",
    "id": "13d8848eef2d"
+  },
+  {
+   "kind": "event",
+   "title": "Brunch at Victoria Gastro Pub",
+   "description": "Every Saturday and Sunday from 10am to 2pm enjoy our incredible brunch offerings! Lunch selection available as well. See you this weekend!",
+   "start": "2026-11-15T10:00",
+   "end": "2026-11-15T14:00",
+   "recurring": null,
+   "url": "https://www.victoriagastropub.com/event/brunch-vgp/2026-11-15/",
+   "image": "https://www.victoriagastropub.com/wp-content/uploads/2026/01/vgp-frit-brunch-promo-presentation-scaled.jpg",
+   "price": null,
+   "venue": "Victoria Gastro Pub",
+   "address": "8201 Snowden River Parkway, Columbia, MD, 21045",
+   "lat": 39.2100458,
+   "lng": -76.800088,
+   "source": "Victoria Gastro Pub",
+   "id": "945191e29795"
   },
   {
    "kind": "event",
@@ -4012,6 +3927,40 @@
    "lng": -76.800088,
    "source": "Victoria Gastro Pub",
    "id": "d7185c2d86cd"
+  },
+  {
+   "kind": "event",
+   "title": "Brunch at Victoria Gastro Pub",
+   "description": "Every Saturday and Sunday from 10am to 2pm enjoy our incredible brunch offerings! Lunch selection available as well. See you this weekend!",
+   "start": "2026-11-21T10:00",
+   "end": "2026-11-21T14:00",
+   "recurring": null,
+   "url": "https://www.victoriagastropub.com/event/brunch-vgp/2026-11-21/",
+   "image": "https://www.victoriagastropub.com/wp-content/uploads/2026/01/vgp-frit-brunch-promo-presentation-scaled.jpg",
+   "price": null,
+   "venue": "Victoria Gastro Pub",
+   "address": "8201 Snowden River Parkway, Columbia, MD, 21045",
+   "lat": 39.2100458,
+   "lng": -76.800088,
+   "source": "Victoria Gastro Pub",
+   "id": "82b041e89061"
+  },
+  {
+   "kind": "event",
+   "title": "VGP Miles for Mimosas",
+   "description": "Calling all runners! If you are looking for a fun weekend run club that rewards you with Mimosas, then we\\'ve got great news for you!",
+   "start": "2026-11-22T09:30",
+   "end": "2026-11-22T14:00",
+   "recurring": null,
+   "url": "https://www.victoriagastropub.com/event/miles4mimosas/2026-11-22/",
+   "image": "https://www.victoriagastropub.com/wp-content/uploads/2026/04/miles-for-mimosas.png",
+   "price": null,
+   "venue": "Victoria Gastro Pub",
+   "address": "8201 Snowden River Parkway, Columbia, MD, 21045",
+   "lat": 39.2100458,
+   "lng": -76.800088,
+   "source": "Victoria Gastro Pub",
+   "id": "453f68c74bd8"
   },
   {
    "kind": "special",
