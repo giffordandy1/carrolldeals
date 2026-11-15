@@ -148,6 +148,10 @@
   "lat": 39.5767578,
   "lng": -76.9969999
  },
+ "560 gorsuch rd, westminster, md, 21157": {
+  "lat": 39.5695276,
+  "lng": -76.9589227
+ },
  "5975 exchange drive, eldersburg, md 21784": {
   "lat": 39.4163621,
   "lng": -76.977291
@@ -219,6 +223,7 @@
   "lat": 39.5774219,
   "lng": -76.998688
  },
+ "915 liberty rd, sykesville, md, 21784": null,
  "915 liberty road eldersburg, md 21784": {
   "lat": 39.4066248,
   "lng": -76.9651567
@@ -324,6 +329,7 @@
   "lat": 39.5756032,
   "lng": -76.9981867
  },
+ "st. joseph\u2019s catholic church, 915 liberty rd, sykesville, md, 21784": null,
  "st. paul methodist church \u2013 new windsor, 200 main st., new windsor, 21776": null,
  "st. paul united methodist church \u2013 new windsor, 200 main st., new windsor, 21776": null,
  "suite 1, glenwood, md 21738": {
@@ -359,5 +365,6 @@
   "lat": 39.5751717,
   "lng": -76.9959168
  },
- "winfield volunteer fire hall, 1320 w. old liberty road, sykesville, md, 21784": null
+ "winfield volunteer fire hall, 1320 w. old liberty road, sykesville, md, 21784": null,
+ "winters mill high school, 560 gorsuch rd, westminster, md, 21157": null
 }

@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-14T10:02:24+00:00",
+ "updated": "2026-11-15T02:20:03+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -19,10 +19,10 @@
   },
   {
    "site": "1623 Brewing",
-   "status": "empty this time (showing last results, 1 of 4)",
+   "status": "ok",
    "found": 22,
    "errors": [],
-   "empty_runs": 1,
+   "empty_runs": 0,
    "mapped": true
   },
   {
@@ -76,7 +76,7 @@
   {
    "site": "Downtown Sykesville Connection",
    "status": "ok",
-   "found": 6,
+   "found": 5,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -99,16 +99,16 @@
   },
   {
    "site": "Antrim 1844",
-   "status": "empty this time (showing last results, 1 of 4)",
+   "status": "ok",
    "found": 5,
    "errors": [],
-   "empty_runs": 1,
+   "empty_runs": 0,
    "mapped": true
   },
   {
    "site": "Carroll County Tourism events",
    "status": "ok",
-   "found": 31,
+   "found": 24,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -116,7 +116,7 @@
   {
    "site": "Carroll County Arts Council events",
    "status": "ok",
-   "found": 24,
+   "found": 23,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -134,7 +134,7 @@
    "status": "ok",
    "found": 0,
    "errors": [],
-   "empty_runs": 6,
+   "empty_runs": 7,
    "mapped": true
   },
   {
@@ -195,10 +195,10 @@
   },
   {
    "site": "Olde Mother Brewing",
-   "status": "empty this time (showing last results, 1 of 4)",
+   "status": "ok",
    "found": 2,
    "errors": [],
-   "empty_runs": 1,
+   "empty_runs": 0,
    "mapped": true
   },
   {
@@ -284,7 +284,7 @@
   {
    "site": "City of Westminster events",
    "status": "ok",
-   "found": 5,
+   "found": 4,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
