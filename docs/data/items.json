@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-15T10:03:25+00:00",
+ "updated": "2026-11-16T02:30:19+00:00",
  "items": [
   {
    "kind": "special",
@@ -1550,23 +1550,6 @@
   },
   {
    "kind": "event",
-   "title": "McDaniel for the Holidays",
-   "description": "McDaniel College Music faculty members and community members perform a special seasonal concert.",
-   "start": "2026-11-15T19:00",
-   "end": "2026-11-15T21:00",
-   "recurring": null,
-   "url": "https://carrollcountytourism.org/event/mcdaniel-for-the-holidays-2/",
-   "image": null,
-   "price": null,
-   "venue": "Carroll County Tourism events",
-   "address": "McDaniel College, 2 College Hill, Westminster, MD, 21157",
-   "lat": 39.5851682,
-   "lng": -77.0037276,
-   "source": "Carroll County Tourism events",
-   "id": "68c3b24a11d0"
-  },
-  {
-   "kind": "event",
    "title": "Box Lunch Talk: Church of the Brethren: Beliefs, Practices, and Customs",
    "description": "Presented by Reverend Dr. James Benedict. The Church of the Brethren [known officially as the German Baptists before 1908, and unofficially as Dunkers] first came to Maryland and what would become Carroll County in the mid-18th century. Brethren families, congregations, and institutions have played important roles in the county. This presentation will focus on Brethren beliefs, practices, and…",
    "start": "2026-11-17T12:00",
@@ -1755,7 +1738,7 @@
   {
    "kind": "event",
    "title": "29th Annual Festival of Wreaths",
-   "description": "Repeats: 6 upcoming dates listed on their site. Celebrate the season at the 29th Annual Festival of Wreaths, a beloved holiday tradition and fundraiser for the Carroll County Arts Council! Discover a wonderland of imaginative wreaths and holiday art, where community creativity helps make the arts possible throughout Carroll County. From nostalgic and traditional to whimsical, wacky, and wonderfully unexpected, every entry has its own…",
+   "description": "Repeats: 7 upcoming dates listed on their site. Celebrate the season at the 29th Annual Festival of Wreaths, a beloved holiday tradition and fundraiser for the Carroll County Arts Council! Discover a wonderland of imaginative wreaths and holiday art, where community creativity helps make the arts possible throughout Carroll County. From nostalgic and traditional to whimsical, wacky, and wonderfully unexpected, every entry has its own…",
    "start": "2026-11-27T12:00",
    "end": "2026-11-27T19:00",
    "recurring": null,
@@ -2246,6 +2229,23 @@
    "id": "26ecfd77217c"
   },
   {
+   "kind": "event",
+   "title": "Gospel Choir Concert",
+   "description": "McDaniel College’s Gospel Choir performs traditional and contemporary gospel music along with spirituals and holiday favorites, under the direction of Senior Adjunct Lecturer Shelley Ensor and accompanied by Alice Dorsey. MORE INFO",
+   "start": "2026-12-06T15:00",
+   "end": "2026-12-06T17:00",
+   "recurring": null,
+   "url": "https://carrollcountyartscouncil.org/event/gospel-choir-concert/",
+   "image": null,
+   "price": null,
+   "venue": "Carroll County Arts Council events",
+   "address": "McDaniel College, 2 College Hill, Westminster, MD, 21157",
+   "lat": 39.5851682,
+   "lng": -77.0037276,
+   "source": "Carroll County Arts Council events",
+   "id": "546451746ab1"
+  },
+  {
    "kind": "special",
    "title": "Every Wednesday we offer our famous Gyros for only $7",
    "description": "Every Wednesday we offer our famous Gyros for only $7!",
@@ -2278,23 +2278,6 @@
    "lng": -76.9799336,
    "source": "Texas Roadhouse (Westminster)",
    "id": "eb3c84257bb5"
-  },
-  {
-   "kind": "event",
-   "title": "NFL: Sunday",
-   "description": "",
-   "start": "2026-11-15T13:00",
-   "end": "2026-11-15T23:00",
-   "recurring": null,
-   "url": "https://brewers-alley.com/event/nfl-sunday/2026-11-15/",
-   "image": "https://brewers-alley.com/wp-content/uploads/2026/09/NFL-Sunday-Website-Image.png",
-   "price": null,
-   "venue": "Brewer's Alley",
-   "address": "124 N Market Street, Frederick, MD 21701",
-   "lat": 39.4160562,
-   "lng": -77.4104247,
-   "source": "Brewer's Alley",
-   "id": "694d1b64658b"
   },
   {
    "kind": "event",
@@ -2431,6 +2414,23 @@
    "lng": -77.4104247,
    "source": "Brewer's Alley",
    "id": "a8d34f3b032a"
+  },
+  {
+   "kind": "event",
+   "title": "Alley Nights",
+   "description": "",
+   "start": "2026-11-21T22:00",
+   "end": "2026-11-22",
+   "recurring": null,
+   "url": "https://brewers-alley.com/event/alley-nights/2026-11-21/",
+   "image": "https://brewers-alley.com/wp-content/uploads/2026/10/alley-nights-website-image-1920x1280px.png",
+   "price": null,
+   "venue": "Brewer's Alley",
+   "address": "124 N Market Street, Frederick, MD 21701",
+   "lat": 39.4160562,
+   "lng": -77.4104247,
+   "source": "Brewer's Alley",
+   "id": "1e79eeec790e"
   },
   {
    "kind": "event",
@@ -3828,40 +3828,6 @@
   },
   {
    "kind": "event",
-   "title": "VGP Miles for Mimosas",
-   "description": "Calling all runners! If you are looking for a fun weekend run club that rewards you with Mimosas, then we\\'ve got great news for you!",
-   "start": "2026-11-15T09:30",
-   "end": "2026-11-15T14:00",
-   "recurring": null,
-   "url": "https://www.victoriagastropub.com/event/miles4mimosas/2026-11-15/",
-   "image": "https://www.victoriagastropub.com/wp-content/uploads/2026/04/miles-for-mimosas.png",
-   "price": null,
-   "venue": "Victoria Gastro Pub",
-   "address": "8201 Snowden River Parkway, Columbia, MD, 21045",
-   "lat": 39.2100458,
-   "lng": -76.800088,
-   "source": "Victoria Gastro Pub",
-   "id": "13d8848eef2d"
-  },
-  {
-   "kind": "event",
-   "title": "Brunch at Victoria Gastro Pub",
-   "description": "Every Saturday and Sunday from 10am to 2pm enjoy our incredible brunch offerings! Lunch selection available as well. See you this weekend!",
-   "start": "2026-11-15T10:00",
-   "end": "2026-11-15T14:00",
-   "recurring": null,
-   "url": "https://www.victoriagastropub.com/event/brunch-vgp/2026-11-15/",
-   "image": "https://www.victoriagastropub.com/wp-content/uploads/2026/01/vgp-frit-brunch-promo-presentation-scaled.jpg",
-   "price": null,
-   "venue": "Victoria Gastro Pub",
-   "address": "8201 Snowden River Parkway, Columbia, MD, 21045",
-   "lat": 39.2100458,
-   "lng": -76.800088,
-   "source": "Victoria Gastro Pub",
-   "id": "945191e29795"
-  },
-  {
-   "kind": "event",
    "title": "Sunday Happy Hour at Victoria Gastro Pub",
    "description": "Join us after brunch and head to the bar for $5 Happy Hour from 2pm to close. Select apps, draft beers, wines, & signature cocktails just $5!",
    "start": "2026-11-15T14:00",
@@ -3961,6 +3927,40 @@
    "lng": -76.800088,
    "source": "Victoria Gastro Pub",
    "id": "453f68c74bd8"
+  },
+  {
+   "kind": "event",
+   "title": "Brunch at Victoria Gastro Pub",
+   "description": "Every Saturday and Sunday from 10am to 2pm enjoy our incredible brunch offerings! Lunch selection available as well. See you this weekend!",
+   "start": "2026-11-22T10:00",
+   "end": "2026-11-22T14:00",
+   "recurring": null,
+   "url": "https://www.victoriagastropub.com/event/brunch-vgp/2026-11-22/",
+   "image": "https://www.victoriagastropub.com/wp-content/uploads/2026/01/vgp-frit-brunch-promo-presentation-scaled.jpg",
+   "price": null,
+   "venue": "Victoria Gastro Pub",
+   "address": "8201 Snowden River Parkway, Columbia, MD, 21045",
+   "lat": 39.2100458,
+   "lng": -76.800088,
+   "source": "Victoria Gastro Pub",
+   "id": "be397a3314b5"
+  },
+  {
+   "kind": "event",
+   "title": "Sunday Happy Hour at Victoria Gastro Pub",
+   "description": "Join us after brunch and head to the bar for $5 Happy Hour from 2pm to close. Select apps, draft beers, wines, & signature cocktails just $5!",
+   "start": "2026-11-22T14:00",
+   "end": "2026-11-22T22:00",
+   "recurring": null,
+   "url": "https://www.victoriagastropub.com/event/sunday-happy-hour-vgp/2026-11-22/",
+   "image": "https://www.victoriagastropub.com/wp-content/uploads/2026/01/vgp-sunday-happy-hour-presentation-scaled.jpg",
+   "price": null,
+   "venue": "Victoria Gastro Pub",
+   "address": "8201 Snowden River Parkway, Columbia, MD, 21045",
+   "lat": 39.2100458,
+   "lng": -76.800088,
+   "source": "Victoria Gastro Pub",
+   "id": "3bcfd1e87c68"
   },
   {
    "kind": "special",
