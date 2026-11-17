@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17T02:27:10+00:00",
+ "updated": "2026-11-17T10:26:04+00:00",
  "items": [
   {
    "kind": "special",
@@ -2485,23 +2485,6 @@
   },
   {
    "kind": "event",
-   "title": "BINGO Night!",
-   "description": "Repeats: 3 upcoming dates listed on their site. How much does it cost to play? FREE! When do games start? 6 ROUNDS, 2 BREAKS 6:30PM – 8:30PM. JUMP IN ANYTIME! Are there prizes? YES!! Various prizes every round. Gift cards, merch, & mystery bags. Where? Inside the taproom at Monocacy Brewing. WHAT ELSE MAKES THIS THE MOST FUN THING YOU CAN DO ON A MONDAY EVENING? THEMES!",
-   "start": "2026-11-16T18:00",
-   "end": "2026-11-16T21:00",
-   "recurring": null,
-   "url": "https://monocacybrewing.com/event/bingo-night/2026-11-16/",
-   "image": null,
-   "price": null,
-   "venue": "Monocacy Brewing Company",
-   "address": "Monocacy Brewing Company, 1781 North Market Street, Frederick, MD, 21701",
-   "lat": 39.4403205,
-   "lng": -77.3989904,
-   "source": "Monocacy Brewing Company",
-   "id": "2355a8a017db"
-  },
-  {
-   "kind": "event",
    "title": "Bring Your Own Vinyl",
    "description": "🎶 Bring Your Own Vinyl Night — Every Tuesday! 🎶 6pm – 8pm | MBC Taproom Tuesday nights just got way smoother. Join us weekly for Vinyl Nights, featuring DJ Goods spinning your very own vinyls. Grab a pint, settle in, and let the soundtrack of take over. Whether you’re winding down or catching up with friends, this is the spot to spend the day after Monday. ✨ QUALITY beers. Great vibes. Great…",
    "start": "2026-11-17T18:00",
@@ -2587,6 +2570,23 @@
   },
   {
    "kind": "event",
+   "title": "BINGO Night!",
+   "description": "How much does it cost to play? FREE! When do games start? 6 ROUNDS, 2 BREAKS 6:30PM – 8:30PM. JUMP IN ANYTIME! Are there prizes? YES!! Various prizes every round. Gift cards, merch, & mystery bags. Where? Inside the taproom at Monocacy Brewing. WHAT ELSE MAKES THIS THE MOST FUN THING YOU CAN DO ON A MONDAY EVENING? THEMES!",
+   "start": "2026-11-23T18:00",
+   "end": "2026-11-23T21:00",
+   "recurring": null,
+   "url": "https://monocacybrewing.com/event/bingo-night/2026-11-23/",
+   "image": null,
+   "price": null,
+   "venue": "Monocacy Brewing Company",
+   "address": "Monocacy Brewing Company, 1781 North Market Street, Frederick, MD, 21701",
+   "lat": 39.4403205,
+   "lng": -77.3989904,
+   "source": "Monocacy Brewing Company",
+   "id": "34c386fb8082"
+  },
+  {
+   "kind": "event",
    "title": "Bring Your Own Vinyl",
    "description": "🎶 Bring Your Own Vinyl Night — Every Tuesday! 🎶 6pm – 8pm | MBC Taproom Tuesday nights just got way smoother. Join us weekly for Vinyl Nights, featuring DJ Goods spinning your very own vinyls. Grab a pint, settle in, and let the soundtrack of take over. Whether you’re winding down or catching up with friends, this is the spot to spend the day after Monday. ✨ QUALITY beers. Great vibes. Great…",
    "start": "2026-11-24T18:00",
@@ -2635,6 +2635,23 @@
    "lng": -76.9382069,
    "source": "Monocacy Brewing Company",
    "id": "9da6fa63955a"
+  },
+  {
+   "kind": "event",
+   "title": "BINGO Night!",
+   "description": "How much does it cost to play? FREE! When do games start? 6 ROUNDS, 2 BREAKS 6:30PM – 8:30PM. JUMP IN ANYTIME! Are there prizes? YES!! Various prizes every round. Gift cards, merch, & mystery bags. Where? Inside the taproom at Monocacy Brewing. WHAT ELSE MAKES THIS THE MOST FUN THING YOU CAN DO ON A MONDAY EVENING? THEMES!",
+   "start": "2026-11-30T18:00",
+   "end": "2026-11-30T21:00",
+   "recurring": null,
+   "url": "https://monocacybrewing.com/event/bingo-night/2026-11-30/",
+   "image": null,
+   "price": null,
+   "venue": "Monocacy Brewing Company",
+   "address": "Monocacy Brewing Company, 1781 North Market Street, Frederick, MD, 21701",
+   "lat": 39.4403205,
+   "lng": -77.3989904,
+   "source": "Monocacy Brewing Company",
+   "id": "8d2976a6c4e3"
   },
   {
    "kind": "special",
@@ -3012,23 +3029,6 @@
   },
   {
    "kind": "event",
-   "title": "Monday Trivia",
-   "description": "Bring a friend, grab a beer, and be prepared to test your knowledge! Signups at 6:30.",
-   "start": "2026-11-16T18:30",
-   "end": null,
-   "recurring": null,
-   "url": "https://www.sandboxbrewhouse.com/sandbox-home/monday-trivia-10",
-   "image": "https://images.squarespace-cdn.com/content/v1/671f0891696546050f847977/1746117180579-YR1PHLMMURMYZOSPD23M/PosterWebsite+Graphics-8.jpg",
-   "price": null,
-   "venue": "Sandbox Brewhouse",
-   "address": "800 N East Street, Suite 201, Frederick, MD 21701",
-   "lat": 39.4156101,
-   "lng": -77.4051539,
-   "source": "Sandbox Brewhouse",
-   "id": "6aabc69c2379"
-  },
-  {
-   "kind": "event",
    "title": "Official Screening with Generation W",
    "description": "Join us for an exclusive screening of Worldwide: Uncharted Territories.",
    "start": "2026-11-17T19:00",
@@ -3145,6 +3145,23 @@
    "lng": -77.4051539,
    "source": "Sandbox Brewhouse",
    "id": "95d9bf0971bd"
+  },
+  {
+   "kind": "event",
+   "title": "Monday Trivia",
+   "description": "Bring a friend, grab a beer, and be prepared to test your knowledge! Signups at 6:30.",
+   "start": "2026-11-23T18:30",
+   "end": null,
+   "recurring": null,
+   "url": "https://www.sandboxbrewhouse.com/sandbox-home/monday-trivia-10-e5s8a",
+   "image": "https://images.squarespace-cdn.com/content/v1/671f0891696546050f847977/1746117180579-YR1PHLMMURMYZOSPD23M/PosterWebsite+Graphics-8.jpg",
+   "price": null,
+   "venue": "Sandbox Brewhouse",
+   "address": "800 N East Street, Suite 201, Frederick, MD 21701",
+   "lat": 39.4156101,
+   "lng": -77.4051539,
+   "source": "Sandbox Brewhouse",
+   "id": "cfde4e50dc5e"
   },
   {
    "kind": "event",
@@ -3623,13 +3640,13 @@
    "id": "1228fb1d85ee"
   },
   {
-   "kind": "event",
-   "title": "Trivia Night!",
-   "description": "Trivia is every Thursday from 7-9:30! Sign-ups start at 6:30.",
-   "start": null,
+   "kind": "special",
+   "title": "Ticketed Event: Pitch, Please!",
+   "description": "PITCH, PLEASE! A \"Pitch Your Friend\" Event Event Details: DATE: Friday, December 18th, 2026 | 6:30 PM – 9:30 PM LOCATION: Olde Mother Brewing Co., Frederick, Maryland ​ SPECTATOR/GUEST TICKETS – $10 PRESENTER PACKAGE – $25 (Presenter + the friend they’re pitching) Tired of swiping past the same five people and pretending you “love hiking”? Let your friends take the wheel for a night. At Pitch Please, your personal hype squad gets 4 minutes on the mic to explain why you’re a catch, and a room…",
+   "start": "2026-12-18T18:30",
    "end": null,
-   "recurring": "Every Thursday from 7-9 30",
-   "url": "https://oldemother.com/events/",
+   "recurring": null,
+   "url": "https://tinyurl.com/PitchPleaseOMBTix",
    "image": null,
    "price": null,
    "venue": "Olde Mother Brewing",
@@ -3637,7 +3654,7 @@
    "lat": 39.4207185,
    "lng": -77.4100111,
    "source": "Olde Mother Brewing",
-   "id": "7ccd13ce06c5"
+   "id": "982be0261f72"
   },
   {
    "kind": "special",
@@ -3655,6 +3672,23 @@
    "lng": -77.4100111,
    "source": "Olde Mother Brewing",
    "id": "a99793b2f61c"
+  },
+  {
+   "kind": "event",
+   "title": "Trivia Night!",
+   "description": "Trivia is every Thursday from 7-9:30! Sign-ups start at 6:30.",
+   "start": null,
+   "end": null,
+   "recurring": "Every Thursday from 7-9 30",
+   "url": "https://oldemother.com/events/",
+   "image": null,
+   "price": null,
+   "venue": "Olde Mother Brewing",
+   "address": "526 N Market Street, Frederick, MD 21701",
+   "lat": 39.4207185,
+   "lng": -77.4100111,
+   "source": "Olde Mother Brewing",
+   "id": "7ccd13ce06c5"
   },
   {
    "kind": "event",
@@ -3693,7 +3727,7 @@
   {
    "kind": "event",
    "title": "Line Dancing Workshop & Evening Social Nov 21 / Frey's Farm Buy Tickets Nov 21, 2026, 4:00 PM",
-   "description": "Sat, Nov 21 Line Dancing Workshop & Evening Social Nov 21 / Frey's Farm Buy Tickets Nov 21, 2026, 4:00 PM – 6:00 PM Frey's Farm, 8601 Mapleville Rd, Mt Airy, MD 21771, USA Schedule: 4:00 PM – 6:00 PM: Guided Line Dancing Instruction (Ticket required) 6:00 PM – 9:00 PM: Open Sip & Dance (Open to the public; no ticket required) See All",
+   "description": "Sat, Nov 21 Line Dancing Workshop & Evening Social Nov 21 / Frey's Farm Buy Tickets Nov 21, 2026, 4:00 PM – 6:00 PM Frey's Farm, 8601 Mapleville Rd, Mt Airy, MD 21771, USA Schedule: 4:00 PM – 6:00 PM: Guided Line Dancing Instruction (Ticket required) 6:00 PM – 9:00 PM: Open Sip & Dance (Open to the public; no ticket required) +1 more",
    "start": "2026-11-21T16:00",
    "end": null,
    "recurring": null,
@@ -3881,23 +3915,6 @@
    "kind": "event",
    "title": "Happy Hour at Manor Hill Tavern",
    "description": "Join us every Monday through Friday for our 3|4|5|6 Happy Hour at Manor Hill Tavern!$3 OFF apps, $4 drafts, $5 wines, $6 cocktails!",
-   "start": "2026-11-16T15:00",
-   "end": "2026-11-16T18:00",
-   "recurring": null,
-   "url": "https://www.manorhilltavern.com/event/happy-hour-mht/2026-11-16/",
-   "image": "https://www.manorhilltavern.com/wp-content/uploads/2026/06/mht-happy-hour.png",
-   "price": null,
-   "venue": "Manor Hill Tavern",
-   "address": "3733 Old Columbia Pike, Ellicott City, MD 21043",
-   "lat": 39.2670128,
-   "lng": -76.7987397,
-   "source": "Manor Hill Tavern",
-   "id": "d5207a78fe4f"
-  },
-  {
-   "kind": "event",
-   "title": "Happy Hour at Manor Hill Tavern",
-   "description": "Join us every Monday through Friday for our 3|4|5|6 Happy Hour at Manor Hill Tavern!$3 OFF apps, $4 drafts, $5 wines, $6 cocktails!",
    "start": "2026-11-17T15:00",
    "end": "2026-11-17T18:00",
    "recurring": null,
@@ -3927,6 +3944,23 @@
    "lng": -76.7987397,
    "source": "Manor Hill Tavern",
    "id": "ca51d782be90"
+  },
+  {
+   "kind": "event",
+   "title": "Wine Wednesday at Manor Hill Tavern",
+   "description": "Every Wednesday enjoy our Wine night weekly special, where ALL Bottles of Wine are 50% off at Manor Hill Tavern!",
+   "start": "2026-11-18",
+   "end": "2026-11-19",
+   "recurring": null,
+   "url": "https://www.manorhilltavern.com/event/wine-wednesday-mht/2026-11-18/",
+   "image": "https://www.manorhilltavern.com/wp-content/uploads/2026/06/wine-wednesday.png",
+   "price": null,
+   "venue": "Manor Hill Tavern",
+   "address": "3733 Old Columbia Pike, Ellicott City, MD 21043",
+   "lat": 39.2670128,
+   "lng": -76.7987397,
+   "source": "Manor Hill Tavern",
+   "id": "b843e2d2988d"
   },
   {
    "kind": "event",
