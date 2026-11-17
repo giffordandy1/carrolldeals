@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-16T10:50:13+00:00",
+ "updated": "2026-11-17T02:27:10+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -76,7 +76,7 @@
   {
    "site": "Downtown Sykesville Connection",
    "status": "ok",
-   "found": 5,
+   "found": 8,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -134,7 +134,7 @@
    "status": "ok",
    "found": 0,
    "errors": [],
-   "empty_runs": 10,
+   "empty_runs": 11,
    "mapped": true
   },
   {
@@ -172,7 +172,7 @@
   {
    "site": "Rockwell Brewery",
    "status": "ok",
-   "found": 11,
+   "found": 18,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -228,7 +228,7 @@
   {
    "site": "Manor Hill Brewing",
    "status": "ok",
-   "found": 7,
+   "found": 8,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
