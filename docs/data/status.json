@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18T10:24:44+00:00",
+ "updated": "2026-11-19T02:24:33+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -108,7 +108,7 @@
   {
    "site": "Carroll County Tourism events",
    "status": "ok",
-   "found": 24,
+   "found": 25,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -134,7 +134,7 @@
    "status": "ok",
    "found": 0,
    "errors": [],
-   "empty_runs": 14,
+   "empty_runs": 15,
    "mapped": true
   },
   {
@@ -251,9 +251,11 @@
   },
   {
    "site": "Sapwood Cellars",
-   "status": "ok",
+   "status": "error (showing last results)",
    "found": 3,
-   "errors": [],
+   "errors": [
+    "https://www.sapwoodcellars.com/events/: HTTPStatusError 500"
+   ],
    "empty_runs": 0,
    "mapped": true
   },

@@ -9,6 +9,10 @@
   "lng": -77.4104247
  },
  "1320 w. old liberty road, sykesville, md, 21784": null,
+ "1341 n. main st., hampstead, md, 21074": {
+  "lat": 39.6103593,
+  "lng": -76.8518163
+ },
  "1415 woodstock road, woodstock, md 21163": {
   "lat": 39.3305664,
   "lng": -76.8702295
@@ -256,6 +260,7 @@
  },
  "eldersburg branch, 6400 w. hemlock drive, eldersburg, md, 21784": null,
  "exchange drive, suite l, eldersburg, md, 21784": null,
+ "fireside on main event center, 1341 n. main st., hampstead, md, 21074": null,
  "gamber & comm fire company, 3838 niner road, finksburg": null,
  "gamber & community fire company, 3838 niner road, finksburg": null,
  "glenwood, md 21738": {
