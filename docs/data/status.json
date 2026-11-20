@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19T10:25:31+00:00",
+ "updated": "2026-11-20T02:25:59+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -76,7 +76,7 @@
   {
    "site": "Downtown Sykesville Connection",
    "status": "ok",
-   "found": 8,
+   "found": 9,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -134,7 +134,7 @@
    "status": "ok",
    "found": 0,
    "errors": [],
-   "empty_runs": 16,
+   "empty_runs": 17,
    "mapped": true
   },
   {
@@ -148,7 +148,7 @@
   {
    "site": "Brewer's Alley",
    "status": "ok",
-   "found": 10,
+   "found": 12,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -251,11 +251,9 @@
   },
   {
    "site": "Sapwood Cellars",
-   "status": "error (showing last results)",
-   "found": 2,
-   "errors": [
-    "https://www.sapwoodcellars.com/events/: HTTPStatusError 500"
-   ],
+   "status": "ok",
+   "found": 4,
+   "errors": [],
    "empty_runs": 0,
    "mapped": true
   },
