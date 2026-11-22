@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22T02:23:10+00:00",
+ "updated": "2026-11-22T10:05:12+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -108,7 +108,7 @@
   {
    "site": "Carroll County Tourism events",
    "status": "ok",
-   "found": 28,
+   "found": 29,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -134,7 +134,7 @@
    "status": "ok",
    "found": 0,
    "errors": [],
-   "empty_runs": 21,
+   "empty_runs": 22,
    "mapped": true
   },
   {
@@ -156,7 +156,7 @@
   {
    "site": "Monocacy Brewing Company",
    "status": "ok",
-   "found": 6,
+   "found": 5,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -172,7 +172,7 @@
   {
    "site": "Rockwell Brewery",
    "status": "ok",
-   "found": 19,
+   "found": 18,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -180,7 +180,7 @@
   {
    "site": "Sandbox Brewhouse",
    "status": "ok",
-   "found": 20,
+   "found": 18,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -211,9 +211,11 @@
   },
   {
    "site": "Frey's Brewing Company",
-   "status": "ok",
-   "found": 1,
-   "errors": [],
+   "status": "error (showing last results)",
+   "found": 0,
+   "errors": [
+    "https://www.freys.farm/events/: could not read page ('href')"
+   ],
    "empty_runs": 0,
    "mapped": true
   },
@@ -268,7 +270,7 @@
   {
    "site": "Barrington Tap & Table",
    "status": "ok",
-   "found": 14,
+   "found": 16,
    "errors": [],
    "empty_runs": 0,
    "mapped": true

@@ -79,6 +79,7 @@
   "lat": 39.3138246,
   "lng": -77.6302917
  },
+ "2401 bollinger mill rd., finksburg, 21048": null,
  "2465 route 97, glenwood, md 21738": null,
  "2465 route 97, suite 1, glenwood, md 21738": null,
  "28 john street, westminster, md, 21157": {
@@ -239,6 +240,7 @@
  },
  "acnb bank \u2013 taneytown branch, 222 east baltimore street, taneytown, md, 21787": null,
  "alumni hall @ mcdaniel college, 2 college hill, westminster, md, 21157": null,
+ "black barn alpacas, 2401 bollinger mill rd., finksburg, 21048": null,
  "broadband drive, suite k, frederick, md 21701": null,
  "carroll arts center": {
   "lat": 39.5774219,
@@ -266,6 +268,10 @@
  },
  "eldersburg branch, 6400 w. hemlock drive, eldersburg, md, 21784": null,
  "exchange drive, suite l, eldersburg, md, 21784": null,
+ "finksburg, 21048": {
+  "lat": 39.4928811,
+  "lng": -76.8894232
+ },
  "fireside on main event center, 1341 n. main st., hampstead, md, 21074": null,
  "gamber & comm fire company, 3838 niner road, finksburg": null,
  "gamber & community fire company, 3838 niner road, finksburg": null,
