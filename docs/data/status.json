@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-21T10:06:11+00:00",
+ "updated": "2026-11-22T02:23:10+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -108,7 +108,7 @@
   {
    "site": "Carroll County Tourism events",
    "status": "ok",
-   "found": 29,
+   "found": 28,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -116,7 +116,7 @@
   {
    "site": "Carroll County Arts Council events",
    "status": "ok",
-   "found": 23,
+   "found": 24,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -134,7 +134,7 @@
    "status": "ok",
    "found": 0,
    "errors": [],
-   "empty_runs": 20,
+   "empty_runs": 21,
    "mapped": true
   },
   {
@@ -284,7 +284,7 @@
   {
    "site": "City of Westminster events",
    "status": "ok",
-   "found": 4,
+   "found": 3,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
