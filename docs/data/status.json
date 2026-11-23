@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22T10:05:12+00:00",
+ "updated": "2026-11-23T02:28:04+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -19,10 +19,10 @@
   },
   {
    "site": "1623 Brewing",
-   "status": "ok",
+   "status": "empty this time (showing last results, 1 of 4)",
    "found": 19,
    "errors": [],
-   "empty_runs": 0,
+   "empty_runs": 1,
    "mapped": true
   },
   {
@@ -99,16 +99,16 @@
   },
   {
    "site": "Antrim 1844",
-   "status": "ok",
+   "status": "empty this time (showing last results, 1 of 4)",
    "found": 5,
    "errors": [],
-   "empty_runs": 0,
+   "empty_runs": 1,
    "mapped": true
   },
   {
    "site": "Carroll County Tourism events",
    "status": "ok",
-   "found": 29,
+   "found": 28,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -134,7 +134,7 @@
    "status": "ok",
    "found": 0,
    "errors": [],
-   "empty_runs": 22,
+   "empty_runs": 23,
    "mapped": true
   },
   {
@@ -195,10 +195,10 @@
   },
   {
    "site": "Olde Mother Brewing",
-   "status": "ok",
+   "status": "empty this time (showing last results, 1 of 4)",
    "found": 3,
    "errors": [],
-   "empty_runs": 0,
+   "empty_runs": 1,
    "mapped": true
   },
   {
@@ -211,7 +211,7 @@
   },
   {
    "site": "Frey's Brewing Company",
-   "status": "error (showing last results)",
+   "status": "error",
    "found": 0,
    "errors": [
     "https://www.freys.farm/events/: could not read page ('href')"
@@ -246,7 +246,7 @@
   {
    "site": "Victoria Gastro Pub",
    "status": "ok",
-   "found": 10,
+   "found": 12,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
