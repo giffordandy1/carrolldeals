@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24T02:29:22+00:00",
+ "updated": "2026-11-24T10:26:48+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -134,7 +134,7 @@
    "status": "ok",
    "found": 0,
    "errors": [],
-   "empty_runs": 25,
+   "empty_runs": 26,
    "mapped": true
   },
   {
@@ -156,7 +156,7 @@
   {
    "site": "Monocacy Brewing Company",
    "status": "ok",
-   "found": 5,
+   "found": 4,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -245,11 +245,9 @@
   },
   {
    "site": "Victoria Gastro Pub",
-   "status": "partial",
-   "found": 3,
-   "errors": [
-    "https://www.victoriagastropub.com/events/: ReadTimeout"
-   ],
+   "status": "ok",
+   "found": 12,
+   "errors": [],
    "empty_runs": 0,
    "mapped": true
   },
@@ -272,7 +270,7 @@
   {
    "site": "Barrington Tap & Table",
    "status": "ok",
-   "found": 16,
+   "found": 14,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
