@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23T10:31:55+00:00",
+ "updated": "2026-11-24T02:29:22+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -134,7 +134,7 @@
    "status": "ok",
    "found": 0,
    "errors": [],
-   "empty_runs": 24,
+   "empty_runs": 25,
    "mapped": true
   },
   {
@@ -164,7 +164,7 @@
   {
    "site": "RAK Brewing Co",
    "status": "ok",
-   "found": 4,
+   "found": 5,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -245,9 +245,11 @@
   },
   {
    "site": "Victoria Gastro Pub",
-   "status": "ok",
-   "found": 12,
-   "errors": [],
+   "status": "partial",
+   "found": 3,
+   "errors": [
+    "https://www.victoriagastropub.com/events/: ReadTimeout"
+   ],
    "empty_runs": 0,
    "mapped": true
   },
