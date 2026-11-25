@@ -254,6 +254,7 @@
  "carroll county farm museum, 500 south center st, westminster, md, 21157": null,
  "carroll county public library, eldersburg branch, 6400 w. hemlock drive, eldersburg, md, 21784": null,
  "carroll county public library, taneytown branch, 10 grand drive, taneytown, md, 21787": null,
+ "carroll county public library, westminster branch, 50 east main street, westminster, md, 21157": null,
  "carroll springs school, 495 south center street, westminster, md, 21157": null,
  "church of the ascension, 23 north court street, westminster, md, 21157": {
   "lat": 39.5703792,
@@ -375,6 +376,10 @@
   "lng": -76.9690372
  },
  "watkins park, 615 center st., mount airy, 21771": null,
+ "westminster branch, 50 east main street, westminster, md, 21157": {
+  "lat": 39.5742293,
+  "lng": -76.9956876
+ },
  "westminster high school, 1225 washington rd, westminster, 21157": {
   "lat": 39.5414903,
   "lng": -76.9924815
