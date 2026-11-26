@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-25T10:27:30+00:00",
+ "updated": "2026-11-26T02:30:34+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -20,7 +20,7 @@
   {
    "site": "1623 Brewing",
    "status": "ok",
-   "found": 17,
+   "found": 18,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -108,7 +108,7 @@
   {
    "site": "Carroll County Tourism events",
    "status": "ok",
-   "found": 30,
+   "found": 31,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -134,7 +134,7 @@
    "status": "ok",
    "found": 0,
    "errors": [],
-   "empty_runs": 28,
+   "empty_runs": 29,
    "mapped": true
   },
   {
@@ -148,7 +148,7 @@
   {
    "site": "Brewer's Alley",
    "status": "ok",
-   "found": 12,
+   "found": 10,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -285,9 +285,13 @@
   },
   {
    "site": "City of Westminster events",
-   "status": "ok",
+   "status": "error (showing last results)",
    "found": 3,
-   "errors": [],
+   "errors": [
+    "https://westminstermd.gov/common/modules/iCalendar/iCalendar.aspx?catID=24&feed=calendar: ConnectTimeout",
+    "https://westminstermd.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar: ConnectTimeout",
+    "https://westminstermd.gov/common/modules/iCalendar/iCalendar.aspx?catID=29&feed=calendar: ConnectTimeout"
+   ],
    "empty_runs": 0,
    "mapped": true
   }

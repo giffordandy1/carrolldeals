@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-25T10:27:30+00:00",
+ "updated": "2026-11-26T02:30:34+00:00",
  "items": [
   {
    "kind": "special",
@@ -204,6 +204,23 @@
    "lng": -76.977291,
    "source": "1623 Brewing",
    "id": "1c3b4f05f836"
+  },
+  {
+   "kind": "event",
+   "title": "Crafts and Drafts",
+   "description": "Plan on joining us December 1st for a really fun, fun night! Space is limited. Everyone enjoyed themselves back in August and requested that we do it again. Enlarge the…",
+   "start": "2026-12-01T18:00",
+   "end": "2026-12-01T20:00",
+   "recurring": null,
+   "url": "https://1623brewing.com/event/crafts-and-drafts/",
+   "image": "https://1623brewing.com/wp-content/uploads/2026/11/Crafts-Drafts-Christmas-Flyer.png",
+   "price": null,
+   "venue": "1623 Brewing Co. Taproom",
+   "address": "5975 Exchange Drive, Suite L, Eldersburg, MD, 21784",
+   "lat": 39.4163621,
+   "lng": -76.977291,
+   "source": "1623 Brewing",
+   "id": "4d72a05ef411"
   },
   {
    "kind": "event",
@@ -1533,23 +1550,6 @@
   },
   {
    "kind": "event",
-   "title": "Holiday of Trees, Wreaths & Centerpieces",
-   "description": "Repeats: 9 upcoming dates listed on their site. The Taneytown Heritage & Museum Association is sponsoring the annual Holiday of Trees, Wreaths & Centerpieces, Individuals, businesses and organizations participate by decorating an item in one of the categories. All decorated items are donated for a silent auction benefitting the Taneytown History Museum. Decorated items will be on display in the lobby of ACNB Bank, 222 East Baltimore Street,…",
-   "start": "2026-11-25T09:00",
-   "end": "2026-11-25T17:00",
-   "recurring": null,
-   "url": "https://carrollcountytourism.org/event/holiday-of-trees-wreaths-centerpieces/2026-11-25/",
-   "image": null,
-   "price": null,
-   "venue": "Carroll County Tourism events",
-   "address": "ACNB Bank – Taneytown Branch, 222 East Baltimore Street, Taneytown, MD, 21787",
-   "lat": 39.6559225,
-   "lng": -77.1722232,
-   "source": "Carroll County Tourism events",
-   "id": "3501ccb27fb5"
-  },
-  {
-   "kind": "event",
    "title": "Weekly Bingo @ Pleasant Valley Community Fire Company",
    "description": "Weekly Wednesday Bingo @ Pleasant Valley Community Fire Company. Doors open at 5:00P.M. Kitchen opens at 5:30 P.M. Games start at 6:30 P.M. 15-minute intermission. Jackpots, Specials, variety of pull tab games sold, cash prizes.",
    "start": "2026-11-25T17:00",
@@ -1564,6 +1564,23 @@
    "lng": -77.0178617,
    "source": "Carroll County Tourism events",
    "id": "76c3ec9e7d98"
+  },
+  {
+   "kind": "event",
+   "title": "Holiday of Trees, Wreaths & Centerpieces",
+   "description": "Repeats: 8 upcoming dates listed on their site. The Taneytown Heritage & Museum Association is sponsoring the annual Holiday of Trees, Wreaths & Centerpieces, Individuals, businesses and organizations participate by decorating an item in one of the categories. All decorated items are donated for a silent auction benefitting the Taneytown History Museum. Decorated items will be on display in the lobby of ACNB Bank, 222 East Baltimore Street,…",
+   "start": "2026-11-27T09:00",
+   "end": "2026-11-27T17:00",
+   "recurring": null,
+   "url": "https://carrollcountytourism.org/event/holiday-of-trees-wreaths-centerpieces/2026-11-27/",
+   "image": null,
+   "price": null,
+   "venue": "Carroll County Tourism events",
+   "address": "ACNB Bank – Taneytown Branch, 222 East Baltimore Street, Taneytown, MD, 21787",
+   "lat": 39.6559225,
+   "lng": -77.1722232,
+   "source": "Carroll County Tourism events",
+   "id": "3984fabd84a1"
   },
   {
    "kind": "event",
@@ -2026,6 +2043,23 @@
   },
   {
    "kind": "event",
+   "title": "Black Barn Alpacas’ Fleece Navidad: A Camelid Christmas",
+   "description": "Get ready for a fleece-filled holiday celebration at Black Barn Alpacas! Experience the magic of Christmas with adorable alpacas, festive activities, and family fun. Stroll down Candy Cane Lane, meet Santa, create holiday crafts at Santa’s Workshop, and explore the Gingerbread Playhouse. Enjoy alpaca feeding, festive “Snow” Bins, the ’Paca Plunge: Snow Edition, and holiday shopping. Just a short…",
+   "start": "2026-12-06T10:00",
+   "end": "2026-12-06T16:00",
+   "recurring": null,
+   "url": "https://carrollcountytourism.org/event/black-barn-alpacas-fleece-navidad-a-camelid-christmas-2/2026-12-06/",
+   "image": null,
+   "price": null,
+   "venue": "Carroll County Tourism events",
+   "address": "Black Barn Alpacas, 2401 Bollinger Mill Rd., FINKSBURG, 21048",
+   "lat": 39.4928811,
+   "lng": -76.8894232,
+   "source": "Carroll County Tourism events",
+   "id": "85e2303c5a18"
+  },
+  {
+   "kind": "event",
    "title": "Bart Walter: Near and Far",
    "description": "This solo exhibition includes bronze sculptures and drawings of wildlife by award-winning artist Bart Walter. Walter is based in Westminster, Maryland, and his work can be found in notable public and private collections worldwide, including the National Zoo in Washington, D.C., Maryland Zoo in Baltimore, and the Uganda Wildlife Authority, as well as the Carroll County Public Library’s…",
    "start": "2026-08-27",
@@ -2366,23 +2400,6 @@
   },
   {
    "kind": "event",
-   "title": "Pizza & Pitchers!",
-   "description": "",
-   "start": "2026-11-25T11:00",
-   "end": "2026-11-25T21:00",
-   "recurring": null,
-   "url": "https://brewers-alley.com/event/pitcher-and-pizza-wednesday/2026-11-25/",
-   "image": "https://brewers-alley.com/wp-content/uploads/2026/04/Pizza-Pitchers-Website-Image.png",
-   "price": null,
-   "venue": "Brewer's Alley",
-   "address": "124 N Market Street, Frederick, MD 21701",
-   "lat": 39.4160562,
-   "lng": -77.4104247,
-   "source": "Brewer's Alley",
-   "id": "6530d1c9888e"
-  },
-  {
-   "kind": "event",
    "title": "Thanksgiving Buffet",
    "description": "",
    "start": "2026-11-26T10:00",
@@ -2469,7 +2486,7 @@
   {
    "kind": "event",
    "title": "Happy Hour",
-   "description": "",
+   "description": "Repeats: 3 upcoming dates listed on their site.",
    "start": "2026-11-30T16:00",
    "end": "2026-11-30T19:00",
    "recurring": null,
@@ -2519,23 +2536,6 @@
   },
   {
    "kind": "event",
-   "title": "Happy Hour",
-   "description": "",
-   "start": "2026-12-01T16:00",
-   "end": "2026-12-01T19:00",
-   "recurring": null,
-   "url": "https://brewers-alley.com/event/happy-hour-11/2026-12-01/",
-   "image": "https://brewers-alley.com/wp-content/uploads/2026/04/BA-Employment-Image-1.jpg",
-   "price": null,
-   "venue": "Brewer's Alley",
-   "address": "124 N Market Street, Frederick, MD 21701",
-   "lat": 39.4160562,
-   "lng": -77.4104247,
-   "source": "Brewer's Alley",
-   "id": "10f0cb89c673"
-  },
-  {
-   "kind": "event",
    "title": "Pizza & Pitchers!",
    "description": "",
    "start": "2026-12-02T11:00",
@@ -2550,6 +2550,23 @@
    "lng": -77.4104247,
    "source": "Brewer's Alley",
    "id": "ef699785cd62"
+  },
+  {
+   "kind": "event",
+   "title": "Lobster Day",
+   "description": "",
+   "start": "2026-12-03T11:00",
+   "end": "2026-12-03T21:00",
+   "recurring": null,
+   "url": "https://brewers-alley.com/event/lobster-day/2026-12-03/",
+   "image": "https://brewers-alley.com/wp-content/uploads/2026/04/Lobster-Day-Website-Image.png",
+   "price": null,
+   "venue": "Brewer's Alley",
+   "address": "124 N Market Street, Frederick, MD 21701",
+   "lat": 39.4160562,
+   "lng": -77.4104247,
+   "source": "Brewer's Alley",
+   "id": "a9e266650b7b"
   },
   {
    "kind": "event",
@@ -2943,12 +2960,12 @@
    "id": "1a663b981ba1"
   },
   {
-   "kind": "special",
-   "title": "SAVE NOW - $5 in Advance $10 at the Door. Doors open early. Band starts",
-   "description": "SAVE NOW - $5 in Advance $10 at the Door. Doors open early. Band starts at 8PM.",
+   "kind": "event",
+   "title": "That Raucous Crew Irish Band is back to celebrate St Patrick's Day in Irish Style!",
+   "description": "That Raucous Crew Irish Band is back to celebrate St Patrick's Day in Irish Style! Friday 12.4.26 - 7-9PM",
    "start": null,
    "end": null,
-   "recurring": "8PM",
+   "recurring": "Friday 12.4.26 - 7-9PM",
    "url": "https://www.rockwellbrewery.com/",
    "image": null,
    "price": null,
@@ -2957,7 +2974,7 @@
    "lat": 39.4403691,
    "lng": -77.3807201,
    "source": "Rockwell Brewery",
-   "id": "0c60eca1bce4"
+   "id": "6641558d3214"
   },
   {
    "kind": "event",
