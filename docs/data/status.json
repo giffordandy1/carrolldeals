@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-26T02:30:34+00:00",
+ "updated": "2026-11-26T10:29:22+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -20,7 +20,7 @@
   {
    "site": "1623 Brewing",
    "status": "ok",
-   "found": 18,
+   "found": 15,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -60,7 +60,7 @@
   {
    "site": "The Woodstock Inn",
    "status": "ok",
-   "found": 14,
+   "found": 13,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -134,7 +134,7 @@
    "status": "ok",
    "found": 0,
    "errors": [],
-   "empty_runs": 29,
+   "empty_runs": 30,
    "mapped": true
   },
   {
@@ -156,7 +156,7 @@
   {
    "site": "Monocacy Brewing Company",
    "status": "ok",
-   "found": 3,
+   "found": 2,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -172,7 +172,7 @@
   {
    "site": "Rockwell Brewery",
    "status": "ok",
-   "found": 18,
+   "found": 16,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -188,7 +188,7 @@
   {
    "site": "Steinhardt Brewing",
    "status": "ok",
-   "found": 8,
+   "found": 6,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -270,7 +270,7 @@
   {
    "site": "Barrington Tap & Table",
    "status": "ok",
-   "found": 14,
+   "found": 13,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -285,13 +285,9 @@
   },
   {
    "site": "City of Westminster events",
-   "status": "error (showing last results)",
+   "status": "ok",
    "found": 3,
-   "errors": [
-    "https://westminstermd.gov/common/modules/iCalendar/iCalendar.aspx?catID=24&feed=calendar: ConnectTimeout",
-    "https://westminstermd.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar: ConnectTimeout",
-    "https://westminstermd.gov/common/modules/iCalendar/iCalendar.aspx?catID=29&feed=calendar: ConnectTimeout"
-   ],
+   "errors": [],
    "empty_runs": 0,
    "mapped": true
   }
