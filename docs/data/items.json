@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-26T10:29:22+00:00",
+ "updated": "2026-11-27T02:29:53+00:00",
  "items": [
   {
    "kind": "special",
@@ -2332,23 +2332,6 @@
   },
   {
    "kind": "event",
-   "title": "Thanksgiving Buffet",
-   "description": "",
-   "start": "2026-11-26T10:00",
-   "end": "2026-11-26T18:30",
-   "recurring": null,
-   "url": "https://brewers-alley.com/event/thanksgiving-buffet/",
-   "image": "https://brewers-alley.com/wp-content/uploads/2026/10/BA-Thanksgiving-2026-FB-Event.png",
-   "price": null,
-   "venue": "Brewer's Alley",
-   "address": "124 N Market Street, Frederick, MD 21701",
-   "lat": 39.4160562,
-   "lng": -77.4104247,
-   "source": "Brewer's Alley",
-   "id": "36fbfb6ef3b8"
-  },
-  {
-   "kind": "event",
    "title": "Frosty Friday",
    "description": "Holiday shopping in Downtown Frederick calls for fuel—and maybe a celebratory sip afterward. Join us for Frosty Friday brunch from 8:00 AM–11:00 AM, then return later to trade shopping bags for holiday cocktails and chill vibes.",
    "start": "2026-11-27T08:00",
@@ -2418,7 +2401,7 @@
   {
    "kind": "event",
    "title": "Happy Hour",
-   "description": "Repeats: 3 upcoming dates listed on their site.",
+   "description": "Repeats: 4 upcoming dates listed on their site.",
    "start": "2026-11-30T16:00",
    "end": "2026-11-30T19:00",
    "recurring": null,
@@ -4050,7 +4033,7 @@
   {
    "kind": "event",
    "title": "Shop Small Saturday",
-   "description": "https://westminstermd.gov/m/calendar/event/detail/4653",
+   "description": "https://westminstermd.gov/calendar.aspx?EID=4653",
    "start": "2026-11-28T10:00",
    "end": "2026-11-28T17:00",
    "recurring": null,
@@ -4067,7 +4050,7 @@
   {
    "kind": "event",
    "title": "Miracle on Main Street",
-   "description": "https://westminstermd.gov/m/calendar/event/detail/4293",
+   "description": "https://westminstermd.gov/calendar.aspx?EID=4293",
    "start": "2026-11-28T12:00",
    "end": "2026-11-28T20:00",
    "recurring": null,
@@ -4084,7 +4067,7 @@
   {
    "kind": "event",
    "title": "Saturdays with Santa",
-   "description": "Repeats: 3 upcoming dates listed on their site. https://westminstermd.gov/m/calendar/event/detail/4294",
+   "description": "Repeats: 3 upcoming dates listed on their site. https://westminstermd.gov/calendar.aspx?EID=4294",
    "start": "2026-12-05T12:00",
    "end": "2026-12-05T16:00",
    "recurring": null,
