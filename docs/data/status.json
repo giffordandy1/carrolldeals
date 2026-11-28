@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-28T02:26:35+00:00",
+ "updated": "2026-11-28T10:10:00+00:00",
  "sites": [
   {
    "site": "The Local Motive",
@@ -108,7 +108,7 @@
   {
    "site": "Carroll County Tourism events",
    "status": "ok",
-   "found": 33,
+   "found": 34,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -134,7 +134,7 @@
    "status": "ok",
    "found": 0,
    "errors": [],
-   "empty_runs": 33,
+   "empty_runs": 34,
    "mapped": true
   },
   {
@@ -172,7 +172,7 @@
   {
    "site": "Rockwell Brewery",
    "status": "ok",
-   "found": 16,
+   "found": 14,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -204,7 +204,7 @@
   {
    "site": "Smoketown Brewing Station",
    "status": "ok",
-   "found": 2,
+   "found": 1,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
@@ -230,7 +230,7 @@
   {
    "site": "Manor Hill Brewing",
    "status": "ok",
-   "found": 6,
+   "found": 3,
    "errors": [],
    "empty_runs": 0,
    "mapped": true
